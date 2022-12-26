@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 namespace App.Domain
 {
     [Table("Services")]
-    public class Services
+    public class Service
     {
         [Key]
         public int ID { get; set; }
 
         public string Name { get; set; }
+
+        public int CategoryID { get; set; }
+
+        public virtual ServiceCategory Category { get; set; }
     }
 }

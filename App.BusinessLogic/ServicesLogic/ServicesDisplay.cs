@@ -13,14 +13,24 @@ namespace App.BusinessLogic.ServicesLogic
             servicesData = new ServicesData();
         }
 
-        public IEnumerable<Services> GetServices()
+        public IEnumerable<Service> GetServices()
         {
             return servicesData.GetAllServices();
         }
 
-        public Services GetService(int id)
+        public Service GetService(int id)
         {
             return servicesData.GetService(id);
+        }
+
+        public IEnumerable<ServiceCategory> GetCategories()
+        {
+            return servicesData.GetAllCategories();
+        }
+
+        public ServiceCategory GetCategory(string name)
+        {
+            return servicesData.GetCategory(name);
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace App.Domain
 {
     [Table("Companies")]
-    public class Companies
+    public class Company
     {
         [Key]
         public int ID { get; set; }

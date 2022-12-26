@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace App.Domain
 {
-    [Table("CompaniesServiceOptions")]
-    public class CompaniesServiceOptions
+    [Table("CompanyServiceOptions")]
+    public class CompanyServiceOption
     {
         [Key, Column(Order = 0)]
         public int ServiceID { get; set; }
 
-        public virtual Services Service { get; set; }
+        public virtual Service Service { get; set; }
 
         [Key, Column(Order = 1)]
         public int CompanyID { get; set; }
 
-        public virtual Companies Company { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

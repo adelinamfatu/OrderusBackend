@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,10 +10,14 @@ namespace App.Domain
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Services> Services { get; set; }
+        public DbSet<Service> Services { get; set; }
 
-        public DbSet<Companies> Companies { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
-        public DbSet<CompaniesServiceOptions> CompaniesServiceOptions { get; set; }
+        public DbSet<CompanyServiceOption> CompaniesServiceOptions { get; set; }
+
+        public DbSet<ServiceCategory> ServicesCategories { get; set; }
+
+        public DbSet<Client> Clients { get; set; }
     }
 }

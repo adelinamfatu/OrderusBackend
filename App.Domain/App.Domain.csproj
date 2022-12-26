@@ -52,24 +52,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
-    <Compile Include="Companies.cs" />
-    <Compile Include="CompaniesServiceOptions.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\CompanyServicesOption.cs" />
     <Compile Include="CRUD\ServicesData.cs" />
-    <Compile Include="Migrations\202209291003102_Initial.cs" />
-    <Compile Include="Migrations\202209291003102_Initial.designer.cs">
-      <DependentUpon>202209291003102_Initial.cs</DependentUpon>
+    <Compile Include="Entities\Service.cs" />
+    <Compile Include="Migrations\202212261027596_Initial.cs" />
+    <Compile Include="Migrations\202212261027596_Initial.designer.cs">
+      <DependentUpon>202212261027596_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Services.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\ServiceCategory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202209291003102_Initial.resx">
-      <DependentUpon>202209291003102_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202212261027596_Initial.resx">
+      <DependentUpon>202212261027596_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

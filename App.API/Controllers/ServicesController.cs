@@ -12,16 +12,23 @@ namespace App.API.Controllers
 
         [Route("")]
         [HttpGet]
-        public IEnumerable<Services> Get()
+        public IEnumerable<Service> Get()
         {
             return servicesDisplay.GetServices();
         }
 
         [Route("{id:int}")]
         [HttpGet]
-        public Services Get(int id)
+        public Service Get(int id)
         {
             return servicesDisplay.GetService(id);
+        }
+
+        [Route("{name:string}")]
+        [HttpGet]
+        public ServiceCategory Get(string name)
+        {
+            return servicesDisplay.GetCategory(name);
         }
     }
 }

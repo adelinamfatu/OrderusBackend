@@ -12,15 +12,26 @@ namespace App.Domain.CRUD
             context = new AppDbContext();
         }
 
-        public IEnumerable<Services> GetAllServices()
+        public IEnumerable<Service> GetAllServices()
         {
             var services = context.Services;
             return services;
         }
 
-        public Services GetService(int id)
+        public Service GetService(int id)
         {
             return context.Services.FirstOrDefault(s => s.ID == id);
+        }
+
+        public IEnumerable<ServiceCategory> GetAllCategories()
+        {
+            var categories = context.ServicesCategories;
+            return categories;
+        }
+
+        public ServiceCategory GetCategory(string name)
+        {
+            return context.ServicesCategories.FirstOrDefault(s => s.Name == name);
         }
     }
 }
