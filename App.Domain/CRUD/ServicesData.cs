@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace App.Domain.CRUD
@@ -32,6 +33,11 @@ namespace App.Domain.CRUD
         public ServiceCategory GetCategory(string name)
         {
             return context.ServicesCategories.FirstOrDefault(s => s.Name == name);
+        }
+
+        public IEnumerable<Service> GetServicesByCategory(string name)
+        {
+            return context.Services.Where(s => s.Category.Name == name);
         }
     }
 }

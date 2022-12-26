@@ -1,5 +1,6 @@
 ﻿using App.Domain;
 using App.Domain.CRUD;
+using System;
 using System.Collections.Generic;
 
 namespace App.BusinessLogic.ServicesLogic
@@ -26,6 +27,11 @@ namespace App.BusinessLogic.ServicesLogic
         public IEnumerable<ServiceCategory> GetCategories()
         {
             return servicesData.GetAllCategories();
+        }
+
+        public IEnumerable<Service> GetServicesByCategory(string name)
+        {
+            return servicesData.GetServicesByCategory(name);
         }
 
         public ServiceCategory GetCategory(string name)
