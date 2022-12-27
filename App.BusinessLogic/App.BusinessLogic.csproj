@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\DTOtoEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesLogic\ServicesDisplay.cs" />
   </ItemGroup>
@@ -48,6 +49,10 @@
     <ProjectReference Include="..\App.Domain\App.Domain.csproj">
       <Project>{DE99E84C-A04D-44D1-AE26-88D5A0B1FE72}</Project>
       <Name>App.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.DTO\App.DTO.csproj">
+      <Project>{72579c54-46b5-480f-a513-2420ec1e49fc}</Project>
+      <Name>App.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

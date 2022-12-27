@@ -1,5 +1,6 @@
 ﻿using App.BusinessLogic.ServicesLogic;
 using App.Domain;
+using App.DTO;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -26,7 +27,7 @@ namespace App.API.Controllers
 
         [Route("categories")]
         [HttpGet]
-        public IEnumerable<ServiceCategory> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
             return servicesDisplay.GetCategories();
         }

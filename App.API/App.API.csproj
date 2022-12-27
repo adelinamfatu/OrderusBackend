@@ -84,9 +84,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\App.BusinessLogic\App.BusinessLogic.csproj">
       <Project>{10962815-60B4-404C-9636-95F8EB9A921F}</Project>
@@ -95,6 +93,10 @@
     <ProjectReference Include="..\App.Domain\App.Domain.csproj">
       <Project>{DE99E84C-A04D-44D1-AE26-88D5A0B1FE72}</Project>
       <Name>App.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.DTO\App.DTO.csproj">
+      <Project>{72579C54-46B5-480F-A513-2420EC1E49FC}</Project>
+      <Name>App.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

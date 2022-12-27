@@ -26,8 +26,7 @@ namespace App.Domain.CRUD
 
         public IEnumerable<ServiceCategory> GetAllCategories()
         {
-            var categories = context.ServicesCategories;
-            return categories;
+            return context.ServicesCategories;
         }
 
         public ServiceCategory GetCategory(string name)

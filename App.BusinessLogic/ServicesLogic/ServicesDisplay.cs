@@ -1,7 +1,10 @@
 ﻿using App.Domain;
 using App.Domain.CRUD;
+using App.DTO;
+using System.Linq;
 using System;
 using System.Collections.Generic;
+using App.BusinessLogic.Helper;
 
 namespace App.BusinessLogic.ServicesLogic
 {
@@ -24,9 +27,9 @@ namespace App.BusinessLogic.ServicesLogic
             return servicesData.GetService(id);
         }
 
-        public IEnumerable<ServiceCategory> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
-            return servicesData.GetAllCategories();
+            return servicesData.GetAllCategories().Select(category => DTOtoEntity.EntitytoDTO(category));
         }
 
         public IEnumerable<Service> GetServicesByCategory(string name)
