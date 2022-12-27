@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\DTOtoEntity.cs" />
+    <Compile Include="Helper\DTOEntity.cs" />
+    <Compile Include="Helper\EntityDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesLogic\ServicesDisplay.cs" />
   </ItemGroup>

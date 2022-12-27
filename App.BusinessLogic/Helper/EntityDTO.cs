@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace App.BusinessLogic.Helper
 {
-    public static class DTOtoEntity
+    public static class EntityDTO
     {
-        public static CategoryDTO EntitytoDTO(ServiceCategory serviceCategory)
+        public static CategoryDTO EntityToDTO(ServiceCategory serviceCategory)
         {
             return new CategoryDTO() { name = serviceCategory.Name };
         }
