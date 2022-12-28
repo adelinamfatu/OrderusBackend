@@ -32,11 +32,11 @@ namespace App.API.Controllers
             return servicesDisplay.GetCategories();
         }
 
-        [Route("categories/{name}")]
+        [Route("categories/{id}")]
         [HttpGet]
-        public IEnumerable<Service> GetServicesByCategory(string name)
+        public IEnumerable<ServiceDTO> GetServicesByCategory(int id)
         {
-            return servicesDisplay.GetServicesByCategory(name);
+            return servicesDisplay.GetServicesByCategory(id);
         }
     }
 }

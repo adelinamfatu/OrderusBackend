@@ -12,7 +12,21 @@ namespace App.BusinessLogic.Helper
     {
         public static CategoryDTO EntityToDTO(ServiceCategory serviceCategory)
         {
-            return new CategoryDTO() { Name = serviceCategory.Name };
+            return new CategoryDTO() 
+            { 
+                ID = serviceCategory.ID,
+                Name = serviceCategory.Name 
+            };
+        }
+
+        public static ServiceDTO EntityToDTO(Service service)
+        {
+            return new ServiceDTO()
+            {
+                ID = service.ID,
+                Name = service.Name,
+                //Category = EntityDTO.EntityToDTO(service.Category)
+            };
         }
     }
 }
