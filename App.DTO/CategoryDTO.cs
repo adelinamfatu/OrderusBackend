@@ -4,6 +4,6 @@ namespace App.DTO
 {
     public class CategoryDTO
     {
-        public string Name { get; set; }
+        public string name { get; set; }
     }
 }
