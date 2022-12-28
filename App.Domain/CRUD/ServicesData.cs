@@ -34,9 +34,9 @@ namespace App.Domain.CRUD
             return context.ServicesCategories.FirstOrDefault(s => s.Name == name);
         }
 
-        public IEnumerable<Service> GetServicesByCategory(int id)
+        public IEnumerable<Service> GetServicesByCategory(string name)
         {
-            return context.Services.Where(s => s.Category.ID == id);
+            return context.Services.Where(s => s.Category.Name == name);
         }
     }
 }

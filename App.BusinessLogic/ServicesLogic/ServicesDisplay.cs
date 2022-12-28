@@ -32,9 +32,9 @@ namespace App.BusinessLogic.ServicesLogic
             return servicesData.GetAllCategories().Select(category => EntityDTO.EntityToDTO(category));
         }
 
-        public IEnumerable<ServiceDTO> GetServicesByCategory(int id)
+        public IEnumerable<Service> GetServicesByCategory(string name)
         {
-            return servicesData.GetServicesByCategory(id).Select(service => EntityDTO.EntityToDTO(service));
+            return servicesData.GetServicesByCategory(name);
         }
 
         public ServiceCategory GetCategory(string name)
