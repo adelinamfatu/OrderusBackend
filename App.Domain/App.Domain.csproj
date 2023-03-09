@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
+    <Compile Include="CRUD\CompaniesData.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\CompanyServicesOption.cs" />

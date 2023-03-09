@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Starter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

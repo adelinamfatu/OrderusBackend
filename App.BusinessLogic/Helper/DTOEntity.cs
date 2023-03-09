@@ -28,5 +28,21 @@ namespace App.BusinessLogic.Helper
                 //Category = DTOEntity.DTOtoEntity(service.Category)
             };
         }
+
+        public static Company DTOtoEntity(CompanyDTO company)
+        {
+            return new Company()
+            {
+                ID = company.ID,
+                Name = company.Name,
+                City = company.City,
+                Street = company.Street,
+                StreetNumber = company.StreetNumber,
+                Building = company.Building,
+                Staircase = company.Staircase,
+                ApartmentNumber = company.ApartmentNumber,
+                Floor = company.Floor
+            };
+        }
     }
 }

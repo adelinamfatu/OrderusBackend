@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompaniesLogic\CompaniesDisplay.cs" />
     <Compile Include="Helper\DTOEntity.cs" />
     <Compile Include="Helper\EntityDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
