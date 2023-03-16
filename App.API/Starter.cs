@@ -10,10 +10,8 @@ namespace App.API
 
         public static void StartOwin()
         {
-            string baseAddress = "http://192.168.2.39:9000/";
-
             // Start OWIN host 
-            owinService = WebApp.Start<WebConfig>(url: baseAddress);
+            owinService = WebApp.Start<WebConfig>(url: AppResources.BaseAddress);
         }
     }
 }

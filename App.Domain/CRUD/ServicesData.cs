@@ -36,7 +36,7 @@ namespace App.Domain.CRUD
 
         public IEnumerable<Service> GetServicesByCategory(int id)
         {
-            return context.Services.Where(s => s.Category.ID == id);
+            return context.Services.Where(s => s.CategoryID == id);
         }
     }
 }

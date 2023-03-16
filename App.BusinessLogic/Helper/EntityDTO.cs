@@ -40,8 +40,8 @@ namespace App.BusinessLogic.Helper
                 StreetNumber = company.StreetNumber,
                 Building = company.Building,
                 Staircase = company.Staircase,
-                ApartmentNumber = company.ApartmentNumber,
-                Floor = company.Floor
+                ApartmentNumber = (int)company.ApartmentNumber,
+                Floor = (int)company.Floor
             };
         }
     }

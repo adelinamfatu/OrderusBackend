@@ -26,8 +26,12 @@ namespace App.Domain
 
         public string Staircase { get; set; }
 
-        public int ApartmentNumber { get; set; }
+        public int? ApartmentNumber { get; set; }
 
-        public int Floor { get; set; }
+        public int? Floor { get; set; }
+
+        public string Logo { get; set; }
+
+        public string Site { get; set; }
     }
 }

@@ -22,5 +22,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetAllCompanies().Select(company => EntityDTO.EntityToDTO(company));
         }
+
+        public IEnumerable<CompanyDTO> GetCompaniesByService(int id)
+        {
+            return companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company));
+        }
     }
 }

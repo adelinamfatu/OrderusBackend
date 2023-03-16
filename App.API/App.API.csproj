@@ -75,6 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Starter.cs" />
@@ -85,7 +90,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.BusinessLogic\App.BusinessLogic.csproj">
       <Project>{10962815-60B4-404C-9636-95F8EB9A921F}</Project>

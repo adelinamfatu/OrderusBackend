@@ -16,5 +16,12 @@ namespace App.API.Controllers
         {
             return companiesDisplay.GetCompanies();
         }
+
+        [Route("services/{id}")]
+        [HttpGet]
+        public IEnumerable<CompanyDTO> GetCompaniesByService(int id)
+        {
+            return companiesDisplay.GetCompaniesByService(id);
+        }
     }
 }

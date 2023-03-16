@@ -55,12 +55,16 @@
     <Compile Include="CRUD\CompaniesData.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\CompanyServicesOption.cs" />
+    <Compile Include="Entities\CompanyServiceOption.cs" />
     <Compile Include="CRUD\ServicesData.cs" />
     <Compile Include="Entities\Service.cs" />
     <Compile Include="Migrations\202212261027596_Initial.cs" />
     <Compile Include="Migrations\202212261027596_Initial.designer.cs">
       <DependentUpon>202212261027596_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303161535138_AddedNullableAndForeignKeyCorrections.cs" />
+    <Compile Include="Migrations\202303161535138_AddedNullableAndForeignKeyCorrections.designer.cs">
+      <DependentUpon>202303161535138_AddedNullableAndForeignKeyCorrections.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212261027596_Initial.resx">
       <DependentUpon>202212261027596_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303161535138_AddedNullableAndForeignKeyCorrections.resx">
+      <DependentUpon>202303161535138_AddedNullableAndForeignKeyCorrections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

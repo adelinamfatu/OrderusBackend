@@ -32,8 +32,8 @@ namespace App.Domain.Entities
 
         public string Staircase { get; set; }
 
-        public int ApartmentNumber { get; set; }
+        public int? ApartmentNumber { get; set; }
 
-        public int Floor { get; set; }
+        public int? Floor { get; set; }
     }
 }
