@@ -41,7 +41,9 @@ namespace App.BusinessLogic.Helper
                 Building = company.Building,
                 Staircase = company.Staircase,
                 ApartmentNumber = company.ApartmentNumber,
-                Floor = company.Floor
+                Floor = company.Floor,
+                Logo = company.Logo,
+                Site = company.Site
             };
         }
     }
