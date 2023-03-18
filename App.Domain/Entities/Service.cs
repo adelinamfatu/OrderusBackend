@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain
+namespace App.Domain.Entities
 {
     [Table("Services")]
     public class Service

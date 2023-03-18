@@ -19,5 +19,7 @@ namespace App.Domain
         public DbSet<ServiceCategory> ServicesCategories { get; set; }
 
         public DbSet<Client> Clients { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
     }
 }

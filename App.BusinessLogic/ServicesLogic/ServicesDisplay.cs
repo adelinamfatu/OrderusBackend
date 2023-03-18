@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using App.BusinessLogic.Helper;
+using App.Domain.Entities;
 
 namespace App.BusinessLogic.ServicesLogic
 {

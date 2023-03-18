@@ -1,5 +1,6 @@
 ﻿using App.BusinessLogic.ServicesLogic;
 using App.Domain;
+using App.Domain.Entities;
 using App.DTO;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -18,7 +19,7 @@ namespace App.API.Controllers
             return servicesDisplay.GetServices();
         }
 
-        [Route("{id:int}")]
+        [Route("{id}")]
         [HttpGet]
         public Service GetService(int id)
         {

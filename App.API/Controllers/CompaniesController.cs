@@ -23,5 +23,19 @@ namespace App.API.Controllers
         {
             return companiesDisplay.GetCompaniesByService(id);
         }
+
+        [Route("services/{serviceId}/{companyId}")]
+        [HttpGet]
+        public CompanyServiceOptionDTO GetCompanyByService(int serviceId, int companyId)
+        {
+            return companiesDisplay.GetCompany(serviceId, companyId);
+        }
+
+        [Route("comments/{id}")]
+        [HttpGet]
+        public IEnumerable<CommentDTO> GetCompanyComments(int id)
+        {
+            return companiesDisplay.GetComments(id);
+        }
     }
 }

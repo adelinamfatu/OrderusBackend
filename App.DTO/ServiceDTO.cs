@@ -9,7 +9,5 @@ namespace App.DTO
         public int ID { get; set; }
 
         public string Name { get; set; }
-
-        //public CategoryDTO Category { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using App.Domain;
+using App.Domain.Entities;
 using App.DTO;
 using System;
 using System.Collections.Generic;

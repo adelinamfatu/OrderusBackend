@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using App.Domain.Entities;
 
 namespace App.Domain.CRUD
 {
@@ -22,11 +23,6 @@ namespace App.Domain.CRUD
             return companies;
         }
 
-        public Company GetCompany(int id)
-        {
-            return context.Companies.FirstOrDefault(c => c.ID == id);
-        }
-
         public IEnumerable<Company> GetCompaniesByService(int id)
         {
             return context.CompaniesServiceOptions.Where(cso => cso.ServiceID == id)
@@ -34,6 +30,21 @@ namespace App.Domain.CRUD
                                                         cso => cso.CompanyID,
                                                         company => company.ID,
                                                         (cso, company) => company);
+        }
+
+        public CompanyServiceOption GetCompany(int serviceId, int companyId)
+        {
+            return context.CompaniesServiceOptions
+                            .Where(cso => cso.ServiceID == serviceId)
+                            .Where(cso => cso.CompanyID == companyId)
+                            .Include(cso => cso.Company)
+                            .Include(cso => cso.Company.Comments)
+                            .FirstOrDefault();
+        }
+
+        public IEnumerable<Comment> GetComments(int id)
+        {
+            return context.Comments.Where(comm => comm.CompanyID == id).ToList();
         }
     }
 }

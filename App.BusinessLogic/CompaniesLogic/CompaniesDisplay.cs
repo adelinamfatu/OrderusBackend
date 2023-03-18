@@ -27,5 +27,15 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company));
         }
+
+        public CompanyServiceOptionDTO GetCompany(int serviceId, int companyId)
+        {
+            return EntityDTO.EntityToDTO(companiesData.GetCompany(serviceId, companyId));
+        }
+
+        public IEnumerable<CommentDTO> GetComments(int id)
+        {
+            return companiesData.GetComments(id).Select(comment => EntityDTO.EntityToDTO(comment));
+        }
     }
 }

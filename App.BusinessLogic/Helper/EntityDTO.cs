@@ -1,4 +1,5 @@
 ﻿using App.Domain;
+using App.Domain.Entities;
 using App.DTO;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,7 @@ namespace App.BusinessLogic.Helper
             return new ServiceDTO()
             {
                 ID = service.ID,
-                Name = service.Name,
-                //Category = EntityDTO.EntityToDTO(service.Category)
+                Name = service.Name
             };
         }
 
@@ -37,13 +37,33 @@ namespace App.BusinessLogic.Helper
                 Name = company.Name,
                 City = company.City,
                 Street = company.Street,
-                StreetNumber = company.StreetNumber,
                 Building = company.Building,
                 Staircase = company.Staircase,
-                ApartmentNumber = (int)company.ApartmentNumber,
-                Floor = (int)company.Floor,
+                ApartmentNumber = company.ApartmentNumber,
+                Floor = company.Floor,
                 Logo = company.Logo,
                 Site = company.Site
+            };
+        }
+
+        public static CommentDTO EntityToDTO(Comment comment)
+        {
+            return new CommentDTO()
+            {
+                ID = comment.ID,
+                Content = comment.Content,
+                Score = comment.Score,
+                ClientEmail = comment.ClientEmail
+            };
+        }
+
+        public static CompanyServiceOptionDTO EntityToDTO(CompanyServiceOption cso)
+        {
+            return new CompanyServiceOptionDTO()
+            {
+                Company = EntityToDTO(cso.Company),
+                Comments = cso.Company.Comments.Select(comm => EntityToDTO(comm)).ToList(),
+                Price = cso.Price
             };
         }
     }

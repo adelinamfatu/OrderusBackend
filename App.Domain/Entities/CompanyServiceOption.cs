@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain
+namespace App.Domain.Entities
 {
     [Table("CompanyServiceOptions")]
     public class CompanyServiceOption
@@ -22,5 +22,7 @@ namespace App.Domain
         public int CompanyID { get; set; }
 
         public virtual Company Company { get; set; }
+
+        public float Price { get; set; }
     }
 }
