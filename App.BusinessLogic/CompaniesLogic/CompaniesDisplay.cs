@@ -28,9 +28,9 @@ namespace App.BusinessLogic.CompaniesLogic
             return companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company));
         }
 
-        public CompanyServiceOptionDTO GetCompany(int serviceId, int companyId)
+        public IEnumerable<CompanyServiceOptionDTO> GetCompanyDetails(int id)
         {
-            return EntityDTO.EntityToDTO(companiesData.GetCompany(serviceId, companyId));
+            return companiesData.GetCompanyDetails(id).Select(cso => EntityDTO.EntityToDTO(cso));
         }
 
         public IEnumerable<CommentDTO> GetComments(int id)

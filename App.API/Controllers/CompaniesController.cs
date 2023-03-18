@@ -24,11 +24,11 @@ namespace App.API.Controllers
             return companiesDisplay.GetCompaniesByService(id);
         }
 
-        [Route("services/{serviceId}/{companyId}")]
+        [Route("services/details/{id}")]
         [HttpGet]
-        public CompanyServiceOptionDTO GetCompanyByService(int serviceId, int companyId)
+        public IEnumerable<CompanyServiceOptionDTO> GetCompanyDetails(int id)
         {
-            return companiesDisplay.GetCompany(serviceId, companyId);
+            return companiesDisplay.GetCompanyDetails(id);
         }
 
         [Route("comments/{id}")]

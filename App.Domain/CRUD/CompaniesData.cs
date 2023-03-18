@@ -32,14 +32,11 @@ namespace App.Domain.CRUD
                                                         (cso, company) => company);
         }
 
-        public CompanyServiceOption GetCompany(int serviceId, int companyId)
+        public IEnumerable<CompanyServiceOption> GetCompanyDetails(int id)
         {
             return context.CompaniesServiceOptions
-                            .Where(cso => cso.ServiceID == serviceId)
-                            .Where(cso => cso.CompanyID == companyId)
-                            .Include(cso => cso.Company)
-                            .Include(cso => cso.Company.Comments)
-                            .FirstOrDefault();
+                            .Where(cso => cso.CompanyID == id)
+                            .Include(cso => cso.Service);
         }
 
         public IEnumerable<Comment> GetComments(int id)

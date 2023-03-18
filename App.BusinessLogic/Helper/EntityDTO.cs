@@ -61,8 +61,7 @@ namespace App.BusinessLogic.Helper
         {
             return new CompanyServiceOptionDTO()
             {
-                Company = EntityToDTO(cso.Company),
-                Comments = cso.Company.Comments.Select(comm => EntityToDTO(comm)).ToList(),
+                Service = EntityToDTO(cso.Service),
                 Price = cso.Price
             };
         }

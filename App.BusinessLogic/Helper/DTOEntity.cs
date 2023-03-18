@@ -26,7 +26,6 @@ namespace App.BusinessLogic.Helper
             {
                 ID = service.ID,
                 Name = service.Name,
-                //Category = DTOEntity.DTOtoEntity(service.Category)
             };
         }
 
@@ -45,6 +44,15 @@ namespace App.BusinessLogic.Helper
                 Floor = company.Floor,
                 Logo = company.Logo,
                 Site = company.Site
+            };
+        }
+
+        public static CompanyServiceOption DTOtoEntity(CompanyServiceOptionDTO cso)
+        {
+            return new CompanyServiceOption()
+            {
+                Service = DTOtoEntity(cso.Service),
+                Price = cso.Price,
             };
         }
     }

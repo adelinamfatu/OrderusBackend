@@ -6,10 +6,8 @@ namespace App.DTO
 {
     public class CompanyServiceOptionDTO
     {
-        public CompanyDTO Company { get; set; }
+        public ServiceDTO Service { get; set; }
 
         public float Price { get; set; }
-
-        public List<CommentDTO> Comments { get; set; }
     }
 }
