@@ -37,6 +37,7 @@ namespace App.BusinessLogic.Helper
                 Name = company.Name,
                 City = company.City,
                 Street = company.Street,
+                StreetNumber = company.StreetNumber,
                 Building = company.Building,
                 Staircase = company.Staircase,
                 ApartmentNumber = company.ApartmentNumber,

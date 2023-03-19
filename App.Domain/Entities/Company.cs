@@ -35,6 +35,6 @@ namespace App.Domain.Entities
 
         public string Site { get; set; }
 
-        public virtual List<Comment> Comments { get; set; }
+        public string Description { get; set; }
     }
 }
