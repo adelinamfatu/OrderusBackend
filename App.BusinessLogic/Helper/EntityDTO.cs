@@ -63,7 +63,9 @@ namespace App.BusinessLogic.Helper
             return new CompanyServiceOptionDTO()
             {
                 Service = EntityToDTO(cso.Service),
-                Price = cso.Price
+                Price = cso.Price,
+                Description = cso.Description,
+                Icon = cso.Icon
             };
         }
     }

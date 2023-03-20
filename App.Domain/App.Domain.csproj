@@ -58,18 +58,11 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\CompanyServiceOption.cs" />
     <Compile Include="CRUD\ServicesData.cs" />
+    <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Service.cs" />
-    <Compile Include="Migrations\202212261027596_Initial.cs" />
-    <Compile Include="Migrations\202212261027596_Initial.designer.cs">
-      <DependentUpon>202212261027596_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303161535138_AddedNullableAndForeignKeyCorrections.cs" />
-    <Compile Include="Migrations\202303161535138_AddedNullableAndForeignKeyCorrections.designer.cs">
-      <DependentUpon>202303161535138_AddedNullableAndForeignKeyCorrections.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303181146495_AddedCSOCorrectionAndAddedCommentsTable.cs" />
-    <Compile Include="Migrations\202303181146495_AddedCSOCorrectionAndAddedCommentsTable.designer.cs">
-      <DependentUpon>202303181146495_AddedCSOCorrectionAndAddedCommentsTable.cs</DependentUpon>
+    <Compile Include="Migrations\202303201325388_Initial.cs" />
+    <Compile Include="Migrations\202303201325388_Initial.designer.cs">
+      <DependentUpon>202303201325388_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,14 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202212261027596_Initial.resx">
-      <DependentUpon>202212261027596_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303161535138_AddedNullableAndForeignKeyCorrections.resx">
-      <DependentUpon>202303161535138_AddedNullableAndForeignKeyCorrections.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303181146495_AddedCSOCorrectionAndAddedCommentsTable.resx">
-      <DependentUpon>202303181146495_AddedCSOCorrectionAndAddedCommentsTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303201325388_Initial.resx">
+      <DependentUpon>202303201325388_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

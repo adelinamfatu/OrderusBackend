@@ -21,10 +21,26 @@
                         StreetNumber = c.String(),
                         Building = c.String(),
                         Staircase = c.String(),
-                        ApartmentNumber = c.Int(nullable: false),
-                        Floor = c.Int(nullable: false),
+                        ApartmentNumber = c.Int(),
+                        Floor = c.Int(),
                     })
                 .PrimaryKey(t => t.Email);
+            
+            CreateTable(
+                "dbo.Comments",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Content = c.String(),
+                        Score = c.Int(nullable: false),
+                        ClientEmail = c.String(maxLength: 128),
+                        CompanyID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Clients", t => t.ClientEmail)
+                .ForeignKey("dbo.Companies", t => t.CompanyID, cascadeDelete: true)
+                .Index(t => t.ClientEmail)
+                .Index(t => t.CompanyID);
             
             CreateTable(
                 "dbo.Companies",
@@ -37,8 +53,11 @@
                         StreetNumber = c.String(),
                         Building = c.String(),
                         Staircase = c.String(),
-                        ApartmentNumber = c.Int(nullable: false),
-                        Floor = c.Int(nullable: false),
+                        ApartmentNumber = c.Int(),
+                        Floor = c.Int(),
+                        Logo = c.String(),
+                        Site = c.String(),
+                        Description = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -48,6 +67,9 @@
                     {
                         ServiceID = c.Int(nullable: false),
                         CompanyID = c.Int(nullable: false),
+                        Price = c.Single(nullable: false),
+                        Description = c.String(),
+                        Icon = c.String(),
                     })
                 .PrimaryKey(t => new { t.ServiceID, t.CompanyID })
                 .ForeignKey("dbo.Companies", t => t.CompanyID, cascadeDelete: true)
@@ -83,13 +105,18 @@
             DropForeignKey("dbo.CompanyServiceOptions", "ServiceID", "dbo.Services");
             DropForeignKey("dbo.Services", "CategoryID", "dbo.ServiceCategories");
             DropForeignKey("dbo.CompanyServiceOptions", "CompanyID", "dbo.Companies");
+            DropForeignKey("dbo.Comments", "CompanyID", "dbo.Companies");
+            DropForeignKey("dbo.Comments", "ClientEmail", "dbo.Clients");
             DropIndex("dbo.Services", new[] { "CategoryID" });
             DropIndex("dbo.CompanyServiceOptions", new[] { "CompanyID" });
             DropIndex("dbo.CompanyServiceOptions", new[] { "ServiceID" });
+            DropIndex("dbo.Comments", new[] { "CompanyID" });
+            DropIndex("dbo.Comments", new[] { "ClientEmail" });
             DropTable("dbo.ServiceCategories");
             DropTable("dbo.Services");
             DropTable("dbo.CompanyServiceOptions");
             DropTable("dbo.Companies");
+            DropTable("dbo.Comments");
             DropTable("dbo.Clients");
         }
     }

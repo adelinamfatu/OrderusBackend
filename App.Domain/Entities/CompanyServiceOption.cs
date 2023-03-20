@@ -26,5 +26,7 @@ namespace App.Domain.Entities
         public float Price { get; set; }
 
         public string Description { get; set; }
+
+        public string Icon { get; set; }
     }
 }

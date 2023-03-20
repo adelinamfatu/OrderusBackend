@@ -41,7 +41,7 @@ namespace App.Domain.CRUD
 
         public IEnumerable<Comment> GetComments(int id)
         {
-            return context.Comments.Where(comm => comm.CompanyID == id).ToList();
+            return context.Comments.Where(comm => comm.CompanyID == id);
         }
     }
 }

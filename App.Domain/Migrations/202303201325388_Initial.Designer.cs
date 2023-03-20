@@ -7,13 +7,13 @@ namespace App.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddedCSOCorrectionAndAddedCommentsTable : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedCSOCorrectionAndAddedCommentsTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202303181146495_AddedCSOCorrectionAndAddedCommentsTable"; }
+            get { return "202303201325388_Initial"; }
         }
         
         string IMigrationMetadata.Source
