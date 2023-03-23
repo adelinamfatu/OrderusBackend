@@ -16,7 +16,7 @@ namespace App.API
             // Configure Route with Attributes
             config.MapHttpAttributeRoutes();
 
-            //config.Filters.Add(new RequireHttpsAttribute());
+            config.Filters.Add(new RequireHttpsAttribute());
 
             appBuilder.UseWebApi(config);
         }

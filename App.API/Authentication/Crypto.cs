@@ -37,22 +37,6 @@ namespace App.API.Authentication
             var dataToEncrypt = Encoder.GetBytes(data);
             var encryptedByteArray = rsa.Encrypt(dataToEncrypt, false).ToArray();
             return Convert.ToBase64String(encryptedByteArray);
-            
-            /*var length = encryptedByteArray.Length;
-            var item = 0;
-            var sb = new StringBuilder();
-            foreach (var x in encryptedByteArray)
-            {
-                item++;
-                sb.Append(x);
-
-                if (item < length)
-                {
-                    sb.Append(",");
-                } 
-            }
-
-            return sb.ToString();*/
         }
     }
 }

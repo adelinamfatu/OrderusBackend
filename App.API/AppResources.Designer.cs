@@ -61,7 +61,7 @@ namespace App.API {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://192.168.2.39:9000.
+        ///   Looks up a localized string similar to https://192.168.2.39:9000.
         /// </summary>
         internal static string BaseAddress {
             get {
