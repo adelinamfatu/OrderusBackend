@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using App.API.Authentication;
+using Owin;
 using System.Web.Http;
 
 namespace App.API
@@ -14,6 +15,8 @@ namespace App.API
             
             // Configure Route with Attributes
             config.MapHttpAttributeRoutes();
+
+            //config.Filters.Add(new RequireHttpsAttribute());
 
             appBuilder.UseWebApi(config);
         }

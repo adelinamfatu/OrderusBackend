@@ -55,5 +55,20 @@ namespace App.BusinessLogic.Helper
                 Price = cso.Price,
             };
         }
+
+        public static Client DTOtoEntity(ClientDTO client)
+        {
+            return new Client()
+            {
+                Email = client.Email,
+                Password = client.Password,
+                /*Name = client.Name,
+                Surname = client.Surname,
+                Phone = client.Phone,
+                City = client.City,
+                Street = client.Street,
+                StreetNumber = client.StreetNumber*/
+            };
+        }
     }
 }

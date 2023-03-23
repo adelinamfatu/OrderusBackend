@@ -80,6 +80,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\BasicAuthenticationAttribute.cs" />
+    <Compile Include="Authentication\Crypto.cs" />
+    <Compile Include="Authentication\RequireHttpsAttribute.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Starter.cs" />

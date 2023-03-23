@@ -1,10 +1,12 @@
-﻿using App.BusinessLogic.CompaniesLogic;
+﻿using App.API.Authentication;
+using App.BusinessLogic.CompaniesLogic;
 using App.DTO;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace App.API.Controllers
 {
+    [BasicAuthentication]
     [RoutePrefix("api/companies")]
     public class CompaniesController : ApiController
     {

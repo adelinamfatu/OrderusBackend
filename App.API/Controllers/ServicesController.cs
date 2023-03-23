@@ -1,4 +1,5 @@
-﻿using App.BusinessLogic.ServicesLogic;
+﻿using App.API.Authentication;
+using App.BusinessLogic.ServicesLogic;
 using App.Domain;
 using App.Domain.Entities;
 using App.DTO;
@@ -7,6 +8,7 @@ using System.Web.Http;
 
 namespace App.API.Controllers
 {
+    [BasicAuthentication]
     [RoutePrefix("api/services")]
     public class ServicesController : ApiController
     {
