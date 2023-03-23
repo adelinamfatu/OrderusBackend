@@ -22,5 +22,10 @@ namespace App.BusinessLogic.UsersLogic
         {
             return clientsData.AddClient(DTOEntity.DTOtoEntity(client));
         }
+
+        public string Login(ClientDTO client)
+        {
+            return clientsData.Login(DTOEntity.DTOtoEntity(client));
+        }
     }
 }

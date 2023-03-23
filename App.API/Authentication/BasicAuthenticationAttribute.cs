@@ -21,26 +21,9 @@ namespace App.API.Authentication
             if (authHeader != null)
             {
                 var authenticationToken = actionContext.Request.Headers.Authorization.Parameter;
-                var decodedAuthenticationToken = Encoding.UTF8.GetString(Convert.FromBase64String(authenticationToken));
-                var decryptedAuthenticationToken = Crypto.Decrypt(decodedAuthenticationToken);
-                var usernamePasswordArray = decryptedAuthenticationToken.Split(':');
-                var userName = usernamePasswordArray[0];
-                var password = usernamePasswordArray[1];
+                var username = TokenManager.ValidateToken(authenticationToken);
 
-                // Replace this with your own system of security / means of validating credentials
-                var isValid = userName.Contains("@");
-
-                if (isValid)
-                {
-                    var principal = new GenericPrincipal(new GenericIdentity(userName), null);
-                    Thread.CurrentPrincipal = principal;
-
-                    actionContext.Response =
-                       actionContext.Request.CreateResponse(HttpStatusCode.OK,
-                          "User " + userName + " successfully authenticated");
-
-                    return;
-                }
+                return;
             }
 
             HandleUnathorized(actionContext);

@@ -22,5 +22,10 @@ namespace App.Domain.CRUD
             context.SaveChanges();
             return true;
         }
+
+        public string Login(Client client)
+        {
+            return context.Clients.FirstOrDefault(c => c.Email == client.Email).Password;
+        }
     }
 }

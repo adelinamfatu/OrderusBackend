@@ -29,5 +29,7 @@ namespace App.DTO
         public int? ApartmentNumber { get; set; }
 
         public int? Floor { get; set; }
+
+        public string Token { get; set; }
     }
 }

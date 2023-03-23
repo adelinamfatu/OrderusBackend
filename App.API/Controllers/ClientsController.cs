@@ -30,5 +30,20 @@ namespace App.API.Controllers
                 return NotFound();
             }
         }
+
+        [Route("login")]
+        [HttpPost]
+        public string Login(ClientDTO client)
+        {
+            var password = Crypto.Decrypt(clientsDisplay.Login(client));
+            if (password == client.Password)
+            {
+                return TokenManager.GenerateToken(client.Email);
+            }
+            else
+            {
+                return "Invalid user";
+            }
+        }
     }
 }
