@@ -62,12 +62,16 @@ namespace App.BusinessLogic.Helper
             {
                 Email = client.Email,
                 Password = client.Password,
-                /*Name = client.Name,
+                Name = client.Name,
                 Surname = client.Surname,
                 Phone = client.Phone,
                 City = client.City,
                 Street = client.Street,
-                StreetNumber = client.StreetNumber*/
+                StreetNumber = client.StreetNumber,
+                Building = client.Building,
+                Staircase = client.Staircase,
+                ApartmentNumber = client.ApartmentNumber,
+                Floor = client.Floor
             };
         }
     }

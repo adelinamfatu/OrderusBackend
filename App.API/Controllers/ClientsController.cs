@@ -27,22 +27,30 @@ namespace App.API.Controllers
             }
             else
             {
-                return NotFound();
+                return Conflict();
             }
         }
 
         [Route("login")]
         [HttpPost]
-        public string Login(ClientDTO client)
+        public IHttpActionResult Login(ClientDTO client)
         {
-            var password = Crypto.Decrypt(clientsDisplay.Login(client));
-            if (password == client.Password)
+            var data = clientsDisplay.Login(client);
+            if(data != "")
             {
-                return TokenManager.GenerateToken(client.Email);
+                var password = Crypto.Decrypt(data);
+                if (password == client.Password)
+                {
+                    return Ok(TokenManager.GenerateToken(client.Email));
+                }
+                else
+                {
+                    return Unauthorized();
+                }
             }
             else
             {
-                return "Invalid user";
+                return Unauthorized();
             }
         }
     }
