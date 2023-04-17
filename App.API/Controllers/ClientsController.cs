@@ -53,5 +53,13 @@ namespace App.API.Controllers
                 return Unauthorized();
             }
         }
+
+        [Route("{token}")]
+        [HttpGet]
+        public ClientDTO GetClient(string token)
+        {
+            var username = TokenManager.GetPrincipal(token).Identity.Name;
+            return clientsDisplay.GetClient(username);
+        }
     }
 }

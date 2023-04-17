@@ -68,5 +68,23 @@ namespace App.BusinessLogic.Helper
                 Icon = cso.Icon
             };
         }
+
+        public static ClientDTO EntityToDTO(Client client)
+        {
+            return new ClientDTO()
+            {
+                Email = client.Email,
+                Name = client.Name,
+                Surname = client.Surname,
+                Phone = client.Phone,
+                City = client.City,
+                Street = client.Street,
+                StreetNumber = client.Street,
+                Building = client.Building,
+                Staircase = client.Staircase,
+                ApartmentNumber = client.ApartmentNumber,
+                Floor = client.Floor
+            };
+        }
     }
 }

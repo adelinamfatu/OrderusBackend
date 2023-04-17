@@ -18,14 +18,27 @@ namespace App.Domain.CRUD
 
         public bool AddClient(Client client)
         {
-            context.Clients.Add(client);
-            context.SaveChanges();
-            return true;
+            var existingClient = context.Clients.FirstOrDefault(c => c.Email == client.Email);
+            if(existingClient != null)
+            {
+                return false;
+            }
+            else
+            {
+                context.Clients.Add(client);
+                context.SaveChanges();
+                return true;
+            }
         }
 
         public string Login(Client client)
         {
             return context.Clients.FirstOrDefault(c => c.Email == client.Email).Password;
+        }
+
+        public Client GetClient(string email)
+        {
+            return context.Clients.FirstOrDefault(c => c.Email == email);
         }
     }
 }
