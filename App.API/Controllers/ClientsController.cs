@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace App.API.Controllers
@@ -14,6 +15,7 @@ namespace App.API.Controllers
     public class ClientsController : ApiController
     {
         ClientsDisplay clientsDisplay = new ClientsDisplay();
+        HttpContext httpContext = HttpContext.Current;
 
         [Route("add")]
         [HttpPost]
@@ -54,10 +56,13 @@ namespace App.API.Controllers
             }
         }
 
-        [Route("{token}")]
+        [Route("token")]
         [HttpGet]
-        public ClientDTO GetClient(string token)
+        public ClientDTO GetClient()
         {
+            var headers = this.Request.Headers;
+            headers.TryGetValues("Authorization", out var authHeader);
+            string token = authHeader.FirstOrDefault().Replace("Bearer ", "").Trim('"');
             var username = TokenManager.GetPrincipal(token).Identity.Name;
             return clientsDisplay.GetClient(username);
         }

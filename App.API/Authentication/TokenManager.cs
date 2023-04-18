@@ -21,7 +21,7 @@ namespace App.API.Authentication
             {
                 Subject = new ClaimsIdentity(new[] {
                       new Claim(ClaimTypes.Name, username)}),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddDays(356),
                 SigningCredentials = new SigningCredentials(securityKey,
                                                             SecurityAlgorithms.HmacSha256Signature)
             };
@@ -42,7 +42,7 @@ namespace App.API.Authentication
                 byte[] key = Convert.FromBase64String(Secret);
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {
-                    RequireExpirationTime = true,
+                    RequireExpirationTime = false,
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     IssuerSigningKey = new SymmetricSecurityKey(key)
