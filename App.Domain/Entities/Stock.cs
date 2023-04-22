@@ -14,6 +14,7 @@ namespace App.Domain.Entities
         [Key]
         public int ID { get; set; }
 
+        [ForeignKey("Company")]
         public int CompanyID { get; set; }
 
         public virtual Company Company { get; set; }

@@ -14,7 +14,8 @@ namespace App.Domain.Entities
         [Key]
         public int ID { get; set; }
 
-        public int ClientID { get; set; }
+        [ForeignKey("Client")]
+        public string ClientEmail { get; set; }
 
         public virtual Client Client { get; set; }
 

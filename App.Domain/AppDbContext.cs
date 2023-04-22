@@ -26,7 +26,7 @@ namespace App.Domain
 
         public DbSet<EmployeeFunction> EmployeeFunctions { get; set; }
 
-        public DbSet<FunctionService> FunctionServices { get; set; }
+        //public DbSet<FunctionService> FunctionServices { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 

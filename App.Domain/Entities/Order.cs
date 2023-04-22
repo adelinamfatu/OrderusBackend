@@ -22,11 +22,13 @@ namespace App.Domain.Entities
 
         public virtual Service Service { get; set; }
 
+        [ForeignKey("Client")]
         public string ClientEmail { get; set; }
 
         public virtual Client Client { get; set; }
 
-        public int EmployeeEmail { get; set; }
+        [ForeignKey("Employee")]
+        public string EmployeeEmail { get; set; }
 
         public virtual Employee Employee { get; set; }
 

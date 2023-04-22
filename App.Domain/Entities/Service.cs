@@ -16,6 +16,7 @@ namespace App.Domain.Entities
 
         public string Name { get; set; }
 
+        [ForeignKey("Category")]
         public int CategoryID { get; set; }
 
         public virtual ServiceCategory Category { get; set; }

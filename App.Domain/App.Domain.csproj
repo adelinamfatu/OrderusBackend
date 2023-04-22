@@ -82,6 +82,10 @@
     <Compile Include="Migrations\202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.designer.cs">
       <DependentUpon>202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304220925326_AddedCorrectionsToLastMigration.cs" />
+    <Compile Include="Migrations\202304220925326_AddedCorrectionsToLastMigration.designer.cs">
+      <DependentUpon>202304220925326_AddedCorrectionsToLastMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ServiceCategory.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.resx">
       <DependentUpon>202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304220925326_AddedCorrectionsToLastMigration.resx">
+      <DependentUpon>202304220925326_AddedCorrectionsToLastMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
