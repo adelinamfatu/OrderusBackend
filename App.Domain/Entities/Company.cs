@@ -36,5 +36,9 @@ namespace App.Domain.Entities
         public string Site { get; set; }
 
         public string Description { get; set; }
+
+        public string RepresentativeEmail { get; set; }
+
+        public virtual Representative Representative { get; set; }
     }
 }

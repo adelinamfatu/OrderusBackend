@@ -21,5 +21,25 @@ namespace App.Domain
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<EmployeeFunction> EmployeeFunctions { get; set; }
+
+        public DbSet<FunctionService> FunctionServices { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Material> Materials { get; set; }
+
+        public DbSet<Stock> Stocks { get; set; }
+
+        public DbSet<StockMaterial> StockMaterials { get; set; }
+
+        public DbSet<OrderMaterial> OrderMaterials { get; set; }
+
+        public DbSet<Offer> Offers { get; set; }
+
+        public DbSet<Representative> Representatives { get; set; }
     }
 }

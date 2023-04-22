@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Entities
 {
+    [Table("Employees")]
     public class Employee
     {
         [Key]
@@ -25,5 +26,11 @@ namespace App.Domain.Entities
         public int CompanyID { get; set; }
 
         public virtual Company Company { get; set; }
+
+        public string Picture { get; set; }
+
+        public int FunctionID { get; set; }
+
+        public virtual EmployeeFunction EmployeeFunction { get; set; }
     }
 }

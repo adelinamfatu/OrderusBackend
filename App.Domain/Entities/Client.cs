@@ -35,5 +35,7 @@ namespace App.Domain.Entities
         public int? ApartmentNumber { get; set; }
 
         public int? Floor { get; set; }
+
+        public string Picture { get; set; }
     }
 }

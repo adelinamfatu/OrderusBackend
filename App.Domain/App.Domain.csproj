@@ -60,10 +60,27 @@
     <Compile Include="Entities\CompanyServiceOption.cs" />
     <Compile Include="CRUD\ServicesData.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\EmployeeFunction.cs" />
+    <Compile Include="Entities\FunctionService.cs" />
+    <Compile Include="Entities\Material.cs" />
+    <Compile Include="Entities\Offer.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderMaterial.cs" />
+    <Compile Include="Entities\Representative.cs" />
     <Compile Include="Entities\Service.cs" />
+    <Compile Include="Entities\Stock.cs" />
+    <Compile Include="Entities\StockMaterial.cs" />
     <Compile Include="Migrations\202303201325388_Initial.cs" />
     <Compile Include="Migrations\202303201325388_Initial.designer.cs">
       <DependentUpon>202303201325388_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202304201311561_AddedOrderAndMaterialTables.cs" />
+    <Compile Include="Migrations\202304201311561_AddedOrderAndMaterialTables.designer.cs">
+      <DependentUpon>202304201311561_AddedOrderAndMaterialTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.cs" />
+    <Compile Include="Migrations\202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.designer.cs">
+      <DependentUpon>202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +92,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202303201325388_Initial.resx">
       <DependentUpon>202303201325388_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304201311561_AddedOrderAndMaterialTables.resx">
+      <DependentUpon>202304201311561_AddedOrderAndMaterialTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.resx">
+      <DependentUpon>202304220817155_AddedRepresentativeAndOfferTablesAndSomeCorrections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
