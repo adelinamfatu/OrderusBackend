@@ -53,5 +53,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.AddEmployee(DTOEntity.DTOtoEntity(employee));
         }
+
+        public string Login(CompanyDTO company)
+        {
+            return companiesData.Login(DTOEntity.DTOtoEntityRepr(company));
+        }
     }
 }

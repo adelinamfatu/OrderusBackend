@@ -58,5 +58,28 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("login")]
+        [HttpPost]
+        public IHttpActionResult Login(CompanyDTO company)
+        {
+            var data = companiesDisplay.Login(company);
+            if (data != "")
+            {
+                var password = Crypto.Decrypt(data);
+                if (password == company.RepresentativePassword)
+                {
+                    return Ok(TokenManager.GenerateToken(company.RepresentativeEmail));
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
     }
 }

@@ -79,5 +79,10 @@ namespace App.Domain.CRUD
         {
             return context.Comments.Where(comm => comm.CompanyID == id);
         }
+
+        public string Login(Representative representative)
+        {
+            return context.Representatives.FirstOrDefault(r => r.Email == representative.Email).Password;
+        }
     }
 }
