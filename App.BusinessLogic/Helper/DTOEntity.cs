@@ -43,7 +43,9 @@ namespace App.BusinessLogic.Helper
                 ApartmentNumber = company.ApartmentNumber,
                 Floor = company.Floor,
                 Logo = company.Logo,
-                Site = company.Site
+                Site = company.Site,
+                Description = company.Description,
+                RepresentativeEmail = company.RepresentativeEmail
             };
         }
 
@@ -72,6 +74,31 @@ namespace App.BusinessLogic.Helper
                 Staircase = client.Staircase,
                 ApartmentNumber = client.ApartmentNumber,
                 Floor = client.Floor
+            };
+        }
+
+        public static Representative DTOtoEntityRepr(CompanyDTO company)
+        {
+            return new Representative()
+            {
+                Email = company.RepresentativeEmail,
+                Password = company.RepresentativePassword,
+                Name = company.RepresentativeName,
+                Surname = company.RepresentativeSurname
+            };
+        }
+
+        public static Employee DTOtoEntity(EmployeeDTO employee)
+        {
+            return new Employee()
+            {
+                Email = employee.Email,
+                Name = employee.Email,
+                Surname = employee.Surname,
+                Phone = employee.Phone,
+                Password = employee.Password,
+                CompanyID = employee.CompanyID,
+                FunctionID = employee.FunctionID
             };
         }
     }

@@ -39,6 +39,42 @@ namespace App.Domain.CRUD
                             .Include(cso => cso.Service);
         }
 
+        public void AddCompany(Company company)
+        {
+            context.Companies.Add(company);
+            context.SaveChanges();
+        }
+
+        public bool AddRepresentative(Representative representative)
+        {
+            var existingRepresentative = context.Representatives.FirstOrDefault(r => r.Email == representative.Email);
+            if (existingRepresentative != null)
+            {
+                return false;
+            }
+            else
+            {
+                context.Representatives.Add(representative);
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool AddEmployee(Employee employee)
+        {
+            var existingEmployee = context.Employees.FirstOrDefault(r => r.Email == employee.Email);
+            if (existingEmployee != null)
+            {
+                return false;
+            }
+            else
+            {
+                context.Employees.Add(employee);
+                context.SaveChanges();
+                return true;
+            }
+        }
+
         public IEnumerable<Comment> GetComments(int id)
         {
             return context.Comments.Where(comm => comm.CompanyID == id);

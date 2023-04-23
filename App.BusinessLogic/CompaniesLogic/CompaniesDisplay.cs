@@ -37,5 +37,21 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetComments(id).Select(comment => EntityDTO.EntityToDTO(comment));
         }
+
+        public bool AddCompany(CompanyDTO company)
+        {
+            var status = companiesData.AddRepresentative(DTOEntity.DTOtoEntityRepr(company));
+            if(status == false)
+            {
+                return status;
+            }
+            companiesData.AddCompany(DTOEntity.DTOtoEntity(company));
+            return status;
+        }
+
+        public bool AddEmployee(EmployeeDTO employee)
+        {
+            return companiesData.AddEmployee(DTOEntity.DTOtoEntity(employee));
+        }
     }
 }

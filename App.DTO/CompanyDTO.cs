@@ -27,5 +27,15 @@ namespace App.DTO
         public string Logo { get; set; }
 
         public string Site { get; set; }
+
+        public string Description { get; set; }
+
+        public string RepresentativeEmail { get; set; }
+
+        public string RepresentativePassword { get; set; }
+
+        public string RepresentativeName { get; set; }
+
+        public string RepresentativeSurname { get; set; }
     }
 }

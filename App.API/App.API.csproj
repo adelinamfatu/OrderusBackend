@@ -130,6 +130,7 @@
     <Compile Include="Authentication\TokenManager.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Starter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
