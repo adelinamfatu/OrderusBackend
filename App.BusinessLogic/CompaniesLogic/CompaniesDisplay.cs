@@ -58,5 +58,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.Login(DTOEntity.DTOtoEntityRepr(company));
         }
+
+        public CompanyDTO GetCompany(string username)
+        {
+            return EntityDTO.EntityToDTO(companiesData.GetCompany(username));
+        }
     }
 }

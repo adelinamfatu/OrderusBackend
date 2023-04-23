@@ -2,6 +2,7 @@
 using App.BusinessLogic.CompaniesLogic;
 using App.DTO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace App.API.Controllers
@@ -80,6 +81,17 @@ namespace App.API.Controllers
             {
                 return Unauthorized();
             }
+        }
+
+        [Route("token")]
+        [HttpGet]
+        public CompanyDTO GetClient()
+        {
+            var headers = this.Request.Headers;
+            headers.TryGetValues("Authorization", out var authHeader);
+            string token = authHeader.FirstOrDefault().Replace("Bearer ", "").Trim('"');
+            var username = TokenManager.GetPrincipal(token).Identity.Name;
+            return companiesDisplay.GetCompany(username);
         }
     }
 }

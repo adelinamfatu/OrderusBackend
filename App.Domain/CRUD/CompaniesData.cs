@@ -84,5 +84,10 @@ namespace App.Domain.CRUD
         {
             return context.Representatives.FirstOrDefault(r => r.Email == representative.Email).Password;
         }
+
+        public Company GetCompany(string email)
+        {
+            return context.Companies.FirstOrDefault(c => c.RepresentativeEmail == email);
+        }
     }
 }
