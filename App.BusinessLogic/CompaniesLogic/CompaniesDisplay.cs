@@ -63,5 +63,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return EntityDTO.EntityToDTO(companiesData.GetCompany(username));
         }
+
+        public void UpdateLogo(string fileName)
+        {
+            companiesData.UpdateLogo(fileName);
+        }
     }
 }

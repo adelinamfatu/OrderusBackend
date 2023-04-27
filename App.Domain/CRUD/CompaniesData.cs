@@ -75,6 +75,13 @@ namespace App.Domain.CRUD
             }
         }
 
+        public void UpdateLogo(string fileName)
+        {
+            var company = context.Companies.FirstOrDefault(c => c.Name == fileName.Substring(0, fileName.Length - 4));
+            company.Logo = Resource.IISAddress + fileName;
+            context.SaveChanges();
+        }
+
         public IEnumerable<Comment> GetComments(int id)
         {
             return context.Comments.Where(comm => comm.CompanyID == id);
