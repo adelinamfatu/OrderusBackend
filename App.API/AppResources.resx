@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BaseAddress" xml:space="preserve">
-    <value>https://192.168.2.39:9000</value>
-  </data>
-  <data name="FilePath" xml:space="preserve">
-    <value>C:/OrderusFiles/</value>
-  </data>
-  <data name="IISAddress" xml:space="preserve">
-    <value>http://192.168.2.39:9000</value>
+    <value>https://192.168.0.102:9000</value>
   </data>
 </root>

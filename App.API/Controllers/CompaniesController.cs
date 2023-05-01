@@ -131,5 +131,28 @@ namespace App.API.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [Route("update")]
+        [HttpPut]
+        public IHttpActionResult UpdateCompany(CompanyDTO company)
+        {
+            var status = companiesDisplay.UpdateCompany(company);
+            if(status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
+
+        [Route("services/update")]
+        [HttpPost]
+        public IHttpActionResult UpdateCompanyServices(IEnumerable<CompanyServiceOptionDTO> services)
+        {
+            companiesDisplay.UpdateCompanyServices(services);
+            return Ok();
+        }
     }
 }

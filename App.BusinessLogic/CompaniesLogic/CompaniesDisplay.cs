@@ -68,5 +68,20 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             companiesData.UpdateLogo(fileName);
         }
+
+        public bool UpdateCompany(CompanyDTO company)
+        {
+            if(company.Functions != null)
+            {
+                companiesData.UpdateFunctions(company.Functions);
+            }
+            return companiesData.UpdateCompany(DTOEntity.DTOtoEntity(company));
+        }
+
+        public void UpdateCompanyServices(IEnumerable<CompanyServiceOptionDTO> services)
+        {
+            var companyServices = services.Select(s => DTOEntity.DTOtoEntity(s));
+            companiesData.UpdateCompanyServices(companyServices);
+        }
     }
 }

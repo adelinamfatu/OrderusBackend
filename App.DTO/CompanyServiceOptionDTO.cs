@@ -13,5 +13,7 @@ namespace App.DTO
         public string Description { get; set; }
 
         public string Icon { get; set; }
+
+        public CompanyDTO Company { get; set; }
     }
 }

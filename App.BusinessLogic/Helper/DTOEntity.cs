@@ -42,7 +42,6 @@ namespace App.BusinessLogic.Helper
                 Staircase = company.Staircase,
                 ApartmentNumber = company.ApartmentNumber,
                 Floor = company.Floor,
-                Logo = company.Logo,
                 Site = company.Site,
                 Description = company.Description,
                 RepresentativeEmail = company.RepresentativeEmail
@@ -53,8 +52,9 @@ namespace App.BusinessLogic.Helper
         {
             return new CompanyServiceOption()
             {
-                Service = DTOtoEntity(cso.Service),
+                ServiceID = cso.Service.ID,
                 Price = cso.Price,
+                CompanyID = cso.Company.ID
             };
         }
 

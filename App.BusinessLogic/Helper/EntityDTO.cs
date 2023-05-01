@@ -43,7 +43,8 @@ namespace App.BusinessLogic.Helper
                 ApartmentNumber = company.ApartmentNumber,
                 Floor = company.Floor,
                 Logo = company.Logo,
-                Site = company.Site
+                Site = company.Site,
+                Description = company.Description
             };
         }
 

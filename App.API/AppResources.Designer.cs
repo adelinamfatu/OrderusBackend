@@ -61,29 +61,11 @@ namespace App.API {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://192.168.2.39:9000.
+        ///   Looks up a localized string similar to https://192.168.0.102:9000.
         /// </summary>
         internal static string BaseAddress {
             get {
                 return ResourceManager.GetString("BaseAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to C:/OrderusFiles/.
-        /// </summary>
-        internal static string FilePath {
-            get {
-                return ResourceManager.GetString("FilePath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://192.168.2.39:9000.
-        /// </summary>
-        internal static string IISAddress {
-            get {
-                return ResourceManager.GetString("IISAddress", resourceCulture);
             }
         }
     }
