@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Entities
 {
-    [Table("Stocks")]
-    public class Stock
+    [Table("Cards")]
+    public class Card
     {
         [Key]
-        public int ID { get; set; }
+        public int Number { get; set; }
 
-        [ForeignKey("Company")]
-        public int CompanyID { get; set; }
+        public DateTime ExpirationDate { get; set; }
 
-        public virtual Company Company { get; set; }
+        [ForeignKey("Client")]
+        public string ClientEmail { get; set; }
+
+        public virtual Client Client { get; set; }
     }
 }

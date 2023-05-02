@@ -18,6 +18,13 @@ namespace App.Domain.Entities
 
         public string Description { get; set; }
 
-        public float Pret { get; set; }
+        public float Price { get; set; }
+
+        public int Quantity { get; set; }
+
+        [ForeignKey("Company")]
+        public int CompanyID { get; set; }
+
+        public virtual Company Company { get; set; }
     }
 }

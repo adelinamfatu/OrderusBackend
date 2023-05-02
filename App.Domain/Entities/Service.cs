@@ -20,5 +20,7 @@ namespace App.Domain.Entities
         public int CategoryID { get; set; }
 
         public virtual ServiceCategory Category { get; set; }
+
+        public string Icon { get; set; }
     }
 }

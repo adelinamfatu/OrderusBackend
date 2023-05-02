@@ -26,20 +26,18 @@ namespace App.Domain
 
         public DbSet<EmployeeFunction> EmployeeFunctions { get; set; }
 
-        //public DbSet<FunctionService> FunctionServices { get; set; }
+        public DbSet<FunctionService> FunctionServices { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Material> Materials { get; set; }
-
-        public DbSet<Stock> Stocks { get; set; }
-
-        public DbSet<StockMaterial> StockMaterials { get; set; }
 
         public DbSet<OrderMaterial> OrderMaterials { get; set; }
 
         public DbSet<Offer> Offers { get; set; }
 
         public DbSet<Representative> Representatives { get; set; }
+
+        public DbSet<Card> Cards { get; set; }
     }
 }

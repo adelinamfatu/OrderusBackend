@@ -54,6 +54,7 @@
     <Compile Include="AppDbContext.cs" />
     <Compile Include="CRUD\ClientsData.cs" />
     <Compile Include="CRUD\CompaniesData.cs" />
+    <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Company.cs" />
@@ -68,8 +69,6 @@
     <Compile Include="Entities\OrderMaterial.cs" />
     <Compile Include="Entities\Representative.cs" />
     <Compile Include="Entities\Service.cs" />
-    <Compile Include="Entities\Stock.cs" />
-    <Compile Include="Entities\StockMaterial.cs" />
     <Compile Include="Migrations\202303201325388_Initial.cs" />
     <Compile Include="Migrations\202303201325388_Initial.designer.cs">
       <DependentUpon>202303201325388_Initial.cs</DependentUpon>
@@ -85,6 +84,10 @@
     <Compile Include="Migrations\202304220925326_AddedCorrectionsToLastMigration.cs" />
     <Compile Include="Migrations\202304220925326_AddedCorrectionsToLastMigration.designer.cs">
       <DependentUpon>202304220925326_AddedCorrectionsToLastMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305020601431_AddedLastTablesAndForeignKeyModifications.cs" />
+    <Compile Include="Migrations\202305020601431_AddedLastTablesAndForeignKeyModifications.designer.cs">
+      <DependentUpon>202305020601431_AddedLastTablesAndForeignKeyModifications.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304220925326_AddedCorrectionsToLastMigration.resx">
       <DependentUpon>202304220925326_AddedCorrectionsToLastMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305020601431_AddedLastTablesAndForeignKeyModifications.resx">
+      <DependentUpon>202305020601431_AddedLastTablesAndForeignKeyModifications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
