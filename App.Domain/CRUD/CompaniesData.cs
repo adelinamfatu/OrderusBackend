@@ -124,39 +124,6 @@ namespace App.Domain.CRUD
             return true;
         }
 
-        public void UpdateFunctions(List<string> functions)
-        {
-            foreach(var function in functions)
-            {
-                if(!context.EmployeeFunctions.Any(f => f.Title == function))
-                {
-                    AddFunction(function);
-                }
-            }
-            var existingFunctions = context.EmployeeFunctions.ToList();
-            foreach(var existingFunction in existingFunctions)
-            {
-                if(!functions.Contains(existingFunction.Title))
-                {
-                    DeleteFunction(existingFunction);
-                }
-            }
-        }
-
-        public bool AddFunction(string function)
-        {
-            context.EmployeeFunctions.Add(new EmployeeFunction() { Title = function });
-            context.SaveChanges();
-            return true;
-        }
-
-        public bool DeleteFunction(EmployeeFunction function)
-        {
-            context.EmployeeFunctions.Remove(function);
-            context.SaveChanges();
-            return true;
-        }
-
         public bool UpdateCompany(Company company)
         {
             var existingCompany = context.Companies.FirstOrDefault(c => c.Name == company.Name);

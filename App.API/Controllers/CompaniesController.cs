@@ -18,10 +18,16 @@ namespace App.API.Controllers
 
         [Route("")]
         [HttpGet]
-        [BasicAuthentication]
         public IEnumerable<CompanyDTO> GetAllCompanies()
         {
             return companiesDisplay.GetCompanies();
+        }
+
+        [Route("functions")]
+        [HttpGet]
+        public IEnumerable<CompanyDTO> GetAllFunctions()
+        {
+            return companiesDisplay.GetAllFunctions();
         }
 
         [Route("services/{id}")]

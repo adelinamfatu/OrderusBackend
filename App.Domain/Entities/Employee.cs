@@ -29,9 +29,6 @@ namespace App.Domain.Entities
 
         public string Picture { get; set; }
 
-        [ForeignKey("EmployeeFunction")]
-        public int FunctionID { get; set; }
-
-        public virtual EmployeeFunction EmployeeFunction { get; set; }
+        public bool IsConfirmed { get; set; }
     }
 }

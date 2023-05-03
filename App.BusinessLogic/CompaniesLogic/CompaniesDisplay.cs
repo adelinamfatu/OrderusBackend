@@ -28,6 +28,11 @@ namespace App.BusinessLogic.CompaniesLogic
             return companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company));
         }
 
+        public IEnumerable<CompanyDTO> GetAllFunctions()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<CompanyServiceOptionDTO> GetCompanyDetails(int id)
         {
             return companiesData.GetCompanyDetails(id).Select(cso => EntityDTO.EntityToDTO(cso));
@@ -71,10 +76,6 @@ namespace App.BusinessLogic.CompaniesLogic
 
         public bool UpdateCompany(CompanyDTO company)
         {
-            if(company.Functions != null)
-            {
-                companiesData.UpdateFunctions(company.Functions);
-            }
             return companiesData.UpdateCompany(DTOEntity.DTOtoEntity(company));
         }
 

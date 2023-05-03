@@ -61,8 +61,7 @@
     <Compile Include="Entities\CompanyServiceOption.cs" />
     <Compile Include="CRUD\ServicesData.cs" />
     <Compile Include="Entities\Employee.cs" />
-    <Compile Include="Entities\EmployeeFunction.cs" />
-    <Compile Include="Entities\FunctionService.cs" />
+    <Compile Include="Entities\EmployeeService.cs" />
     <Compile Include="Entities\Material.cs" />
     <Compile Include="Entities\Offer.cs" />
     <Compile Include="Entities\Order.cs" />
@@ -88,6 +87,10 @@
     <Compile Include="Migrations\202305020601431_AddedLastTablesAndForeignKeyModifications.cs" />
     <Compile Include="Migrations\202305020601431_AddedLastTablesAndForeignKeyModifications.designer.cs">
       <DependentUpon>202305020601431_AddedLastTablesAndForeignKeyModifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.cs" />
+    <Compile Include="Migrations\202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.designer.cs">
+      <DependentUpon>202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305020601431_AddedLastTablesAndForeignKeyModifications.resx">
       <DependentUpon>202305020601431_AddedLastTablesAndForeignKeyModifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.resx">
+      <DependentUpon>202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

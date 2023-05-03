@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Entities
 {
-    [Table("FunctionServices")]
-    public class FunctionService
+    [Table("EmployeeServices")]
+    public class EmployeeService
     {
         [Key, Column(Order = 0)]
-        [ForeignKey("EmployeeFunction")]
-        public int FunctionID { get; set; }
+        [ForeignKey("Employee")]
+        public string EmployeeEmail { get; set; }
 
-        public virtual EmployeeFunction EmployeeFunction { get; set; }
+        public virtual Employee Employee { get; set; }
 
         [Key, Column(Order = 1)]
         [ForeignKey("Service")]
