@@ -97,8 +97,7 @@ namespace App.BusinessLogic.Helper
                 Surname = employee.Surname,
                 Phone = employee.Phone,
                 Password = employee.Password,
-                CompanyID = employee.CompanyID,
-                FunctionID = employee.FunctionID
+                CompanyID = employee.CompanyID
             };
         }
     }

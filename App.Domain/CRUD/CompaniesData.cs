@@ -60,6 +60,11 @@ namespace App.Domain.CRUD
             }
         }
 
+        public IEnumerable<Employee> GetEmployees(int id)
+        {
+            return context.Employees.Where(e => e.CompanyID == id);
+        }
+
         public bool AddEmployee(Employee employee)
         {
             var existingEmployee = context.Employees.FirstOrDefault(r => r.Email == employee.Email);
@@ -182,6 +187,19 @@ namespace App.Domain.CRUD
         public string Login(Representative representative)
         {
             return context.Representatives.FirstOrDefault(r => r.Email == representative.Email).Password;
+        }
+
+        public string Login(Employee employee)
+        {
+            var data = context.Employees.FirstOrDefault(e => e.Email == employee.Email);
+            if(data.IsConfirmed == false)
+            {
+                return "";
+            }
+            else
+            {
+                return data.Password;
+            }
         }
 
         public Company GetCompany(string email)

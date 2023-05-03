@@ -20,6 +20,6 @@ namespace App.DTO
 
         public string Picture { get; set; }
 
-        public int FunctionID { get; set; }
+        public bool IsConfirmed { get; set; }
     }
 }

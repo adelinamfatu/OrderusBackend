@@ -10,8 +10,8 @@ using System.Web.Http;
 
 namespace App.API.Controllers
 {
-    [RoutePrefix("api/employess")]
-    class EmployeesController : ApiController
+    [RoutePrefix("api/employees")]
+    public class EmployeesController : ApiController
     {
         CompaniesDisplay companiesDisplay = new CompaniesDisplay();
 
@@ -19,7 +19,7 @@ namespace App.API.Controllers
         [HttpPost]
         public IHttpActionResult AddEmployee(EmployeeDTO employee)
         {
-            employee.Email = Crypto.Encrypt(employee.Email);
+            employee.Password = Crypto.Encrypt(employee.Password);
             var status = companiesDisplay.AddEmployee(employee);
             if (status == true)
             {
@@ -29,6 +29,36 @@ namespace App.API.Controllers
             {
                 return Conflict();
             }
+        }
+
+        [Route("login")]
+        [HttpPost]
+        public IHttpActionResult Login(EmployeeDTO employee)
+        {
+            var data = companiesDisplay.Login(employee);
+            if (data != "")
+            {
+                var password = Crypto.Decrypt(data);
+                if (password == employee.Password)
+                {
+                    return Ok(TokenManager.GenerateToken(employee.Email));
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
+        [Route("company/id")]
+        [HttpGet]
+        public IEnumerable<EmployeeDTO> GetEmployeesByCompany(int id)
+        {
+            return companiesDisplay.GetEmployees(id);
         }
     }
 }

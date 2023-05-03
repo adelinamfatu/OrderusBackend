@@ -85,5 +85,17 @@ namespace App.BusinessLogic.Helper
                 Floor = client.Floor
             };
         }
+
+        public static EmployeeDTO EntityToDTO(Employee employee)
+        {
+            return new EmployeeDTO()
+            {
+                Email = employee.Email,
+                Name = employee.Name,
+                Surname = employee.Surname,
+                Phone = employee.Phone,
+                IsConfirmed = employee.IsConfirmed
+            };
+        }
     }
 }

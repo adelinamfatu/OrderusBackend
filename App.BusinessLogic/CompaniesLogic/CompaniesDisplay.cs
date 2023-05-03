@@ -54,6 +54,11 @@ namespace App.BusinessLogic.CompaniesLogic
             return status;
         }
 
+        public IEnumerable<EmployeeDTO> GetEmployees(int id)
+        {
+            return companiesData.GetEmployees(id).Select(employee => EntityDTO.EntityToDTO(employee));
+        }
+
         public bool AddEmployee(EmployeeDTO employee)
         {
             return companiesData.AddEmployee(DTOEntity.DTOtoEntity(employee));
@@ -62,6 +67,11 @@ namespace App.BusinessLogic.CompaniesLogic
         public string Login(CompanyDTO company)
         {
             return companiesData.Login(DTOEntity.DTOtoEntityRepr(company));
+        }
+
+        public string Login(EmployeeDTO employee)
+        {
+            return companiesData.Login(DTOEntity.DTOtoEntity(employee));
         }
 
         public CompanyDTO GetCompany(string username)
