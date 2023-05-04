@@ -41,5 +41,12 @@ namespace App.API.Controllers
         {
             return servicesDisplay.GetServicesByCategory(id);
         }
+
+        [Route("companies/{id}")]
+        [HttpGet]
+        public IEnumerable<ServiceDTO> GetServicesByCompany(int id)
+        {
+            return servicesDisplay.GetServicesByCompany(id);
+        }
     }
 }

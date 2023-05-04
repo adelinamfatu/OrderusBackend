@@ -38,6 +38,11 @@ namespace App.BusinessLogic.ServicesLogic
             return servicesData.GetServicesByCategory(id).Select(service => EntityDTO.EntityToDTO(service));
         }
 
+        public IEnumerable<ServiceDTO> GetServicesByCompany(int id)
+        {
+            return servicesData.GetServicesByCompany(id).Select(service => EntityDTO.EntityToDTO(service));
+        }
+
         public ServiceCategory GetCategory(string name)
         {
             return servicesData.GetCategory(name);

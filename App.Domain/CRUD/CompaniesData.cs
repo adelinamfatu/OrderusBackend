@@ -39,6 +39,11 @@ namespace App.Domain.CRUD
                             .Include(cso => cso.Service);
         }
 
+        public IEnumerable<Material> GetCompanyMaterials(int id)
+        {
+            return context.Materials.Where(m => m.CompanyID == id);
+        }
+
         public void AddCompany(Company company)
         {
             context.Companies.Add(company);
@@ -55,6 +60,21 @@ namespace App.Domain.CRUD
             else
             {
                 context.Representatives.Add(representative);
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool AddMaterial(Material material)
+        {
+            var existingMaterial = context.Materials.FirstOrDefault(m => m.Name == material.Name && m.CompanyID == material.CompanyID);
+            if (existingMaterial != null)
+            {
+                return false;
+            }
+            else
+            {
+                context.Materials.Add(material);
                 context.SaveChanges();
                 return true;
             }
@@ -167,6 +187,25 @@ namespace App.Domain.CRUD
             if (existingCompany.Description != company.Description)
             {
                 existingCompany.Description = company.Description;
+            }
+            context.SaveChanges();
+            return true;
+        }
+
+        public bool UpdateMaterial(Material material)
+        {
+            var existingMaterial = context.Materials.FirstOrDefault(m => m.Name == material.Name && m.CompanyID == material.CompanyID);
+            if(existingMaterial.Name != material.Name)
+            {
+                existingMaterial.Name = material.Name;
+            }
+            if(existingMaterial.Price != material.Price)
+            {
+                existingMaterial.Price = material.Price;
+            }
+            if (existingMaterial.Quantity != material.Quantity)
+            {
+                existingMaterial.Quantity = material.Quantity;
             }
             context.SaveChanges();
             return true;

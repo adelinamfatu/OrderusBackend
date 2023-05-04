@@ -54,8 +54,9 @@ namespace App.API.Controllers
             }
         }
 
-        [Route("company/id")]
+        [Route("company/{id}")]
         [HttpGet]
+        [BasicAuthentication]
         public IEnumerable<EmployeeDTO> GetEmployeesByCompany(int id)
         {
             return companiesDisplay.GetEmployees(id);

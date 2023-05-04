@@ -28,6 +28,11 @@ namespace App.BusinessLogic.CompaniesLogic
             return companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company));
         }
 
+        public IEnumerable<MaterialDTO> GetCompanyMaterials(int id)
+        {
+            return companiesData.GetCompanyMaterials(id).Select(material => EntityDTO.EntityToDTO(material));
+        }
+
         public IEnumerable<CompanyDTO> GetAllFunctions()
         {
             throw new NotImplementedException();
@@ -52,6 +57,11 @@ namespace App.BusinessLogic.CompaniesLogic
             }
             companiesData.AddCompany(DTOEntity.DTOtoEntity(company));
             return status;
+        }
+
+        public bool AddMaterial(MaterialDTO material)
+        {
+            return companiesData.AddMaterial(DTOEntity.DTOtoEntity(material));
         }
 
         public IEnumerable<EmployeeDTO> GetEmployees(int id)
@@ -87,6 +97,11 @@ namespace App.BusinessLogic.CompaniesLogic
         public bool UpdateCompany(CompanyDTO company)
         {
             return companiesData.UpdateCompany(DTOEntity.DTOtoEntity(company));
+        }
+
+        public bool UpdateMaterial(MaterialDTO material)
+        {
+            return companiesData.UpdateMaterial(DTOEntity.DTOtoEntity(material));
         }
 
         public void UpdateCompanyServices(IEnumerable<CompanyServiceOptionDTO> services)

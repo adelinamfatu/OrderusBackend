@@ -93,11 +93,22 @@ namespace App.BusinessLogic.Helper
             return new Employee()
             {
                 Email = employee.Email,
-                Name = employee.Email,
+                Name = employee.Name,
                 Surname = employee.Surname,
                 Phone = employee.Phone,
                 Password = employee.Password,
                 CompanyID = employee.CompanyID
+            };
+        }
+
+        public static Material DTOtoEntity(MaterialDTO material)
+        {
+            return new Material()
+            {
+                Name = material.Name,
+                Quantity = material.Quantity,
+                Price = material.Price,
+                CompanyID = material.CompanyID
             };
         }
     }

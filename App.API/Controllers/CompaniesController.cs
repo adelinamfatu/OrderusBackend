@@ -160,5 +160,45 @@ namespace App.API.Controllers
             companiesDisplay.UpdateCompanyServices(services);
             return Ok();
         }
+
+        [Route("materials/{id}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<MaterialDTO> GetCompanyMaterials(int id)
+        {
+            return companiesDisplay.GetCompanyMaterials(id);
+        }
+
+        [Route("materials/add")]
+        [HttpPost]
+        [BasicAuthentication]
+        public IHttpActionResult AddMaterial(MaterialDTO material)
+        {
+            var status = companiesDisplay.AddMaterial(material);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
+
+        [Route("materials/update")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult UpdateMaterial(MaterialDTO material)
+        {
+            var status = companiesDisplay.UpdateMaterial(material);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

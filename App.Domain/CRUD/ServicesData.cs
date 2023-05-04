@@ -39,5 +39,15 @@ namespace App.Domain.CRUD
         {
             return context.Services.Where(s => s.CategoryID == id);
         }
+
+        public IEnumerable<Service> GetServicesByCompany(int id)
+        {
+            return context.Services.Join(context.CompaniesServiceOptions,
+                                            s => s.ID,
+                                            cso => cso.ServiceID,
+                                            (s, cso) => new { Company = cso, Service = s })
+                                            .Where(s => s.Company.CompanyID == id)
+                                            .Select(s => s.Service); 
+        }
     }
 }

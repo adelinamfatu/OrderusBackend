@@ -97,5 +97,15 @@ namespace App.BusinessLogic.Helper
                 IsConfirmed = employee.IsConfirmed
             };
         }
+
+        public static MaterialDTO EntityToDTO(Material material)
+        {
+            return new MaterialDTO()
+            {
+                Name = material.Name,
+                Price = material.Price,
+                Quantity = material.Quantity
+            };
+        }
     }
 }
