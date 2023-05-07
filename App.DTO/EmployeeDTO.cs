@@ -21,5 +21,7 @@ namespace App.DTO
         public string Picture { get; set; }
 
         public bool IsConfirmed { get; set; }
+
+        public List<ServiceDTO> Services { get; set; }
     }
 }

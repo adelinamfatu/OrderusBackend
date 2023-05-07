@@ -37,7 +37,5 @@ namespace App.DTO
         public string RepresentativeName { get; set; }
 
         public string RepresentativeSurname { get; set; }
-
-        public List<string> Functions { get; set; } 
     }
 }

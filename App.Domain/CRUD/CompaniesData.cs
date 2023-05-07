@@ -85,6 +85,11 @@ namespace App.Domain.CRUD
             return context.Employees.Where(e => e.CompanyID == id);
         }
 
+        public IEnumerable<Service> GetEmployeeServices(string email)
+        {
+            return context.EmployeeServices.Where(es => es.EmployeeEmail == email).Select(es => es.Service);
+        }
+
         public bool AddEmployee(Employee employee)
         {
             var existingEmployee = context.Employees.FirstOrDefault(r => r.Email == employee.Email);
@@ -211,6 +216,14 @@ namespace App.Domain.CRUD
             return true;
         }
 
+        public bool UpdateEmployee(Employee employee)
+        {
+            var existingEmployee = context.Employees.FirstOrDefault(e => e.Email == employee.Email);
+            existingEmployee.IsConfirmed = true;
+            context.SaveChanges();
+            return true;
+        }
+
         public void UpdateLogo(string fileName)
         {
             var company = context.Companies.FirstOrDefault(c => c.Name == fileName.Substring(0, fileName.Length - 4));
@@ -244,6 +257,12 @@ namespace App.Domain.CRUD
         public Company GetCompany(string email)
         {
             return context.Companies.FirstOrDefault(c => c.RepresentativeEmail == email);
+        }
+
+        public void AddEmployeeService(Service service, string employeeEmail)
+        {
+            context.EmployeeServices.Add(new EmployeeService() { EmployeeEmail = employeeEmail, ServiceID = service.ID });
+            context.SaveChanges();
         }
     }
 }

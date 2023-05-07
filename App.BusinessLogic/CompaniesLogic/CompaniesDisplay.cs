@@ -66,7 +66,12 @@ namespace App.BusinessLogic.CompaniesLogic
 
         public IEnumerable<EmployeeDTO> GetEmployees(int id)
         {
-            return companiesData.GetEmployees(id).Select(employee => EntityDTO.EntityToDTO(employee));
+            var employees = companiesData.GetEmployees(id).Select(employee => EntityDTO.EntityToDTO(employee)).ToList();
+            foreach(var employee in employees)
+            {
+                employee.Services = companiesData.GetEmployeeServices(employee.Email).Select(es => EntityDTO.EntityToDTO(es)).ToList();
+            }
+            return employees;
         }
 
         public bool AddEmployee(EmployeeDTO employee)
@@ -102,6 +107,15 @@ namespace App.BusinessLogic.CompaniesLogic
         public bool UpdateMaterial(MaterialDTO material)
         {
             return companiesData.UpdateMaterial(DTOEntity.DTOtoEntity(material));
+        }
+
+        public bool UpdateEmployee(EmployeeDTO employee)
+        {
+            foreach(var service in employee.Services)
+            {
+                companiesData.AddEmployeeService(DTOEntity.DTOtoEntity(service), employee.Email);
+            }
+            return companiesData.UpdateEmployee(DTOEntity.DTOtoEntity(employee));
         }
 
         public void UpdateCompanyServices(IEnumerable<CompanyServiceOptionDTO> services)

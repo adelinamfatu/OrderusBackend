@@ -61,7 +61,7 @@ namespace App.Domain {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://192.168.0.102:81/.
+        ///   Looks up a localized string similar to http://192.168.1.39:81/.
         /// </summary>
         internal static string IISAddress {
             get {

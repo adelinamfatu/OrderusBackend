@@ -61,5 +61,21 @@ namespace App.API.Controllers
         {
             return companiesDisplay.GetEmployees(id);
         }
+
+        [Route("update")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult UpdateEmployee(EmployeeDTO employee)
+        {
+            var status = companiesDisplay.UpdateEmployee(employee);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

@@ -140,6 +140,7 @@ namespace App.API.Controllers
 
         [Route("update")]
         [HttpPut]
+        [BasicAuthentication]
         public IHttpActionResult UpdateCompany(CompanyDTO company)
         {
             var status = companiesDisplay.UpdateCompany(company);
@@ -155,6 +156,7 @@ namespace App.API.Controllers
 
         [Route("services/update")]
         [HttpPost]
+        [BasicAuthentication]
         public IHttpActionResult UpdateCompanyServices(IEnumerable<CompanyServiceOptionDTO> services)
         {
             companiesDisplay.UpdateCompanyServices(services);
