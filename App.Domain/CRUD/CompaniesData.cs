@@ -264,5 +264,10 @@ namespace App.Domain.CRUD
             context.EmployeeServices.Add(new EmployeeService() { EmployeeEmail = employeeEmail, ServiceID = service.ID });
             context.SaveChanges();
         }
+
+        public Employee GetEmployee(string email)
+        {
+            return context.Employees.FirstOrDefault(e => e.Email == email);
+        }
     }
 }

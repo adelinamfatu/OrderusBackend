@@ -123,5 +123,10 @@ namespace App.BusinessLogic.CompaniesLogic
             var companyServices = services.Select(s => DTOEntity.DTOtoEntity(s));
             companiesData.UpdateCompanyServices(companyServices);
         }
+
+        public EmployeeDTO GetEmployee(string username)
+        {
+            return EntityDTO.EntityToDTO(companiesData.GetEmployee(username));
+        }
     }
 }

@@ -54,6 +54,17 @@ namespace App.API.Controllers
             }
         }
 
+        [Route("token")]
+        [HttpGet]
+        public EmployeeDTO GetEmployee()
+        {
+            var headers = this.Request.Headers;
+            headers.TryGetValues("Authorization", out var authHeader);
+            string token = authHeader.FirstOrDefault().Replace("Bearer ", "").Trim('"');
+            var username = TokenManager.GetPrincipal(token).Identity.Name;
+            return companiesDisplay.GetEmployee(username);
+        }
+
         [Route("company/{id}")]
         [HttpGet]
         [BasicAuthentication]
