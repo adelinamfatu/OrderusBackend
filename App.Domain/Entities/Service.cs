@@ -21,6 +21,8 @@ namespace App.Domain.Entities
 
         public virtual ServiceCategory Category { get; set; }
 
+        public string UnitOfMeasurement { get; set; }
+
         public string Icon { get; set; }
     }
 }

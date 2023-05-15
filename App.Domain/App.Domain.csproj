@@ -65,6 +65,7 @@
     <Compile Include="Entities\Material.cs" />
     <Compile Include="Entities\Offer.cs" />
     <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderExtendedProperties.cs" />
     <Compile Include="Entities\OrderMaterial.cs" />
     <Compile Include="Entities\Representative.cs" />
     <Compile Include="Entities\Service.cs" />
@@ -91,6 +92,10 @@
     <Compile Include="Migrations\202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.cs" />
     <Compile Include="Migrations\202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.designer.cs">
       <DependentUpon>202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305151548043_AddedVerticalTable.cs" />
+    <Compile Include="Migrations\202305151548043_AddedVerticalTable.designer.cs">
+      <DependentUpon>202305151548043_AddedVerticalTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.resx">
       <DependentUpon>202305030907004_RemovedEmployeeFunctionTableAndAddedEmployeeColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305151548043_AddedVerticalTable.resx">
+      <DependentUpon>202305151548043_AddedVerticalTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

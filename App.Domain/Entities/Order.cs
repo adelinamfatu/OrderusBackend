@@ -16,8 +16,11 @@ namespace App.Domain.Entities
 
         public DateTime DateTime { get; set; }
 
+        public int Duration { get; set; }
+
         public bool RequireMaterial { get; set; }
 
+        [ForeignKey("Service")]
         public int ServiceID { get; set; }
 
         public virtual Service Service { get; set; }
@@ -33,5 +36,7 @@ namespace App.Domain.Entities
         public virtual Employee Employee { get; set; }
 
         public float PaymentAmount { get; set; }
+
+        public bool IsConfirmed { get; set; }
     }
 }

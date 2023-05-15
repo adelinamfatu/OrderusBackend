@@ -27,5 +27,10 @@ namespace App.Domain.Entities
         public virtual Company Company { get; set; }
 
         public DateTime Date { get; set; }
+
+        [ForeignKey("Order")]
+        public int OrderID { get; set; }
+
+        public virtual Order Order { get; set; }
     }
 }

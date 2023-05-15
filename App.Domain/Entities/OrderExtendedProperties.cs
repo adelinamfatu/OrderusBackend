@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Entities
 {
-    [Table("Materials")]
-    public class Material
+    [Table("OrderExtendedProperties")]
+    public class OrderExtendedProperties
     {
         [Key]
         public int ID { get; set; }
 
-        public string Name { get; set; }
+        [ForeignKey("Order")]
+        public int OrderID { get; set; }
 
-        public float Price { get; set; }
+        public virtual Order Order { get; set; }
 
-        public int Quantity { get; set; }
+        public string Key { get; set; }
 
-        [ForeignKey("Company")]
-        public int CompanyID { get; set; }
-
-        public virtual Company Company { get; set; }
+        public string Value { get; set; }
     }
 }
