@@ -45,5 +45,17 @@ namespace App.Domain.CRUD
         {
             return context.Comments.Where(o => o.ClientEmail == clientEmail && o.CompanyID == companyID).Average(o => o.Score);
         }
+
+        public IDictionary<string, int> GetEmployeeMapping()
+        {
+            var distinctEmployeeEmails = context.Orders.Select(o => o.EmployeeEmail).Distinct().ToList();
+            return distinctEmployeeEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
+        }
+
+        public IDictionary<string, int> GetClientMapping()
+        {
+            var distinctClientEmails = context.Orders.Select(o => o.ClientEmail).Distinct().ToList();
+            return distinctClientEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
+        }
     }
 }

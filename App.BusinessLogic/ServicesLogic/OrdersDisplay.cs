@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML;
 using App.BusinessLogic.MLModels;
+using App.BusinessLogic.Helper;
+using Microsoft.ML.Data;
 
 namespace App.BusinessLogic.ServicesLogic
 {
@@ -48,17 +50,22 @@ namespace App.BusinessLogic.ServicesLogic
             var trainData = trainTestSplit.TrainSet;
             var testData = trainTestSplit.TestSet;
 
-            var model = Train(mlContext, trainData);
+            var employeeEmailMapping = ordersData.GetEmployeeMapping();
+            var clientEmailMapping = ordersData.GetClientMapping();
+            var model = Train(mlContext, trainData, employeeEmailMapping, clientEmailMapping);
             Evaluate(mlContext, model, testData);
             var duration = TestSinglePrediction(mlContext, model, po);
             return 0;
         }
 
-        private ITransformer Train(MLContext mlContext, IDataView dataView)
+        private ITransformer Train(MLContext mlContext, IDataView dataView, IDictionary<string, int> employeeEmailMapping, IDictionary<string, int> clientEmailMapping)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "EmployeeEmailEncoded", inputColumnName: "EmployeeEmail"))
-                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeEmailEncoded", "OrderID", "MaterialQuantity", "ClientEmail", "DateTimeEncoded", "Rating", "NbRooms", "Surface", "Duration"))
+                .Append(mlContext.Transforms.Conversion.MapValue("EmployeeEmailEncoded", employeeEmailMapping, "EmployeeEmail"))
+                .Append(mlContext.Transforms.Conversion.MapValue("ClientEmailEncoded", employeeEmailMapping, "ClientEmail"))
+                .Append(mlContext.Transforms.CustomMapping(new CustomDate().GetMapping(), "CustomDateMapping"))
+                .Append(mlContext.Transforms.Conversion.ConvertType(nameof(CustomMappingOutput.CustomDateHour), outputKind: DataKind.Int32))
+                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeEmailEncoded", "OrderID", "MaterialQuantity", "ClientEmailEncoded", "CustomMappingOutput", "Rating", "NbRooms", "Surface", "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
             return model;

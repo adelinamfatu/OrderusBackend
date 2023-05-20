@@ -48,4 +48,10 @@ namespace App.BusinessLogic.MLModels
         [ColumnName("Score")]
         public float Duration;
     }
+
+    public class CustomMappingOutput
+    {
+        [ColumnName("CustomMappingOutput")]
+        public float CustomDateHour { get; set; }
+    }
 }
