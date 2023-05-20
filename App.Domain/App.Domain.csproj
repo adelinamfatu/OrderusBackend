@@ -54,6 +54,7 @@
     <Compile Include="AppDbContext.cs" />
     <Compile Include="CRUD\ClientsData.cs" />
     <Compile Include="CRUD\CompaniesData.cs" />
+    <Compile Include="CRUD\OrdersData.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Comment.cs" />
