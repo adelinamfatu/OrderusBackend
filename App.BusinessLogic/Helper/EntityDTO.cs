@@ -95,7 +95,8 @@ namespace App.BusinessLogic.Helper
                 Surname = employee.Surname,
                 Phone = employee.Phone,
                 IsConfirmed = employee.IsConfirmed,
-                Services = new List<ServiceDTO>()
+                Services = new List<ServiceDTO>(),
+                Orders = new List<OrderDTO>()
             };
         }
 
@@ -106,6 +107,17 @@ namespace App.BusinessLogic.Helper
                 Name = material.Name,
                 Price = material.Price,
                 Quantity = material.Quantity
+            };
+        }
+
+        public static OrderDTO EntityToDTO(Order order)
+        {
+            return new OrderDTO()
+            {
+                DateTime = order.DateTime,
+                Duration = order.Duration,
+                PaymentAmount = order.PaymentAmount,
+                ServiceName = order.Service.Name
             };
         }
     }

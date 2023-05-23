@@ -41,9 +41,9 @@ namespace App.Domain.CRUD
             return context.Orders.OrderByDescending(o => o.ID).FirstOrDefault().ID + 1;
         }
 
-        public double GetClientMeanScore(string clientEmail, int companyID)
+        public float GetClientMeanScore(string clientEmail, int companyID)
         {
-            return context.Comments.Where(o => o.ClientEmail == clientEmail && o.CompanyID == companyID).Average(o => o.Score);
+            return (float)context.Comments.Where(o => o.ClientEmail == clientEmail && o.CompanyID == companyID).Average(o => o.Score);
         }
 
         public IDictionary<string, int> GetEmployeeMapping()
@@ -56,6 +56,17 @@ namespace App.Domain.CRUD
         {
             var distinctClientEmails = context.Orders.Select(o => o.ClientEmail).Distinct().ToList();
             return distinctClientEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
+        }
+
+        public Dictionary<string, int> GetOrderServicesCount(int companyID)
+        {
+            return context.Orders.Where(o => o.Employee.CompanyID == companyID)
+                                .GroupBy(o => o.Service.Name)
+                                .Select(g => new
+                                {
+                                    ServiceName = g.Key,
+                                    Count = g.Count()
+                                }).ToDictionary(osc => osc.ServiceName, osc => osc.Count);
         }
     }
 }

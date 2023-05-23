@@ -89,6 +89,13 @@ namespace App.BusinessLogic.CompaniesLogic
             return companiesData.Login(DTOEntity.DTOtoEntity(employee));
         }
 
+        public EmployeeDTO GetEmployeeDetails(string email)
+        {
+            var employee = EntityDTO.EntityToDTO(companiesData.GetEmployee(email));
+            employee.Orders = companiesData.GetEmployeeOrders(email).Select(eo => EntityDTO.EntityToDTO(eo)).ToList();
+            return employee;
+        }
+
         public CompanyDTO GetCompany(string username)
         {
             return EntityDTO.EntityToDTO(companiesData.GetCompany(username));

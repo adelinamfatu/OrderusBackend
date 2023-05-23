@@ -23,5 +23,7 @@ namespace App.DTO
         public bool IsConfirmed { get; set; }
 
         public List<ServiceDTO> Services { get; set; }
+
+        public List<OrderDTO> Orders { get; set; }
     }
 }

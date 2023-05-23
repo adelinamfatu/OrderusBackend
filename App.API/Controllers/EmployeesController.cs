@@ -88,5 +88,13 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public EmployeeDTO GetEmployeeDetails(string email)
+        {
+            return companiesDisplay.GetEmployeeDetails(email);
+        }
     }
 }

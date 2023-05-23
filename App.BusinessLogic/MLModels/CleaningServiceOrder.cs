@@ -10,19 +10,10 @@ namespace App.BusinessLogic.MLModels
     public class CleaningServiceOrder
     {
         [ColumnName("CompanyID")]
-        public int CompanyID;
+        public float CompanyID;
 
         [ColumnName("EmployeeEmail")]
         public string EmployeeEmail;
-
-        [ColumnName("OrderID")]
-        public int OrderID;
-
-        [ColumnName("RequireMaterial")]
-        public bool RequireMaterial;
-
-        [ColumnName("MaterialQuantity")]
-        public int MaterialQuantity;
 
         [ColumnName("ClientEmail")]
         public string ClientEmail;
@@ -31,13 +22,13 @@ namespace App.BusinessLogic.MLModels
         public DateTime DateTime;
 
         [ColumnName("Rating")]
-        public double Rating;
+        public float Rating;
 
         [ColumnName("NbRooms")]
-        public int NbRooms;
+        public float NbRooms;
 
         [ColumnName("Surface")]
-        public int Surface;
+        public float Surface;
 
         [ColumnName("Duration")]
         public float Duration;

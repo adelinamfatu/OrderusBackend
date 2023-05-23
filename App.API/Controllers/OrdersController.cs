@@ -22,5 +22,12 @@ namespace App.API.Controllers
         {
             return ordersDisplay.GetEstimtedTime(po);
         }
+
+        [Route("services/{id}")]
+        [HttpGet]
+        public Dictionary<string, int> GetOrderServicesCount(int id)
+        {
+            return ordersDisplay.GetOrderServicesCount(id);
+        }
     }
 }

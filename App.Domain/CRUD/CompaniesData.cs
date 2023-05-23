@@ -269,5 +269,10 @@ namespace App.Domain.CRUD
         {
             return context.Employees.FirstOrDefault(e => e.Email == email);
         }
+
+        public IEnumerable<Order> GetEmployeeOrders(string email)
+        {
+            return context.Orders.Where(o => o.EmployeeEmail == email);
+        }
     }
 }

@@ -27,20 +27,19 @@ namespace App.BusinessLogic.ServicesLogic
             var orderDetails = ordersData.GetAllCleaningOrders();
             foreach(var order in orderDetails)
             {
-                cleaningServiceOrders.Add(new CleaningServiceOrder
+                CleaningServiceOrder cso2 = new CleaningServiceOrder
                 {
                     CompanyID = order.Employee.CompanyID,
                     EmployeeEmail = order.EmployeeEmail,
-                    OrderID = order.ID,
-                    RequireMaterial = order.RequireMaterial,
-                    MaterialQuantity = order.RequireMaterial == true ? ordersData.GetOrderMaterialQuantity(order.ID) : 0,
                     ClientEmail = order.ClientEmail,
                     DateTime = order.DateTime,
                     Rating = ordersData.GetOrderScore(order.ID),
                     NbRooms = int.Parse(ordersData.GetOrderExtendedProperty(order.ID, "NbRooms")),
                     Surface = int.Parse(ordersData.GetOrderExtendedProperty(order.ID, "Surface")),
                     Duration = order.Duration
-                });
+                };
+                cleaningServiceOrders.Add(cso2);
+                Console.WriteLine(cso2.ToString());
             }
 
             MLContext mlContext = new MLContext(seed: 0);
@@ -61,10 +60,9 @@ namespace App.BusinessLogic.ServicesLogic
         private ITransformer Train(MLContext mlContext, IDataView dataView, IDictionary<string, int> employeeEmailMapping, IDictionary<string, int> clientEmailMapping)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
-                .Append(mlContext.Transforms.Conversion.MapValue("EmployeeEmailEncoded", employeeEmailMapping, "EmployeeEmail"))
-                .Append(mlContext.Transforms.Conversion.MapValue("ClientEmailEncoded", employeeEmailMapping, "ClientEmail"))
+                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "EmployeeEmailEncoded", inputColumnName: "EmployeeEmail"))
+                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ClientEmailEncoded", inputColumnName: "ClientEmail"))
                 .Append(mlContext.Transforms.CustomMapping(new CustomDate().GetMapping(), "CustomDateMapping"))
-                .Append(mlContext.Transforms.Conversion.ConvertType(nameof(CustomMappingOutput.CustomDateHour), outputKind: DataKind.Int32))
                 .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeEmailEncoded", "OrderID", "MaterialQuantity", "ClientEmailEncoded", "CustomMappingOutput", "Rating", "NbRooms", "Surface", "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
@@ -84,9 +82,9 @@ namespace App.BusinessLogic.ServicesLogic
             {
                 CompanyID = po.CompanyID,
                 EmployeeEmail = "marianion@gmail.com",
-                OrderID = ordersData.GetLastOrderID(),
-                RequireMaterial = po.Comment != null ? true : false,
-                MaterialQuantity = po.Comment != null ? 1 : 0,
+                //OrderID = ordersData.GetLastOrderID(),
+                //RequireMaterial = po.Comment != null ? true : false,
+                //MaterialQuantity = po.Comment != null ? 1 : 0,
                 ClientEmail = po.ClientEmail,
                 DateTime = po.DateTime,
                 Rating = ordersData.GetClientMeanScore(po.ClientEmail, po.CompanyID),
@@ -100,6 +98,11 @@ namespace App.BusinessLogic.ServicesLogic
         private string AssignEmployee()
         {
             return "";
+        }
+
+        public Dictionary<string, int> GetOrderServicesCount(int companyID)
+        {
+            return ordersData.GetOrderServicesCount(companyID);
         }
     }
 }
