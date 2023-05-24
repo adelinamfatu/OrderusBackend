@@ -1,9 +1,11 @@
 ﻿using App.API.Authentication;
 using App.BusinessLogic.CompaniesLogic;
+using App.BusinessLogic.Helper;
 using App.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -95,6 +97,56 @@ namespace App.API.Controllers
         public EmployeeDTO GetEmployeeDetails(string email)
         {
             return companiesDisplay.GetEmployeeDetails(email);
+        }
+
+        [Route("details/update")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult UpdateEmployeeDetails(EmployeeDTO employee)
+        {
+            var status = companiesDisplay.UpdateEmployeeDetails(employee);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
+
+        [Route("photo")]
+        [HttpPost]
+        public async Task<IHttpActionResult> AddEmployeePhoto()
+        {
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    return BadRequest("Unsupported media type. Only multipart/form-data is supported.");
+                }
+
+                var provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                var fileContent = provider.Contents.FirstOrDefault();
+
+                if (fileContent != null)
+                {
+                    var fileName = fileContent.Headers.ContentDisposition.FileName.Trim('\"');
+                    var fileStream = await fileContent.ReadAsStreamAsync();
+                    ImageSaveService.SaveImageAsync(fileName, fileStream);
+                    companiesDisplay.UpdatePicture(fileName);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("No file was found in the request.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }

@@ -96,6 +96,11 @@ namespace App.BusinessLogic.CompaniesLogic
             return employee;
         }
 
+        public bool UpdateEmployeeDetails(EmployeeDTO employee)
+        {
+            return companiesData.UpdateEmployeeDetails(DTOEntity.DTOtoEntity(employee));
+        }
+
         public CompanyDTO GetCompany(string username)
         {
             return EntityDTO.EntityToDTO(companiesData.GetCompany(username));
@@ -123,6 +128,11 @@ namespace App.BusinessLogic.CompaniesLogic
                 companiesData.AddEmployeeService(DTOEntity.DTOtoEntity(service), employee.Email);
             }
             return companiesData.UpdateEmployee(DTOEntity.DTOtoEntity(employee));
+        }
+
+        public void UpdatePicture(string fileName)
+        {
+            companiesData.UpdatePicture(fileName);
         }
 
         public void UpdateCompanyServices(IEnumerable<CompanyServiceOptionDTO> services)

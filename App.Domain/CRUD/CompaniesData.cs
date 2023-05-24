@@ -105,6 +105,14 @@ namespace App.Domain.CRUD
             }
         }
 
+        public bool UpdateEmployeeDetails(Employee employee)
+        {
+            var existingEmployee = context.Employees.Where(e => e.Email == employee.Email).FirstOrDefault();
+            existingEmployee.Phone = employee.Phone;
+            context.SaveChanges();
+            return true;
+        }
+
         public void UpdateCompanyServices(IEnumerable<CompanyServiceOption> companyServiceOptions)
         {
             foreach (var service in companyServiceOptions)
@@ -131,6 +139,13 @@ namespace App.Domain.CRUD
                     DeleteCompanyService(existingService);
                 }
             }
+        }
+
+        public void UpdatePicture(string fileName)
+        {
+            var employee = context.Employees.FirstOrDefault(c => c.Email == fileName.Substring(0, fileName.Length - 4));
+            employee.Picture = Resource.IISAddress + fileName;
+            context.SaveChanges();
         }
 
         public bool AddCompanyService(CompanyServiceOption companyServiceOption)

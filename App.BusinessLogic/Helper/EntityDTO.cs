@@ -95,6 +95,7 @@ namespace App.BusinessLogic.Helper
                 Surname = employee.Surname,
                 Phone = employee.Phone,
                 IsConfirmed = employee.IsConfirmed,
+                Picture = employee.Picture,
                 Services = new List<ServiceDTO>(),
                 Orders = new List<OrderDTO>()
             };
