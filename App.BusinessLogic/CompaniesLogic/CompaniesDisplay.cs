@@ -145,5 +145,25 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return EntityDTO.EntityToDTO(companiesData.GetEmployee(username));
         }
+
+        public IEnumerable<OrderDTO> GetScheduledOrders(string email)
+        {
+            return companiesData.GetScheduledOrders(email).Select(order => EntityDTO.EntityToDTO(order));
+        }
+
+        public IEnumerable<OrderDTO> GetPastOrders(string email)
+        {
+            return companiesData.GetPastOrders(email).Select(order => EntityDTO.EntityToDTO(order));
+        }
+
+        public IEnumerable<OrderDTO> GetUnconfirmedOrders(string email)
+        {
+            return companiesData.GetUnconfirmedOrders(email).Select(order => EntityDTO.EntityToDTO(order));
+        }
+
+        public Dictionary<string, string> GetOrderDetails(int id)
+        {
+            return companiesData.GetOrderDetails(id);
+        }
     }
 }

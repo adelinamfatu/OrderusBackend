@@ -148,5 +148,37 @@ namespace App.API.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [Route("schedule/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OrderDTO> GetScheduledOrders(string email)
+        {
+            return companiesDisplay.GetScheduledOrders(email);
+        }
+
+        [Route("history/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OrderDTO> GetPastOrders(string email)
+        {
+            return companiesDisplay.GetPastOrders(email);
+        }
+
+        [Route("orders/unconfirmed/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OrderDTO> GetUnconfirmedOrders(string email)
+        {
+            return companiesDisplay.GetUnconfirmedOrders(email);
+        }
+
+        [Route("orders/{id}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IDictionary<string, string> GetOrderDetails(int id)
+        {
+            return companiesDisplay.GetOrderDetails(id);
+        }
     }
 }

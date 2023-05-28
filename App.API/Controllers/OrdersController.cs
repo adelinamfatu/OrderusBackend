@@ -29,5 +29,20 @@ namespace App.API.Controllers
         {
             return ordersDisplay.GetOrderServicesCount(id);
         }
+
+        [Route("update/{id}")]
+        [HttpPost]
+        public IHttpActionResult UpdateOrder(int id, List<MaterialDTO> materials)
+        {
+            var status = ordersDisplay.UpdateOrder(id, materials);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

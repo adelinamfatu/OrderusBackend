@@ -148,6 +148,29 @@ namespace App.Domain.CRUD
             context.SaveChanges();
         }
 
+        public IEnumerable<Order> GetPastOrders(string email)
+        {
+            return context.Orders.Where(o => o.EmployeeEmail == email && o.DateTime < DateTime.Now).OrderByDescending(o => o.DateTime);
+        }
+
+        public IEnumerable<Order> GetUnconfirmedOrders(string email)
+        {
+            return context.Orders.Where(o => o.EmployeeEmail == email && o.IsConfirmed == false);
+        }
+
+        public Dictionary<string, string> GetOrderDetails(int id)
+        {
+            return context.OrderExtendedProperties.Where(oep => oep.OrderID == id).ToDictionary(oep => oep.Key, oep => oep.Value);
+        }
+
+        public IEnumerable<Order> GetScheduledOrders(string email)
+        {
+            return context.Orders.Where(o => o.EmployeeEmail == email 
+                                        && o.DateTime.Year == DateTime.Now.Year
+                                        && o.DateTime.Month == DateTime.Now.Month
+                                        && o.DateTime.Day >= DateTime.Now.Day);
+        }
+
         public bool AddCompanyService(CompanyServiceOption companyServiceOption)
         {
             context.CompaniesServiceOptions.Add(companyServiceOption);

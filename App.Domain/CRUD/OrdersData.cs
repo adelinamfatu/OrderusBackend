@@ -68,5 +68,25 @@ namespace App.Domain.CRUD
                                     Count = g.Count()
                                 }).ToDictionary(osc => osc.ServiceName, osc => osc.Count);
         }
+
+        public bool ConfirmOrder(int id)
+        {
+            var existingOrder = context.Orders.Where(o => o.ID == id).FirstOrDefault();
+            existingOrder.IsConfirmed = true;
+            context.SaveChanges();
+            return true;
+        }
+
+        public void UpdateRequestMaterials(int id)
+        {
+            var existingOrder = context.Orders.Where(o => o.ID == id).FirstOrDefault();
+            existingOrder.RequireMaterial = true;
+            context.SaveChanges();
+        }
+
+        public void AddOrderMaterial(OrderMaterial material)
+        {
+            context.OrderMaterials.Add(material);
+        }
     }
 }

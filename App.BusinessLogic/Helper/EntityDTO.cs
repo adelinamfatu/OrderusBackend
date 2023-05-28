@@ -91,6 +91,7 @@ namespace App.BusinessLogic.Helper
             return new EmployeeDTO()
             {
                 Email = employee.Email,
+                CompanyID = employee.CompanyID,
                 Name = employee.Name,
                 Surname = employee.Surname,
                 Phone = employee.Phone,
@@ -105,6 +106,7 @@ namespace App.BusinessLogic.Helper
         {
             return new MaterialDTO()
             {
+                ID = material.ID,
                 Name = material.Name,
                 Price = material.Price,
                 Quantity = material.Quantity
@@ -115,10 +117,22 @@ namespace App.BusinessLogic.Helper
         {
             return new OrderDTO()
             {
-                DateTime = order.DateTime,
+                ID = order.ID,
+                StartTime = order.DateTime,
+                FinishTime = order.DateTime.AddMinutes(order.Duration),
                 Duration = order.Duration,
                 PaymentAmount = order.PaymentAmount,
                 ServiceName = order.Service.Name
+            };
+        }
+
+        internal static OrderMaterial EntityToDTO(int id, MaterialDTO material)
+        {
+            return new OrderMaterial()
+            {
+                OrderID = id,
+                MaterialID = material.ID,
+                Quantity = material.Quantity
             };
         }
     }

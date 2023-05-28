@@ -104,5 +104,18 @@ namespace App.BusinessLogic.ServicesLogic
         {
             return ordersData.GetOrderServicesCount(companyID);
         }
+
+        public bool UpdateOrder(int id, List<MaterialDTO> materials)
+        {
+            if(materials != null)
+            {
+                ordersData.UpdateRequestMaterials(id);
+                foreach(var material in materials)
+                {
+                    ordersData.AddOrderMaterial(EntityDTO.EntityToDTO(id, material));
+                }
+            }
+            return ordersData.ConfirmOrder(id);
+        }
     }
 }
