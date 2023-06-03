@@ -1,6 +1,8 @@
 ﻿using App.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +48,7 @@ namespace App.Domain.CRUD
             return (float)context.Comments.Where(o => o.ClientEmail == clientEmail && o.CompanyID == companyID).Average(o => o.Score);
         }
 
-        public IDictionary<string, int> GetEmployeeMapping()
+        /*public IDictionary<string, int> GetEmployeeMapping()
         {
             var distinctEmployeeEmails = context.Orders.Select(o => o.EmployeeEmail).Distinct().ToList();
             return distinctEmployeeEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
@@ -56,7 +58,7 @@ namespace App.Domain.CRUD
         {
             var distinctClientEmails = context.Orders.Select(o => o.ClientEmail).Distinct().ToList();
             return distinctClientEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
-        }
+        }*/
 
         public Dictionary<string, int> GetOrderServicesCount(int companyID)
         {
@@ -84,9 +86,58 @@ namespace App.Domain.CRUD
             context.SaveChanges();
         }
 
+        public float GetClientID(string clientEmail)
+        {
+            return context.Clients.Where(c => c.Email == clientEmail).FirstOrDefault().ID;
+        }
+
         public void AddOrderMaterial(OrderMaterial material)
         {
             context.OrderMaterials.Add(material);
+        }
+
+        public int AssignEmployee(DateTime startTime, int companyID)
+        {
+            var eligibleEmployees = context.Employees.Where(e => e.CompanyID == companyID && e.IsConfirmed == true);
+
+            var nextOrder = context.Orders.Where(o => o.DateTime > startTime)
+                                            .OrderBy(o => o.DateTime)
+                                            .FirstOrDefault();
+            if (nextOrder == null)
+            {
+                return eligibleEmployees.FirstOrDefault()?.ID ?? 0;
+            }
+
+            var availableEmployees = eligibleEmployees.Where(e => !context.Orders
+                                                        .Any(o => o.EmployeeEmail == e.Email && 
+                                                        o.DateTime < DbFunctions.AddMinutes(startTime, o.Duration) && 
+                                                        nextOrder.DateTime > startTime)).ToList();
+
+            var employeeWithLargestBreak = availableEmployees
+                .OrderByDescending(e => GetBreakUntilNextOrder(e, startTime, nextOrder.DateTime))
+                .FirstOrDefault();
+
+            if (employeeWithLargestBreak != null)
+            {
+                return employeeWithLargestBreak.ID;
+            }
+
+            return -1;
+        }
+
+        private TimeSpan GetBreakUntilNextOrder(Employee employee, DateTime startTime, DateTime nextOrderTime)
+        {
+            var ordersAfterStartTime = context.Orders.Where(o => o.EmployeeEmail == employee.Email && o.DateTime > startTime)
+                                                        .OrderBy(o => o.DateTime).ToList();
+
+            if (ordersAfterStartTime.Count == 0)
+            {
+                return nextOrderTime - startTime;
+            }
+
+            var firstOrderAfterStartTime = ordersAfterStartTime.First();
+
+            return firstOrderAfterStartTime.DateTime - startTime;
         }
     }
 }

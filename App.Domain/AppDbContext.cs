@@ -1,6 +1,7 @@
 ﻿using App.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -39,5 +40,16 @@ namespace App.Domain
         public DbSet<Card> Cards { get; set; }
 
         public DbSet<OrderExtendedProperties> OrderExtendedProperties { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Client>()
+                .Property(e => e.ID)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.ID)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+        }
     }
 }

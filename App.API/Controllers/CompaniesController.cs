@@ -95,7 +95,7 @@ namespace App.API.Controllers
 
         [Route("token")]
         [HttpGet]
-        public CompanyDTO GetClient()
+        public CompanyDTO GetCompany()
         {
             var headers = this.Request.Headers;
             headers.TryGetValues("Authorization", out var authHeader);

@@ -9,6 +9,9 @@ using Microsoft.ML;
 using App.BusinessLogic.MLModels;
 using App.BusinessLogic.Helper;
 using Microsoft.ML.Data;
+using System.IO;
+using CsvHelper;
+using System.Globalization;
 
 namespace App.BusinessLogic.ServicesLogic
 {
@@ -23,23 +26,18 @@ namespace App.BusinessLogic.ServicesLogic
 
         public int GetEstimtedTime(PossibleOrderDTO po)
         {
-            IList<CleaningServiceOrder> cleaningServiceOrders = new List<CleaningServiceOrder>();
-            var orderDetails = ordersData.GetAllCleaningOrders();
-            foreach(var order in orderDetails)
+            var id = ordersData.AssignEmployee(po.DateTime, po.CompanyID);
+            if (id == -1)
             {
-                CleaningServiceOrder cso2 = new CleaningServiceOrder
-                {
-                    CompanyID = order.Employee.CompanyID,
-                    EmployeeEmail = order.EmployeeEmail,
-                    ClientEmail = order.ClientEmail,
-                    DateTime = order.DateTime,
-                    Rating = ordersData.GetOrderScore(order.ID),
-                    NbRooms = int.Parse(ordersData.GetOrderExtendedProperty(order.ID, "NbRooms")),
-                    Surface = int.Parse(ordersData.GetOrderExtendedProperty(order.ID, "Surface")),
-                    Duration = order.Duration
-                };
-                cleaningServiceOrders.Add(cso2);
-                Console.WriteLine(cso2.ToString());
+                return -1;
+            }
+            po.EmployeeID = id;
+
+            IList<CleaningServiceOrder> cleaningServiceOrders = new List<CleaningServiceOrder>();
+            using (var reader = new StreamReader(FilePathResource.FileStorage + FilePathResource.ClearningServicesCsv))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                cleaningServiceOrders = csv.GetRecords<CleaningServiceOrder>().ToList();
             }
 
             MLContext mlContext = new MLContext(seed: 0);
@@ -49,21 +47,17 @@ namespace App.BusinessLogic.ServicesLogic
             var trainData = trainTestSplit.TrainSet;
             var testData = trainTestSplit.TestSet;
 
-            var employeeEmailMapping = ordersData.GetEmployeeMapping();
-            var clientEmailMapping = ordersData.GetClientMapping();
-            var model = Train(mlContext, trainData, employeeEmailMapping, clientEmailMapping);
+            var model = Train(mlContext, trainData);
             Evaluate(mlContext, model, testData);
             var duration = TestSinglePrediction(mlContext, model, po);
-            return 0;
+            return (int)Math.Ceiling(duration);
         }
 
-        private ITransformer Train(MLContext mlContext, IDataView dataView, IDictionary<string, int> employeeEmailMapping, IDictionary<string, int> clientEmailMapping)
+        private ITransformer Train(MLContext mlContext, IDataView dataView)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "EmployeeEmailEncoded", inputColumnName: "EmployeeEmail"))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ClientEmailEncoded", inputColumnName: "ClientEmail"))
                 .Append(mlContext.Transforms.CustomMapping(new CustomDate().GetMapping(), "CustomDateMapping"))
-                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeEmailEncoded", "OrderID", "MaterialQuantity", "ClientEmailEncoded", "CustomMappingOutput", "Rating", "NbRooms", "Surface", "Duration"))
+                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutput", "Hour", "NbRooms", "Surface", "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
             return model;
@@ -81,23 +75,15 @@ namespace App.BusinessLogic.ServicesLogic
             var cleaningOrderSample = new CleaningServiceOrder()
             {
                 CompanyID = po.CompanyID,
-                EmployeeEmail = "marianion@gmail.com",
-                //OrderID = ordersData.GetLastOrderID(),
-                //RequireMaterial = po.Comment != null ? true : false,
-                //MaterialQuantity = po.Comment != null ? 1 : 0,
-                ClientEmail = po.ClientEmail,
+                EmployeeID = po.EmployeeID,
+                ClientID = ordersData.GetClientID(po.ClientEmail),
                 DateTime = po.DateTime,
-                Rating = ordersData.GetClientMeanScore(po.ClientEmail, po.CompanyID),
+                Hour = po.DateTime.Hour,
                 NbRooms = po.NbRooms,
                 Surface = po.Surface,
                 Duration = 0
             };
             return predictionFunction.Predict(cleaningOrderSample).Duration;
-        }
-
-        private string AssignEmployee()
-        {
-            return "";
         }
 
         public Dictionary<string, int> GetOrderServicesCount(int companyID)

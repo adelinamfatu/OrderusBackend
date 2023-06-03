@@ -14,6 +14,9 @@ namespace App.Domain.Entities
         [Key]
         public string Email { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+
         public string Surname { get; set; }
 
         public string Name { get; set; }

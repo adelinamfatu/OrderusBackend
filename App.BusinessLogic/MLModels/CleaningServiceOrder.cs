@@ -10,28 +10,28 @@ namespace App.BusinessLogic.MLModels
     public class CleaningServiceOrder
     {
         [ColumnName("CompanyID")]
-        public float CompanyID;
+        public float CompanyID { get; set; } 
 
-        [ColumnName("EmployeeEmail")]
-        public string EmployeeEmail;
+        [ColumnName("EmployeeID")]
+        public float EmployeeID { get; set; }
 
-        [ColumnName("ClientEmail")]
-        public string ClientEmail;
+        [ColumnName("ClientID")]
+        public float ClientID { get; set; }
 
         [ColumnName("DateTime")]
-        public DateTime DateTime;
+        public DateTime DateTime { get; set; }
 
-        [ColumnName("Rating")]
-        public float Rating;
+        [ColumnName("Hour")]
+        public float Hour { get; set; }
 
         [ColumnName("NbRooms")]
-        public float NbRooms;
+        public float NbRooms { get; set; }
 
         [ColumnName("Surface")]
-        public float Surface;
+        public float Surface { get; set; }
 
         [ColumnName("Duration")]
-        public float Duration;
+        public float Duration { get; set; }
     }
 
     public class CleaningDurationPrediction

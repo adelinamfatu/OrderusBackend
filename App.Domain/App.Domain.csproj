@@ -98,6 +98,10 @@
     <Compile Include="Migrations\202305151548043_AddedVerticalTable.designer.cs">
       <DependentUpon>202305151548043_AddedVerticalTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306021122506_AddedIDsForClientAndEmployee.cs" />
+    <Compile Include="Migrations\202306021122506_AddedIDsForClientAndEmployee.designer.cs">
+      <DependentUpon>202306021122506_AddedIDsForClientAndEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ServiceCategory.cs" />
@@ -131,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305151548043_AddedVerticalTable.resx">
       <DependentUpon>202305151548043_AddedVerticalTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306021122506_AddedIDsForClientAndEmployee.resx">
+      <DependentUpon>202306021122506_AddedIDsForClientAndEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

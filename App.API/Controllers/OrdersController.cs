@@ -16,11 +16,16 @@ namespace App.API.Controllers
     {
         OrdersDisplay ordersDisplay = new OrdersDisplay();
 
-        [Route("curatare")]
+        [Route("cleaning")]
         [HttpGet]
         public int GetEstimtedTime(PossibleOrderDTO po)
         {
-            return ordersDisplay.GetEstimtedTime(po);
+            var result = ordersDisplay.GetEstimtedTime(po);
+            if(result == -1)
+            {
+                throw new Exception("Nu exista niciun angajat valabil");
+            }
+            return result;
         }
 
         [Route("services/{id}")]

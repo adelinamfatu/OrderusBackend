@@ -14,6 +14,8 @@ namespace App.DTO
 
         public string ClientEmail { get; set; }
 
+        public int EmployeeID { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public string Comment { get; set; }
