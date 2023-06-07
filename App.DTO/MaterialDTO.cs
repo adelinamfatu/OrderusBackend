@@ -15,5 +15,7 @@ namespace App.DTO
         public int Quantity { get; set; }
 
         public int CompanyID { get; set; }
+
+        public float Total => Price * Quantity;
     }
 }

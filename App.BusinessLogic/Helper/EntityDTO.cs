@@ -135,5 +135,16 @@ namespace App.BusinessLogic.Helper
                 Quantity = material.Quantity
             };
         }
+
+        public static MaterialDTO EntityToDTO(OrderMaterial om)
+        {
+            return new MaterialDTO()
+            {
+                ID = om.OrderID,
+                Name = om.Material.Name,
+                Price = om.Material.Price,
+                Quantity = om.Quantity
+            };
+        }
     }
 }

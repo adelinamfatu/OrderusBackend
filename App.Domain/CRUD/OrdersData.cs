@@ -96,9 +96,15 @@ namespace App.Domain.CRUD
             context.OrderMaterials.Add(material);
         }
 
-        public int AssignEmployee(DateTime startTime, int companyID)
+        public int AssignEmployee(DateTime startTime, int companyID, int serviceID)
         {
-            var eligibleEmployees = context.Employees.Where(e => e.CompanyID == companyID && e.IsConfirmed == true);
+            var eligibleEmployees = context.Employees.Where(e => e.CompanyID == companyID && e.IsConfirmed == true)
+                                                        .Join(context.EmployeeServices,
+                                                                e => e.Email,
+                                                                es => es.EmployeeEmail,
+                                                                (e, es) => new { Employee = e, ServiceID = es.ServiceID })
+                                                                    .Where(x => x.ServiceID == serviceID)
+                                                                    .Select(x => x.Employee);
 
             var nextOrder = context.Orders.Where(o => o.DateTime > startTime)
                                             .OrderBy(o => o.DateTime)
@@ -138,6 +144,16 @@ namespace App.Domain.CRUD
             var firstOrderAfterStartTime = ordersAfterStartTime.First();
 
             return firstOrderAfterStartTime.DateTime - startTime;
+        }
+
+        public IEnumerable<OrderMaterial> GetOrderMaterials(int id)
+        {
+            return context.OrderMaterials.Where(om => om.OrderID == id);
+        }
+
+        public Company GetCompanyInfo(int id)
+        {
+            return context.Orders.Where(o => o.ID == id).Select(o => o.Employee.Company).FirstOrDefault();
         }
     }
 }

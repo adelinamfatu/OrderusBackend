@@ -49,5 +49,19 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("materials/{id}")]
+        [HttpGet]
+        public IEnumerable<MaterialDTO> GetOrderMaterials(int id)
+        {
+            return ordersDisplay.GetOrderMaterials(id);
+        }
+
+        [Route("companies/{id}")]
+        [HttpGet]
+        public CompanyDTO GetCompanyInfo(int id)
+        {
+            return ordersDisplay.GetCompanyInfo(id);
+        }
     }
 }

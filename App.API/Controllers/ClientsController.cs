@@ -66,5 +66,13 @@ namespace App.API.Controllers
             var username = TokenManager.GetPrincipal(token).Identity.Name;
             return clientsDisplay.GetClient(username);
         }
+
+        [Route("history/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OrderDTO> GetOrders(string email)
+        {
+            return clientsDisplay.GetOrders(email);
+        }
     }
 }

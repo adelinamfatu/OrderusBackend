@@ -40,5 +40,10 @@ namespace App.Domain.CRUD
         {
             return context.Clients.FirstOrDefault(c => c.Email == email);
         }
+
+        public IEnumerable<Order> GetOrders(string email)
+        {
+            return context.Orders.Where(o => o.ClientEmail == email).OrderByDescending(o => o.DateTime);
+        }
     }
 }

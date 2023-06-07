@@ -32,5 +32,10 @@ namespace App.BusinessLogic.UsersLogic
         {
             return EntityDTO.EntityToDTO(clientsData.GetClient(username));
         }
+
+        public IEnumerable<OrderDTO> GetOrders(string email)
+        {
+            return clientsData.GetOrders(email).Select(order => EntityDTO.EntityToDTO(order));
+        }
     }
 }

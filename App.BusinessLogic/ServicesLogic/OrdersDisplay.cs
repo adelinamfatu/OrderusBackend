@@ -26,7 +26,7 @@ namespace App.BusinessLogic.ServicesLogic
 
         public int GetEstimtedTime(PossibleOrderDTO po)
         {
-            var id = ordersData.AssignEmployee(po.DateTime, po.CompanyID);
+            var id = ordersData.AssignEmployee(po.DateTime, po.CompanyID, po.ServiceID);
             if (id == -1)
             {
                 return -1;
@@ -57,7 +57,8 @@ namespace App.BusinessLogic.ServicesLogic
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
                 .Append(mlContext.Transforms.CustomMapping(new CustomDate().GetMapping(), "CustomDateMapping"))
-                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutput", "Hour", "NbRooms", "Surface", "Duration"))
+                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutput", 
+                                                            "Hour", "NbRooms", "Surface", "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
             return model;
@@ -102,6 +103,16 @@ namespace App.BusinessLogic.ServicesLogic
                 }
             }
             return ordersData.ConfirmOrder(id);
+        }
+
+        public IEnumerable<MaterialDTO> GetOrderMaterials(int id)
+        {
+            return ordersData.GetOrderMaterials(id).Select(o => EntityDTO.EntityToDTO(o));
+        }
+
+        public CompanyDTO GetCompanyInfo(int id)
+        {
+            return EntityDTO.EntityToDTO(ordersData.GetCompanyInfo(id));
         }
     }
 }
