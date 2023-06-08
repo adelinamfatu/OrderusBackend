@@ -8,8 +8,6 @@ namespace App.DTO
     {
         public int CompanyID { get; set; }
 
-        public int MaterialQuantity { get; set; }
-
         public int ServiceID { get; set; }
 
         public string ClientEmail { get; set; }

@@ -55,7 +55,6 @@
     <Compile Include="CRUD\ClientsData.cs" />
     <Compile Include="CRUD\CompaniesData.cs" />
     <Compile Include="CRUD\OrdersData.cs" />
-    <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Company.cs" />
@@ -102,6 +101,10 @@
     <Compile Include="Migrations\202306021122506_AddedIDsForClientAndEmployee.designer.cs">
       <DependentUpon>202306021122506_AddedIDsForClientAndEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.cs" />
+    <Compile Include="Migrations\202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.designer.cs">
+      <DependentUpon>202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ServiceCategory.cs" />
@@ -138,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306021122506_AddedIDsForClientAndEmployee.resx">
       <DependentUpon>202306021122506_AddedIDsForClientAndEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.resx">
+      <DependentUpon>202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

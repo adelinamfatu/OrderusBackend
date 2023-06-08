@@ -38,5 +38,7 @@ namespace App.Domain.Entities
         public float PaymentAmount { get; set; }
 
         public bool IsConfirmed { get; set; }
+
+        public string Comment { get; set; }
     }
 }

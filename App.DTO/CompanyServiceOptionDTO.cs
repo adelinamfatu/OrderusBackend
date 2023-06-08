@@ -13,5 +13,13 @@ namespace App.DTO
         public string Icon { get; set; }
 
         public CompanyDTO Company { get; set; }
+
+        public int NbRooms { get; set; }
+
+        public int Surface { get; set; }
+
+        public DateTime DateTime { get; set; }
+
+        public int Duration { get; set; }
     }
 }

@@ -106,7 +106,10 @@ namespace App.Domain.CRUD
                                                                     .Where(x => x.ServiceID == serviceID)
                                                                     .Select(x => x.Employee);
 
-            var nextOrder = context.Orders.Where(o => o.DateTime > startTime)
+            var nextOrder = context.Orders.Where(o => o.DateTime > startTime 
+                                            && o.DateTime.Year == startTime.Year
+                                            && o.DateTime.Month == startTime.Month
+                                            && o.DateTime.Day == startTime.Day)
                                             .OrderBy(o => o.DateTime)
                                             .FirstOrDefault();
             if (nextOrder == null)

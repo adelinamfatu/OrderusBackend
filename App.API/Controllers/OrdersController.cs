@@ -17,15 +17,18 @@ namespace App.API.Controllers
         OrdersDisplay ordersDisplay = new OrdersDisplay();
 
         [Route("cleaning")]
-        [HttpGet]
-        public int GetEstimtedTime(PossibleOrderDTO po)
+        [HttpPost]
+        public IHttpActionResult GetEstimtedTime(PossibleOrderDTO po)
         {
-            var result = ordersDisplay.GetEstimtedTime(po);
-            if(result == -1)
+            var duration = ordersDisplay.GetEstimtedTime(po);
+            if(duration == -1)
             {
-                throw new Exception("Nu exista niciun angajat valabil");
+                return Conflict();
             }
-            return result;
+            else
+            {
+                return Ok(duration);
+            }
         }
 
         [Route("services/{id}")]

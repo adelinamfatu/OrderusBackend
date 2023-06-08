@@ -37,8 +37,6 @@ namespace App.Domain
 
         public DbSet<Representative> Representatives { get; set; }
 
-        public DbSet<Card> Cards { get; set; }
-
         public DbSet<OrderExtendedProperties> OrderExtendedProperties { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
