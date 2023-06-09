@@ -66,5 +66,20 @@ namespace App.API.Controllers
         {
             return ordersDisplay.GetCompanyInfo(id);
         }
+
+        [Route("add")]
+        [HttpPost]
+        public IHttpActionResult AddOrder(OrderDTO order)
+        {
+            var status = ordersDisplay.AddOrder(order);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

@@ -48,18 +48,6 @@ namespace App.Domain.CRUD
             return (float)context.Comments.Where(o => o.ClientEmail == clientEmail && o.CompanyID == companyID).Average(o => o.Score);
         }
 
-        /*public IDictionary<string, int> GetEmployeeMapping()
-        {
-            var distinctEmployeeEmails = context.Orders.Select(o => o.EmployeeEmail).Distinct().ToList();
-            return distinctEmployeeEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
-        }
-
-        public IDictionary<string, int> GetClientMapping()
-        {
-            var distinctClientEmails = context.Orders.Select(o => o.ClientEmail).Distinct().ToList();
-            return distinctClientEmails.Select((value, index) => new { Value = value, Index = index }).ToDictionary(x => x.Value, x => x.Index);
-        }*/
-
         public Dictionary<string, int> GetOrderServicesCount(int companyID)
         {
             return context.Orders.Where(o => o.Employee.CompanyID == companyID)
@@ -96,7 +84,7 @@ namespace App.Domain.CRUD
             context.OrderMaterials.Add(material);
         }
 
-        public int AssignEmployee(DateTime startTime, int companyID, int serviceID)
+        public int FindAvailableEmployee(DateTime startTime, int companyID, int serviceID)
         {
             var eligibleEmployees = context.Employees.Where(e => e.CompanyID == companyID && e.IsConfirmed == true)
                                                         .Join(context.EmployeeServices,
@@ -149,6 +137,43 @@ namespace App.Domain.CRUD
             return firstOrderAfterStartTime.DateTime - startTime;
         }
 
+        public string AssignEmployee(DateTime startTime, int companyID, int serviceID, int duration)
+        {
+            DateTime endTime = startTime.AddMinutes(duration);
+
+            var eligibleEmployees = context.Employees.Where(e => e.CompanyID == companyID && e.IsConfirmed == true)
+                                                        .Join(context.EmployeeServices,
+                                                                e => e.Email,
+                                                                es => es.EmployeeEmail,
+                                                                (e, es) => new { Employee = e, ServiceID = es.ServiceID })
+                                                                    .Where(x => x.ServiceID == serviceID)
+                                                                    .Select(x => x.Employee).ToList();
+
+            var freeEmployee = eligibleEmployees.Where(e => !context.Orders.Any(o => o.EmployeeEmail == e.Email
+                                                        && o.DateTime.Year == startTime.Year
+                                                        && o.DateTime.Month == startTime.Month
+                                                        && o.DateTime.Day == startTime.Day)).FirstOrDefault();
+
+            if (freeEmployee != null)
+            {
+                return freeEmployee.Email;
+            }
+
+            var availableEmployee = eligibleEmployees.Where(e =>
+                                                context.Orders.Any(o => o.EmployeeEmail == e.Email
+                                                                        && (o.DateTime >= startTime
+                                                                            && DbFunctions.AddMinutes(o.DateTime, o.Duration) <= endTime)
+                                                                        && (o.DateTime <= startTime
+                                                                            && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= endTime)
+                                                                        && (o.DateTime <= startTime
+                                                                            && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= startTime)
+                                                                        && (o.DateTime <= endTime
+                                                                            && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= endTime)
+                                                                        )).FirstOrDefault();
+
+            return availableEmployee.Email;
+        }
+
         public IEnumerable<OrderMaterial> GetOrderMaterials(int id)
         {
             return context.OrderMaterials.Where(om => om.OrderID == id);
@@ -157,6 +182,28 @@ namespace App.Domain.CRUD
         public Company GetCompanyInfo(int id)
         {
             return context.Orders.Where(o => o.ID == id).Select(o => o.Employee.Company).FirstOrDefault();
+        }
+
+        public int AddOrder(Order order)
+        {
+            context.Orders.Add(order);
+            return context.Orders.Where(o => o == order).FirstOrDefault().ID;
+        }
+
+        public bool AddOrderDetails(Dictionary<string, string> details, int orderID)
+        {
+            foreach(var kvp in details)
+            {
+                string key = kvp.Key;
+                string value = kvp.Value;
+                context.OrderExtendedProperties.Add(new OrderExtendedProperties()
+                {
+                    Key = key,
+                    Value = value,
+                    OrderID = orderID
+                });
+            }
+            return true;
         }
     }
 }

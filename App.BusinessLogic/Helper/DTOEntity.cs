@@ -111,5 +111,19 @@ namespace App.BusinessLogic.Helper
                 CompanyID = material.CompanyID
             };
         }
+
+        public static Order DTOtoEntity(OrderDTO order, string employeeEmail)
+        {
+            return new Order()
+            {
+                DateTime = order.StartTime,
+                Duration = order.Duration,
+                ServiceID = order.ServiceID,
+                ClientEmail = order.ClientEmail,
+                EmployeeEmail = employeeEmail,
+                PaymentAmount = order.PaymentAmount,
+                Comment = order.Comment
+            };
+        }
     }
 }

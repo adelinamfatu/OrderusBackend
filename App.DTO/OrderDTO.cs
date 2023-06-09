@@ -16,10 +16,18 @@ namespace App.DTO
 
         public string ServiceName { get; set; }
 
+        public int ServiceID { get; set; }
+
         public float PaymentAmount { get; set; }
 
         public bool AreButtonsVisible { get; set; }
 
         public Dictionary<string, string> Details { get; set; }
+
+        public string Comment { get; set; }
+
+        public string ClientEmail { get; set; }
+
+        public int CompanyID { get; set; }
     }
 }

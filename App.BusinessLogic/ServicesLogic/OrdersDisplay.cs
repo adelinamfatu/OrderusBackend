@@ -26,7 +26,7 @@ namespace App.BusinessLogic.ServicesLogic
 
         public int GetEstimtedTime(PossibleOrderDTO po)
         {
-            var id = ordersData.AssignEmployee(po.DateTime, po.CompanyID, po.ServiceID);
+            var id = ordersData.FindAvailableEmployee(po.DateTime, po.CompanyID, po.ServiceID);
             if (id == -1)
             {
                 return -1;
@@ -113,6 +113,15 @@ namespace App.BusinessLogic.ServicesLogic
         public CompanyDTO GetCompanyInfo(int id)
         {
             return EntityDTO.EntityToDTO(ordersData.GetCompanyInfo(id));
+        }
+
+        public bool AddOrder(OrderDTO order)
+        {
+            var employeeEmail = ordersData.AssignEmployee(order.StartTime, order.CompanyID, order.ServiceID, order.Duration);
+            //var transformedOrder = DTOEntity.DTOtoEntity(order, employeeEmail);
+            //var orderID = ordersData.AddOrder(transformedOrder);
+            //return ordersData.AddOrderDetails(order.Details, orderID);
+            return true;
         }
     }
 }
