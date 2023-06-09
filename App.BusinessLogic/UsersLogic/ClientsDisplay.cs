@@ -37,5 +37,15 @@ namespace App.BusinessLogic.UsersLogic
         {
             return clientsData.GetOrders(email).Select(order => EntityDTO.EntityToDTO(order));
         }
+
+        public void UpdatePicture(string fileName)
+        {
+            clientsData.UpdatePicture(fileName);
+        }
+
+        public bool UpdateClientDetails(ClientDTO client)
+        {
+            return clientsData.UpdateClientDetails(DTOEntity.DTOtoEntity(client));
+        }
     }
 }

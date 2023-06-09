@@ -1,9 +1,11 @@
 ﻿using App.API.Authentication;
+using App.BusinessLogic.Helper;
 using App.BusinessLogic.UsersLogic;
 using App.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -73,6 +75,56 @@ namespace App.API.Controllers
         public IEnumerable<OrderDTO> GetOrders(string email)
         {
             return clientsDisplay.GetOrders(email);
+        }
+
+        [Route("photo")]
+        [HttpPost]
+        public async Task<IHttpActionResult> AddClientPhoto()
+        {
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    return BadRequest("Unsupported media type. Only multipart/form-data is supported.");
+                }
+
+                var provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                var fileContent = provider.Contents.FirstOrDefault();
+
+                if (fileContent != null)
+                {
+                    var fileName = fileContent.Headers.ContentDisposition.FileName.Trim('\"');
+                    var fileStream = await fileContent.ReadAsStreamAsync();
+                    ImageSaveService.SaveImageAsync(fileName, fileStream);
+                    clientsDisplay.UpdatePicture(fileName);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("No file was found in the request.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [Route("details/update")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult UpdateClientDetails(ClientDTO client)
+        {
+            var status = clientsDisplay.UpdateClientDetails(client);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
         }
     }
 }

@@ -82,7 +82,8 @@ namespace App.BusinessLogic.Helper
                 Building = client.Building,
                 Staircase = client.Staircase,
                 ApartmentNumber = client.ApartmentNumber,
-                Floor = client.Floor
+                Floor = client.Floor,
+                Picture = client.Picture
             };
         }
 

@@ -118,10 +118,13 @@ namespace App.BusinessLogic.ServicesLogic
         public bool AddOrder(OrderDTO order)
         {
             var employeeEmail = ordersData.AssignEmployee(order.StartTime, order.CompanyID, order.ServiceID, order.Duration);
-            //var transformedOrder = DTOEntity.DTOtoEntity(order, employeeEmail);
-            //var orderID = ordersData.AddOrder(transformedOrder);
-            //return ordersData.AddOrderDetails(order.Details, orderID);
-            return true;
+            if(employeeEmail == "-1")
+            {
+                return false;
+            }
+            var transformedOrder = DTOEntity.DTOtoEntity(order, employeeEmail);
+            var orderID = ordersData.AddOrder(transformedOrder);
+            return ordersData.AddOrderDetails(order.Details, orderID);
         }
     }
 }

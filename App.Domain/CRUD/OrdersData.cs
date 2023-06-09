@@ -94,10 +94,11 @@ namespace App.Domain.CRUD
                                                                     .Where(x => x.ServiceID == serviceID)
                                                                     .Select(x => x.Employee);
 
-            var nextOrder = context.Orders.Where(o => o.DateTime > startTime 
+            var nextOrder = context.Orders.Where(o => o.Employee.Company.ID == companyID
                                             && o.DateTime.Year == startTime.Year
                                             && o.DateTime.Month == startTime.Month
-                                            && o.DateTime.Day == startTime.Day)
+                                            && o.DateTime.Day == startTime.Day
+                                            && o.DateTime.Hour >= startTime.Hour)
                                             .OrderBy(o => o.DateTime)
                                             .FirstOrDefault();
             if (nextOrder == null)
@@ -107,8 +108,8 @@ namespace App.Domain.CRUD
 
             var availableEmployees = eligibleEmployees.Where(e => !context.Orders
                                                         .Any(o => o.EmployeeEmail == e.Email && 
-                                                        o.DateTime < DbFunctions.AddMinutes(startTime, o.Duration) && 
-                                                        nextOrder.DateTime > startTime)).ToList();
+                                                            (o.DateTime <= startTime && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= startTime)
+                                                        )).ToList();
 
             var employeeWithLargestBreak = availableEmployees
                 .OrderByDescending(e => GetBreakUntilNextOrder(e, startTime, nextOrder.DateTime))
@@ -159,7 +160,7 @@ namespace App.Domain.CRUD
                 return freeEmployee.Email;
             }
 
-            var availableEmployee = eligibleEmployees.Where(e =>
+            /*var availableEmployee = eligibleEmployees.Where(e =>
                                                 context.Orders.Any(o => o.EmployeeEmail == e.Email
                                                                         && (o.DateTime >= startTime
                                                                             && DbFunctions.AddMinutes(o.DateTime, o.Duration) <= endTime)
@@ -169,7 +170,18 @@ namespace App.Domain.CRUD
                                                                             && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= startTime)
                                                                         && (o.DateTime <= endTime
                                                                             && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= endTime)
-                                                                        )).FirstOrDefault();
+                                                                        )).FirstOrDefault();*/
+
+            var availableEmployee = eligibleEmployees.Where(e =>
+                                                !context.Orders.Any(o => o.EmployeeEmail == e.Email
+                                                                    && ((o.DateTime < startTime && DbFunctions.AddMinutes(o.DateTime, o.Duration) >= startTime)
+                                                                    || (o.DateTime >= startTime && o.DateTime <= endTime))
+                                                )).FirstOrDefault();
+
+            if (availableEmployee == null)
+            {
+                return "-1";
+            }
 
             return availableEmployee.Email;
         }
@@ -187,7 +199,8 @@ namespace App.Domain.CRUD
         public int AddOrder(Order order)
         {
             context.Orders.Add(order);
-            return context.Orders.Where(o => o == order).FirstOrDefault().ID;
+            context.SaveChanges();
+            return context.Orders.Where(o => o.DateTime == order.DateTime && o.EmployeeEmail == order.EmployeeEmail).FirstOrDefault().ID;
         }
 
         public bool AddOrderDetails(Dictionary<string, string> details, int orderID)
@@ -203,6 +216,7 @@ namespace App.Domain.CRUD
                     OrderID = orderID
                 });
             }
+            context.SaveChanges();
             return true;
         }
     }
