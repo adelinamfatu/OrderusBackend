@@ -22,5 +22,7 @@ namespace App.Domain.Entities
         public int DiscountValue { get; set; }
 
         public int DiscountPercentage { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
     }
 }

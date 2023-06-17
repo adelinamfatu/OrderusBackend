@@ -105,6 +105,10 @@
     <Compile Include="Migrations\202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.designer.cs">
       <DependentUpon>202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306171210396_AddedExpirationDayColumnOnOfferTable.cs" />
+    <Compile Include="Migrations\202306171210396_AddedExpirationDayColumnOnOfferTable.designer.cs">
+      <DependentUpon>202306171210396_AddedExpirationDayColumnOnOfferTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ServiceCategory.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.resx">
       <DependentUpon>202306081431022_RemovedCardTableAndAddedCommentColumnOnOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306171210396_AddedExpirationDayColumnOnOfferTable.resx">
+      <DependentUpon>202306171210396_AddedExpirationDayColumnOnOfferTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

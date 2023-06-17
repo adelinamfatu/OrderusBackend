@@ -87,5 +87,12 @@ namespace App.Domain.CRUD
             client.Picture = Resource.IISAddress + fileName;
             context.SaveChanges();
         }
+
+        public bool AddOffer(Offer offer)
+        {
+            context.Offers.Add(offer);
+            context.SaveChanges();
+            return true;
+        }
     }
 }

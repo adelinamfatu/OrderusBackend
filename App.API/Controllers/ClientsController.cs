@@ -126,5 +126,20 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("discount/add")]
+        [HttpPost]
+        public IHttpActionResult AddOffer(OfferDTO offer)
+        {
+            var status = clientsDisplay.AddOffer(offer);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

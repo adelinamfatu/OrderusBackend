@@ -47,5 +47,10 @@ namespace App.BusinessLogic.UsersLogic
         {
             return clientsData.UpdateClientDetails(DTOEntity.DTOtoEntity(client));
         }
+
+        public bool AddOffer(OfferDTO offer)
+        {
+            return clientsData.AddOffer(DTOEntity.DTOtoEntity(offer));
+        }
     }
 }

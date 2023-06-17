@@ -125,5 +125,16 @@ namespace App.BusinessLogic.Helper
                 Comment = order.Comment
             };
         }
+
+        public static Offer DTOtoEntity(OfferDTO offer)
+        {
+            return new Offer()
+            {
+                DiscountValue = offer.DiscountValue,
+                DiscountPercentage = offer.DiscountPercentage,
+                ClientEmail = offer.ClientEmail,
+                ExpirationDate = offer.ExpirationDate
+            };
+        }
     }
 }
