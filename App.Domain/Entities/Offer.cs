@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Entities
 {
+    public enum DiscountType
+    {
+        Value,
+        Percentage
+    }
+
     [Table("Offers")]
     public class Offer
     {
@@ -19,9 +25,9 @@ namespace App.Domain.Entities
 
         public virtual Client Client { get; set; }
 
-        public int DiscountValue { get; set; }
+        public int Discount { get; set; }
 
-        public int DiscountPercentage { get; set; }
+        public DiscountType Type { get; set; }
 
         public DateTime ExpirationDate { get; set; }
     }

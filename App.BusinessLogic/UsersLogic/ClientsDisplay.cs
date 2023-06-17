@@ -52,5 +52,10 @@ namespace App.BusinessLogic.UsersLogic
         {
             return clientsData.AddOffer(DTOEntity.DTOtoEntity(offer));
         }
+
+        public IEnumerable<OfferDTO> GetOffers(string email)
+        {
+            return clientsData.GetOffers(email).Select(o => EntityDTO.EntityToDTO(o));
+        }
     }
 }

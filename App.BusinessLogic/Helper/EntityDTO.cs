@@ -58,7 +58,6 @@ namespace App.BusinessLogic.Helper
                 ClientEmail = comment.ClientEmail
             };
         }
-
         public static CompanyServiceOptionDTO EntityToDTO(CompanyServiceOption cso)
         {
             return new CompanyServiceOptionDTO()
@@ -145,6 +144,16 @@ namespace App.BusinessLogic.Helper
                 Name = om.Material.Name,
                 Price = om.Material.Price,
                 Quantity = om.Quantity
+            };
+        }
+
+        public static OfferDTO EntityToDTO(Offer o)
+        {
+            return new OfferDTO()
+            {
+                Discount = o.Discount,
+                Type = (DTO.DiscountType)o.Type,
+                ExpirationDate = o.ExpirationDate
             };
         }
     }

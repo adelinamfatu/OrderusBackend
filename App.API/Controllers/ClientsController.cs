@@ -129,6 +129,7 @@ namespace App.API.Controllers
 
         [Route("discount/add")]
         [HttpPost]
+        [BasicAuthentication]
         public IHttpActionResult AddOffer(OfferDTO offer)
         {
             var status = clientsDisplay.AddOffer(offer);
@@ -140,6 +141,14 @@ namespace App.API.Controllers
             {
                 return Conflict();
             }
+        }
+
+        [Route("discount/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OfferDTO> GetOffers(string email)
+        {
+            return clientsDisplay.GetOffers(email);
         }
     }
 }

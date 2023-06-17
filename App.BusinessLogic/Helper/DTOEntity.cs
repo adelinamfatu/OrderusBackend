@@ -130,8 +130,8 @@ namespace App.BusinessLogic.Helper
         {
             return new Offer()
             {
-                DiscountValue = offer.DiscountValue,
-                DiscountPercentage = offer.DiscountPercentage,
+                Discount = offer.Discount,
+                Type = (Domain.Entities.DiscountType)offer.Type,
                 ClientEmail = offer.ClientEmail,
                 ExpirationDate = offer.ExpirationDate
             };

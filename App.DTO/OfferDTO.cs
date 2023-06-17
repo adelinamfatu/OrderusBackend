@@ -4,11 +4,17 @@ using System.Text;
 
 namespace App.DTO
 {
+    public enum DiscountType
+    {
+        Value,
+        Percentage
+    }
+
     public class OfferDTO
     {
-        public int DiscountValue { get; set; }
+        public int Discount { get; set; }
 
-        public int DiscountPercentage { get; set; }
+        public DiscountType Type { get; set; }
 
         public string ClientEmail { get; set; }
 
