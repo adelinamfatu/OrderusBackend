@@ -248,5 +248,26 @@ namespace App.Domain.CRUD
             context.SaveChanges();
             return true;
         }
+
+        public bool UpdateOrderFinished(int id)
+        {
+            context.Orders.Where(o => o.ID == id).FirstOrDefault().IsFinished = true;
+            context.SaveChanges();
+            return true;
+        }
+
+        public bool AddOrderChangeTime(int id, TimeSpan time)
+        {
+            DateTime date = DateTime.Now.Date.AddDays(1).AddHours(time.Hours).AddMinutes(time.Minutes);
+
+            context.OrderExtendedProperties.Add(new OrderExtendedProperties()
+            {
+                OrderID = id,
+                Key = Resource.OrderDateKey,
+                Value = date.ToString()
+            });
+            context.SaveChanges();
+            return true;
+        }
     }
 }

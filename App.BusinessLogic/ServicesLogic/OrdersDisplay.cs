@@ -131,5 +131,15 @@ namespace App.BusinessLogic.ServicesLogic
         {
             return ordersData.UpdateEmployeeOrders(email);
         }
+
+        public bool UpdateOrderFinished(int id)
+        {
+            return ordersData.UpdateOrderFinished(id);
+        }
+
+        public bool AddOrderChangeTime(int id, TimeSpan time)
+        {
+            return ordersData.AddOrderChangeTime(id, time);
+        }
     }
 }

@@ -97,5 +97,37 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("{id}")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult UpdateOrderFinished(int id)
+        {
+            var status = ordersDisplay.UpdateOrderFinished(id);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
+
+        [Route("time/{id}")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult AddOrderChangeTime(int id, [FromBody] TimeSpan time)
+        {
+            var status = ordersDisplay.AddOrderChangeTime(id, time);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

@@ -68,5 +68,14 @@ namespace App.Domain {
                 return ResourceManager.GetString("IISAddress", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data noua comanda.
+        /// </summary>
+        internal static string OrderDateKey {
+            get {
+                return ResourceManager.GetString("OrderDateKey", resourceCulture);
+            }
+        }
     }
 }
