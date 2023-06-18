@@ -219,5 +219,25 @@ namespace App.Domain.CRUD
             context.SaveChanges();
             return true;
         }
+
+        public bool UpdateEmployeeOrders(string email)
+        {
+            DateTime currentDate = DateTime.Now.Date;
+            DateTime currentDateTime = DateTime.Now;
+            DateTime nextDateTime = currentDateTime.AddMinutes(10);
+
+            var ordersToUpdate = context.Orders
+                .Where(o => o.EmployeeEmail == email && o.DateTime.Year == currentDate.Year &&
+                                                        o.DateTime.Month == currentDate.Month &&
+                                                        o.DateTime.Day == currentDate.Day).ToList();
+
+            foreach (var order in ordersToUpdate)
+            {
+                order.Duration += 10;
+            }
+
+            context.SaveChanges();
+            return true;
+        }
     }
 }

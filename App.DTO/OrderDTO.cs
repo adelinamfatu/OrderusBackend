@@ -20,8 +20,6 @@ namespace App.DTO
 
         public float PaymentAmount { get; set; }
 
-        public bool AreButtonsVisible { get; set; }
-
         public Dictionary<string, string> Details { get; set; }
 
         public string Comment { get; set; }
@@ -29,5 +27,7 @@ namespace App.DTO
         public string ClientEmail { get; set; }
 
         public int CompanyID { get; set; }
+
+        public bool IsFinished { get; set; }
     }
 }

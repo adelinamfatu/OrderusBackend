@@ -126,5 +126,10 @@ namespace App.BusinessLogic.ServicesLogic
             var orderID = ordersData.AddOrder(transformedOrder);
             return ordersData.AddOrderDetails(order.Details, orderID);
         }
+
+        public bool UpdateEmployeeOrders(string email)
+        {
+            return ordersData.UpdateEmployeeOrders(email);
+        }
     }
 }

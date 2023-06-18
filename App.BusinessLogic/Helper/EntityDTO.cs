@@ -122,7 +122,8 @@ namespace App.BusinessLogic.Helper
                 FinishTime = order.DateTime.AddMinutes(order.Duration),
                 Duration = order.Duration,
                 PaymentAmount = order.PaymentAmount,
-                ServiceName = order.Service.Name
+                ServiceName = order.Service.Name,
+                IsFinished = order.IsFinished
             };
         }
 

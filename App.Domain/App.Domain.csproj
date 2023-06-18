@@ -113,6 +113,10 @@
     <Compile Include="Migrations\202306171648576_AddedEnumColumnToOfferTable.designer.cs">
       <DependentUpon>202306171648576_AddedEnumColumnToOfferTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306180604449_AddedBooleanColumnForFinishedOrders.cs" />
+    <Compile Include="Migrations\202306180604449_AddedBooleanColumnForFinishedOrders.designer.cs">
+      <DependentUpon>202306180604449_AddedBooleanColumnForFinishedOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ServiceCategory.cs" />
@@ -158,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306171648576_AddedEnumColumnToOfferTable.resx">
       <DependentUpon>202306171648576_AddedEnumColumnToOfferTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306180604449_AddedBooleanColumnForFinishedOrders.resx">
+      <DependentUpon>202306180604449_AddedBooleanColumnForFinishedOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -81,5 +81,21 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("delay/{email}")]
+        [HttpPut]
+        [BasicAuthentication]
+        public IHttpActionResult UpdateEmployeeOrders(string email)
+        {
+            var status = ordersDisplay.UpdateEmployeeOrders(email);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

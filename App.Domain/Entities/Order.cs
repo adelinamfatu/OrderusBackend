@@ -40,5 +40,7 @@ namespace App.Domain.Entities
         public bool IsConfirmed { get; set; }
 
         public string Comment { get; set; }
+
+        public bool IsFinished { get; set; }
     }
 }
