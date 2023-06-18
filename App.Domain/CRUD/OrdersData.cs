@@ -233,7 +233,16 @@ namespace App.Domain.CRUD
 
             foreach (var order in ordersToUpdate)
             {
-                order.Duration += 10;
+                var startTime = order.DateTime;
+                var finishTime = order.DateTime.AddMinutes(order.Duration);
+                if(startTime <= currentDateTime && currentDateTime <= finishTime)
+                {
+                    order.Duration += 10;
+                }
+                else
+                {
+                    order.DateTime = order.DateTime.AddMinutes(10);
+                }
             }
 
             context.SaveChanges();
