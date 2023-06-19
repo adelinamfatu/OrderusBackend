@@ -162,5 +162,10 @@ namespace App.BusinessLogic.ServicesLogic
         {
             return ordersData.DeleteOrderChange(id);
         }
+
+        public bool DeleteChange(int id)
+        {
+            return ordersData.DeleteChange(id);
+        }
     }
 }

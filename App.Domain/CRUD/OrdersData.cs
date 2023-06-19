@@ -300,5 +300,13 @@ namespace App.Domain.CRUD
             }
             return true;
         }
+
+        public bool DeleteChange(int id)
+        {
+            var order = context.Orders.Where(o => o.ID == id).FirstOrDefault();
+            context.Orders.Remove(order);
+            context.SaveChanges();
+            return true;
+        }
     }
 }

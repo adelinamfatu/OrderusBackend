@@ -163,5 +163,20 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteChange(int id)
+        {
+            var status = ordersDisplay.DeleteChange(id);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }
