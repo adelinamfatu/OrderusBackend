@@ -282,8 +282,9 @@ namespace App.Domain.CRUD
 
         public bool UpdateOrderTime(int id)
         {
-            var dateTime = context.OrderExtendedProperties.Where(o => o.OrderID == id && o.Key == Resource.OrderDateKey).FirstOrDefault().Value;
-            context.Orders.Where(o => o.ID == id).FirstOrDefault().DateTime = DateTime.Parse(dateTime);
+            var order = context.OrderExtendedProperties.Where(o => o.OrderID == id && o.Key == Resource.OrderDateKey).FirstOrDefault();
+            context.Orders.Where(o => o.ID == id).FirstOrDefault().DateTime = DateTime.Parse(order.Value);
+            context.OrderExtendedProperties.Remove(order);
             context.SaveChanges();
             return true;
         }

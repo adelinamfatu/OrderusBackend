@@ -99,10 +99,9 @@ namespace App.Domain.CRUD
         {
             DateTime currentDate = DateTime.Now;
             DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
 
             return context.Offers
-                .Where(o => o.ClientEmail == email && o.ExpirationDate >= startOfMonth && o.ExpirationDate <= endOfMonth);
+                .Where(o => o.ClientEmail == email && o.ExpirationDate >= startOfMonth);
         }
     }
 }
