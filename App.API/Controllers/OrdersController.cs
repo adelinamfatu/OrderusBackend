@@ -84,7 +84,6 @@ namespace App.API.Controllers
 
         [Route("delay/{email}")]
         [HttpPut]
-        [BasicAuthentication]
         public IHttpActionResult UpdateEmployeeOrders(string email)
         {
             var status = ordersDisplay.UpdateEmployeeOrders(email);
@@ -100,7 +99,6 @@ namespace App.API.Controllers
 
         [Route("{id}")]
         [HttpPut]
-        [BasicAuthentication]
         public IHttpActionResult UpdateOrderFinished(int id)
         {
             var status = ordersDisplay.UpdateOrderFinished(id);
@@ -116,10 +114,46 @@ namespace App.API.Controllers
 
         [Route("time/{id}")]
         [HttpPut]
-        [BasicAuthentication]
         public IHttpActionResult AddOrderChangeTime(int id, [FromBody] TimeSpan time)
         {
             var status = ordersDisplay.AddOrderChangeTime(id, time);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
+
+        [Route("clients/{email}")]
+        [HttpGet]
+        public IEnumerable<OrderChangeDTO> GetOrderTimeChangeRequests(string email)
+        {
+            return ordersDisplay.GetOrderTimeChangeRequests(email);
+        }
+
+        [Route("change/{id}")]
+        [HttpPut]
+        public IHttpActionResult UpdateOrderTime(int id)
+        {
+            var status = ordersDisplay.UpdateOrderTime(id);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
+
+        [Route("change/delete/{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteOrderChange(int id)
+        {
+            var status = ordersDisplay.DeleteOrderChange(id);
             if (status == true)
             {
                 return Ok();

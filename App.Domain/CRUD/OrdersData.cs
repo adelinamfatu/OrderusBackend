@@ -269,5 +269,35 @@ namespace App.Domain.CRUD
             context.SaveChanges();
             return true;
         }
+
+        public IList<OrderExtendedProperties> GetOrderTimeChangeRequests(string email)
+        {
+            return context.OrderExtendedProperties.Where(o => o.Order.ClientEmail == email && o.Key == Resource.OrderDateKey).ToList();
+        }
+
+        public DateTime GetDate(int orderID)
+        {
+            return context.Orders.Where(o => o.ID == orderID).FirstOrDefault().DateTime;
+        }
+
+        public bool UpdateOrderTime(int id)
+        {
+            var dateTime = context.OrderExtendedProperties.Where(o => o.OrderID == id && o.Key == Resource.OrderDateKey).FirstOrDefault().Value;
+            context.Orders.Where(o => o.ID == id).FirstOrDefault().DateTime = DateTime.Parse(dateTime);
+            context.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteOrderChange(int id)
+        {
+            var orderExtendedProperty = context.OrderExtendedProperties.FirstOrDefault(o => o.OrderID == id && o.Key == Resource.OrderDateKey);
+
+            if (orderExtendedProperty != null)
+            {
+                context.OrderExtendedProperties.Remove(orderExtendedProperty);
+                context.SaveChanges();
+            }
+            return true;
+        }
     }
 }

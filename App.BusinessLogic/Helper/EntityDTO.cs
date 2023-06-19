@@ -157,5 +157,16 @@ namespace App.BusinessLogic.Helper
                 ExpirationDate = o.ExpirationDate
             };
         }
+
+        public static OrderChangeDTO EntityToDTO(OrderExtendedProperties oep, DateTime initialDate)
+        {
+            return new OrderChangeDTO()
+            {
+                OrderID = oep.OrderID,
+                ServiceName = oep.Order.Service.Name,
+                InitialDate = initialDate,
+                ChangedDate = DateTime.Parse(oep.Value)
+            };
+        }
     }
 }

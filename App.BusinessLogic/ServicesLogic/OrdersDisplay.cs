@@ -86,7 +86,7 @@ namespace App.BusinessLogic.ServicesLogic
             };
             return predictionFunction.Predict(cleaningOrderSample).Duration;
         }
-
+        
         public Dictionary<string, int> GetOrderServicesCount(int companyID)
         {
             return ordersData.GetOrderServicesCount(companyID);
@@ -140,6 +140,27 @@ namespace App.BusinessLogic.ServicesLogic
         public bool AddOrderChangeTime(int id, TimeSpan time)
         {
             return ordersData.AddOrderChangeTime(id, time);
+        }
+
+        public IEnumerable<OrderChangeDTO> GetOrderTimeChangeRequests(string email)
+        {
+            var oeps = ordersData.GetOrderTimeChangeRequests(email);
+            IList<OrderChangeDTO> ocd = new List<OrderChangeDTO>();
+            foreach(var oep in oeps)
+            {
+                ocd.Add(EntityDTO.EntityToDTO(oep, ordersData.GetDate(oep.OrderID)));
+            }
+            return ocd;
+        }
+
+        public bool UpdateOrderTime(int id)
+        {
+            return ordersData.UpdateOrderTime(id);
+        }
+
+        public bool DeleteOrderChange(int id)
+        {
+            return ordersData.DeleteOrderChange(id);
         }
     }
 }
