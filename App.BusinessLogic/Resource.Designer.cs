@@ -22,14 +22,14 @@ namespace App.BusinessLogic {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class FilePathResource {
+    internal class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal FilePathResource() {
+        internal Resource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace App.BusinessLogic {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App.BusinessLogic.FilePathResource", typeof(FilePathResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App.BusinessLogic.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,47 @@ namespace App.BusinessLogic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /CleaningServices.csv.
+        ///   Looks up a localized string similar to factura_{0}.pdf.
         /// </summary>
-        internal static string ClearningServicesCsv {
+        internal static string AttachmentName {
             get {
-                return ResourceManager.GetString("ClearningServicesCsv", resourceCulture);
+                return ResourceManager.GetString("AttachmentName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:/OrderusFiles.
+        ///   Looks up a localized string similar to Buna,&lt;br&gt;&lt;br&gt;Va multumim ca ati facut o comanda prin Orderus. Gasiti atasata factura!&lt;br&gt;&lt;br&gt;Toate cele bune,&lt;br&gt;Echipa Orderus..
         /// </summary>
-        internal static string FileStorage {
+        internal static string EmailBody {
             get {
-                return ResourceManager.GetString("FileStorage", resourceCulture);
+                return ResourceManager.GetString("EmailBody", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:/OrderusFiles/invoice.pdf.
+        ///   Looks up a localized string similar to Factura {0} {1}.
         /// </summary>
-        internal static string InvoicePath {
+        internal static string EmailSubject {
             get {
-                return ResourceManager.GetString("InvoicePath", resourceCulture);
+                return ResourceManager.GetString("EmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to noreply.orderus@gmail.com.
+        /// </summary>
+        internal static string SenderEmail {
+            get {
+                return ResourceManager.GetString("SenderEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to knvqifdasnogdnhr.
+        /// </summary>
+        internal static string SenderPassword {
+            get {
+                return ResourceManager.GetString("SenderPassword", resourceCulture);
             }
         }
     }

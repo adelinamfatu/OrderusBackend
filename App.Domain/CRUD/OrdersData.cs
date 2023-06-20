@@ -308,5 +308,15 @@ namespace App.Domain.CRUD
             context.SaveChanges();
             return true;
         }
+
+        public Order GetOrderData(int id)
+        {
+            return context.Orders.Where(o => o.ID == id).FirstOrDefault();
+        }
+
+        public Company GetCompanyData(int id)
+        {
+            return context.Orders.Where(o => o.ID == id).FirstOrDefault().Employee.Company;
+        }
     }
 }

@@ -118,6 +118,7 @@ namespace App.BusinessLogic.Helper
             return new OrderDTO()
             {
                 ID = order.ID,
+                ClientEmail = order.ClientEmail,
                 StartTime = order.DateTime,
                 FinishTime = order.DateTime.AddMinutes(order.Duration),
                 Duration = order.Duration,

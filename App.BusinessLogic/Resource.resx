@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClearningServicesCsv" xml:space="preserve">
-    <value>/CleaningServices.csv</value>
+  <data name="AttachmentName" xml:space="preserve">
+    <value>factura_{0}.pdf</value>
   </data>
-  <data name="FileStorage" xml:space="preserve">
-    <value>C:/OrderusFiles</value>
+  <data name="EmailBody" xml:space="preserve">
+    <value>Buna,&lt;br&gt;&lt;br&gt;Va multumim ca ati facut o comanda prin Orderus. Gasiti atasata factura!&lt;br&gt;&lt;br&gt;Toate cele bune,&lt;br&gt;Echipa Orderus.</value>
   </data>
-  <data name="InvoicePath" xml:space="preserve">
-    <value>C:/OrderusFiles/invoice.pdf</value>
+  <data name="EmailSubject" xml:space="preserve">
+    <value>Factura {0} {1}</value>
+  </data>
+  <data name="SenderEmail" xml:space="preserve">
+    <value>noreply.orderus@gmail.com</value>
+  </data>
+  <data name="SenderPassword" xml:space="preserve">
+    <value>knvqifdasnogdnhr</value>
   </data>
 </root>
