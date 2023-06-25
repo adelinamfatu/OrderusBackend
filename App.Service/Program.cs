@@ -3,6 +3,7 @@ using App.Service;
 using Microsoft.Owin.Hosting;
 using System;
 using System.Net.Http;
+using App.SMS;
 
 namespace App.Service
 {
@@ -11,6 +12,7 @@ namespace App.Service
         static void Main()
         {
             Starter.StartOwin();
+            TwilioSMSService.Start();
             Console.ReadLine();
         }
     }

@@ -312,5 +312,10 @@ namespace App.Domain.CRUD
         {
             return context.Orders.Where(o => o.EmployeeEmail == email);
         }
+
+        public string GetClientPhoneNumber(int orderID)
+        {
+            return context.Orders.Where(o => o.ID == orderID).FirstOrDefault().Client.Phone;
+        }
     }
 }

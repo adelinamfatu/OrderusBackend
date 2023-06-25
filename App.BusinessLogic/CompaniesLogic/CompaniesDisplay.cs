@@ -158,7 +158,14 @@ namespace App.BusinessLogic.CompaniesLogic
 
         public IEnumerable<OrderDTO> GetUnconfirmedOrders(string email)
         {
-            return companiesData.GetUnconfirmedOrders(email).Select(order => EntityDTO.EntityToDTO(order));
+            var orders = companiesData.GetUnconfirmedOrders(email).Select(order => EntityDTO.EntityToDTO(order)).ToList();
+            foreach(var order in orders)
+            {
+                var phoneNumber = companiesData.GetClientPhoneNumber(order.ID);
+                order.ClientNumber = phoneNumber;
+            }
+            
+            return orders;
         }
 
         public Dictionary<string, string> GetOrderDetails(int id)

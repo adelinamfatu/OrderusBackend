@@ -124,11 +124,12 @@ namespace App.BusinessLogic.Helper
                 Duration = order.Duration,
                 PaymentAmount = order.PaymentAmount,
                 ServiceName = order.Service.Name,
-                IsFinished = order.IsFinished
+                IsFinished = order.IsFinished,
+                Comment = order.Comment
             };
         }
 
-        internal static OrderMaterial EntityToDTO(int id, MaterialDTO material)
+        public static OrderMaterial EntityToDTO(int id, MaterialDTO material)
         {
             return new OrderMaterial()
             {

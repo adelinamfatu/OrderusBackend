@@ -130,6 +130,10 @@
       <Project>{2d6d2620-d5d5-4d16-adc2-87ab72da3770}</Project>
       <Name>App.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\App.SMS\App.SMS.csproj">
+      <Project>{578C5E20-DCC9-4E4B-899A-A99389CED5BA}</Project>
+      <Name>App.SMS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

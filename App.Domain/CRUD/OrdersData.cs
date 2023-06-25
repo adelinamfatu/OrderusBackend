@@ -318,5 +318,33 @@ namespace App.Domain.CRUD
         {
             return context.Orders.Where(o => o.ID == id).FirstOrDefault().Employee.Company;
         }
+
+        public List<string> GetNextDayOrders()
+        {
+            var currentTime = DateTime.Now;
+            var oneDayAhead = currentTime.AddDays(1);
+            return context.Orders
+                .Where(o => o.DateTime.Year == oneDayAhead.Year &&
+                            o.DateTime.Month == oneDayAhead.Month &&
+                            o.DateTime.Day == oneDayAhead.Day &&
+                            o.DateTime.Hour == oneDayAhead.Hour &&
+                            o.DateTime.Minute == oneDayAhead.Minute)
+                .Select(o => o.Client.Email)
+                .ToList();
+        }
+
+        public List<string> GetNextHourOrders()
+        {
+            var currentTime = DateTime.Now;
+            var oneHourAhead = currentTime.AddHours(1);
+            return context.Orders
+                .Where(o => o.DateTime.Year == oneHourAhead.Year &&
+                            o.DateTime.Month == oneHourAhead.Month &&
+                            o.DateTime.Day == oneHourAhead.Day &&
+                            o.DateTime.Hour == oneHourAhead.Hour &&
+                            o.DateTime.Minute == oneHourAhead.Minute)
+                .Select(o => o.Client.Email)
+                .ToList();
+        }
     }
 }

@@ -29,5 +29,7 @@ namespace App.DTO
         public int CompanyID { get; set; }
 
         public bool IsFinished { get; set; }
+
+        public string ClientNumber { get; set; }
     }
 }
