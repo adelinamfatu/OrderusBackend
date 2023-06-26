@@ -25,7 +25,12 @@ namespace App.BusinessLogic.CompaniesLogic
 
         public IEnumerable<CompanyDTO> GetCompaniesByService(int id)
         {
-            return companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company));
+            var companies = companiesData.GetCompaniesByService(id).Select(company => EntityDTO.EntityToDTO(company)).ToList();
+            foreach(var company in companies)
+            {
+                company.Score = companiesData.GetCompanyScore(company.ID);
+            }
+            return companies;
         }
 
         public IEnumerable<MaterialDTO> GetCompanyMaterials(int id)

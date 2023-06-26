@@ -12,6 +12,8 @@ namespace App.DTO
 
         public int Score { get; set; }
 
-        public string ClientEmail { get; set; }
+        public string ClientName { get; set; }
+
+        public string ClientPhoto { get; set; }
     }
 }

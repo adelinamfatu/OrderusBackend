@@ -38,12 +38,10 @@ namespace App.SMS
                 {
                     if(order.Value == BusinessLogic.Helper.NextOrderType.NextHourOrder)
                     {
-                        var x = TwilioMessage.NextHourMessage.Replace("{0}", currentTime.ToString("dd.MM.yyyy HH:mm"));
                         //SendSMSThroughTwilio(order.Key, TwilioMessage.NextHourMessage.Replace("{0}", currentTime.ToString("dd.MM.yyyy HH:mm")));
                     }
                     if (order.Value == BusinessLogic.Helper.NextOrderType.NextDayOrder)
                     {
-                        var x = TwilioMessage.NextDayMessage.Replace("{0}", currentTime.ToString("HH:mm"));
                         //SendSMSThroughTwilio(order.Key, TwilioMessage.NextDayMessage.Replace("{0}", currentTime.ToString("HH:mm")));
                     }
                 }

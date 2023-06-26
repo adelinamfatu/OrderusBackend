@@ -317,5 +317,10 @@ namespace App.Domain.CRUD
         {
             return context.Orders.Where(o => o.ID == orderID).FirstOrDefault().Client.Phone;
         }
+
+        public double GetCompanyScore(int id)
+        {
+            return context.Comments.Where(c => c.CompanyID == id).Average(c => c.Score);
+        }
     }
 }

@@ -55,7 +55,8 @@ namespace App.BusinessLogic.Helper
                 ID = comment.ID,
                 Content = comment.Content,
                 Score = comment.Score,
-                ClientEmail = comment.ClientEmail
+                ClientName = comment.Client.Name + " " + comment.Client.Surname,
+                ClientPhoto = comment.Client.Picture
             };
         }
         public static CompanyServiceOptionDTO EntityToDTO(CompanyServiceOption cso)
