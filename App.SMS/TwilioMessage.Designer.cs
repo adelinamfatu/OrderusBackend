@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace App.SMS {
+namespace App.Server {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace App.SMS {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App.SMS.TwilioMessage", typeof(TwilioMessage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App.Server.TwilioMessage", typeof(TwilioMessage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

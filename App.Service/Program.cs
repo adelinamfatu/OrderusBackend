@@ -3,7 +3,7 @@ using App.Service;
 using Microsoft.Owin.Hosting;
 using System;
 using System.Net.Http;
-using App.SMS;
+using App.Server;
 
 namespace App.Service
 {
