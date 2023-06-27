@@ -31,18 +31,18 @@ namespace App.Server
 
             while (true)
             {
-                var currentTime = DateTime.Now;
+                var orderTime = DateTime.Now;
                 var orders = smsDisplay.RetrieveDataForSchedullingSMS();
 
                 foreach(var order in orders)
                 {
                     if(order.Value == BusinessLogic.Helper.NextOrderType.NextHourOrder)
                     {
-                        //SendSMSThroughTwilio(order.Key, TwilioMessage.NextHourMessage.Replace("{0}", currentTime.ToString("dd.MM.yyyy HH:mm")));
+                        //SendSMSThroughTwilio(order.Key, TwilioMessage.NextHourMessage.Replace("{0}", orderTime.AddHours(1).ToString("dd.MM.yyyy HH:mm")));
                     }
                     if (order.Value == BusinessLogic.Helper.NextOrderType.NextDayOrder)
                     {
-                        //SendSMSThroughTwilio(order.Key, TwilioMessage.NextDayMessage.Replace("{0}", currentTime.ToString("HH:mm")));
+                        //SendSMSThroughTwilio(order.Key, TwilioMessage.NextDayMessage.Replace("{0}", orderTime.AddDays(1).ToString("HH:mm")));
                     }
                 }
 

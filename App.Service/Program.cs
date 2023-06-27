@@ -12,6 +12,7 @@ namespace App.Service
         static void Main()
         {
             Starter.StartOwin();
+            OrderVerificationService.Start();
             TwilioSMSService.Start();
             Console.ReadLine();
         }

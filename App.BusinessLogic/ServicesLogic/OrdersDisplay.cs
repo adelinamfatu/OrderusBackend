@@ -301,5 +301,10 @@ namespace App.BusinessLogic.ServicesLogic
 
             document.Save(FilePathResource.InvoicePath);
         }
+
+        public void VerifyOrderCancellation()
+        {
+            ordersData.CancelOrders();
+        }
     }
 }

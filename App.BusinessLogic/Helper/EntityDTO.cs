@@ -59,6 +59,7 @@ namespace App.BusinessLogic.Helper
                 ClientPhoto = comment.Client.Picture
             };
         }
+
         public static CompanyServiceOptionDTO EntityToDTO(CompanyServiceOption cso)
         {
             return new CompanyServiceOptionDTO()

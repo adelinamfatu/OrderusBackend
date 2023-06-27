@@ -328,8 +328,9 @@ namespace App.Domain.CRUD
                             o.DateTime.Month == oneDayAhead.Month &&
                             o.DateTime.Day == oneDayAhead.Day &&
                             o.DateTime.Hour == oneDayAhead.Hour &&
-                            o.DateTime.Minute == oneDayAhead.Minute)
-                .Select(o => o.Client.Email)
+                            o.DateTime.Minute == oneDayAhead.Minute &&
+                            o.IsConfirmed == true)
+                .Select(o => o.Client.Phone)
                 .ToList();
         }
 
@@ -343,8 +344,29 @@ namespace App.Domain.CRUD
                             o.DateTime.Day == oneHourAhead.Day &&
                             o.DateTime.Hour == oneHourAhead.Hour &&
                             o.DateTime.Minute == oneHourAhead.Minute)
-                .Select(o => o.Client.Email)
+                .Select(o => o.Client.Phone)
                 .ToList();
+        }
+
+        public void CancelOrders()
+        {
+            var currentTime = DateTime.Now.AddDays(1);
+
+            var orders = context.Orders.Where(o => o.DateTime.Year == currentTime.Year &&
+                            o.DateTime.Month == currentTime.Month &&
+                            o.DateTime.Day == currentTime.Day &&
+                            o.DateTime.Hour == currentTime.Hour &&
+                            o.DateTime.Minute == currentTime.Minute).ToList();
+
+            foreach(var order in orders)
+            {
+                if(order.IsConfirmed == false)
+                {
+                    order.IsFinished = true;
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }
