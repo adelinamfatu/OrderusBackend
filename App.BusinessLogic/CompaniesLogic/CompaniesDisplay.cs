@@ -177,5 +177,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetOrderDetails(id);
         }
+
+        public IEnumerable<OrderDTO> GetCancelledOrders(string email)
+        {
+            return companiesData.GetCancelledOrders(email).Select(o => EntityDTO.EntityToDTO(o));
+        }
     }
 }

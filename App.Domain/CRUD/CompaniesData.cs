@@ -323,5 +323,15 @@ namespace App.Domain.CRUD
         {
             return context.Comments.Where(c => c.CompanyID == id).Average(c => c.Score);
         }
+
+        public IEnumerable<Order> GetCancelledOrders(string email)
+        {
+            return context.Orders.Where(o => o.EmployeeEmail == email)
+                                .Join(context.OrderExtendedProperties.Where(oep => oep.Key == Resource.OrderDateKey && oep.Value.Contains("2000")),
+                                    order => order.ID,
+                                    extendedProperty => extendedProperty.OrderID,
+                                    (order, extendedProperty) => order)
+                                .OrderByDescending(o => o.DateTime);
+        }
     }
 }

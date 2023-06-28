@@ -180,5 +180,13 @@ namespace App.API.Controllers
         {
             return companiesDisplay.GetOrderDetails(id);
         }
+
+        [Route("orders/cancel/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OrderDTO> GetCancelledOrders(string email)
+        {
+            return companiesDisplay.GetCancelledOrders(email);
+        }
     }
 }
