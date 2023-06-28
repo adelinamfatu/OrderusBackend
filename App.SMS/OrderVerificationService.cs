@@ -19,6 +19,7 @@ namespace App.Server
                 await Task.Run(() =>
                 {
                     orderDisplay.VerifyOrderCancellation();
+                    orderDisplay.VerifyOrderChangeTimeRequest();
                 });
 
                 await Task.Delay(TimeSpan.FromMinutes(1));

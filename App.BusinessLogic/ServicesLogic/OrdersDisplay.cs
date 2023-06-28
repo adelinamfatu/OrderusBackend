@@ -162,9 +162,9 @@ namespace App.BusinessLogic.ServicesLogic
             return ordersData.DeleteOrderChange(id);
         }
 
-        public bool DeleteChange(int id)
+        public bool CancelOrder(int id)
         {
-            return ordersData.DeleteChange(id);
+            return ordersData.CancelOrder(id);
         }
 
         public bool UpdateOrderFinished(int id)
@@ -305,6 +305,11 @@ namespace App.BusinessLogic.ServicesLogic
         public void VerifyOrderCancellation()
         {
             ordersData.CancelOrders();
+        }
+
+        public void VerifyOrderChangeTimeRequest()
+        {
+            ordersData.CancelOrderChangeRequest();
         }
     }
 }

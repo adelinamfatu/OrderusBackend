@@ -155,7 +155,7 @@ namespace App.Domain.CRUD
 
         public IEnumerable<Order> GetUnconfirmedOrders(string email)
         {
-            return context.Orders.Where(o => o.EmployeeEmail == email && o.IsConfirmed == false);
+            return context.Orders.Where(o => o.EmployeeEmail == email && o.IsConfirmed == false && o.IsFinished == false);
         }
 
         public Dictionary<string, string> GetOrderDetails(int id)
@@ -168,7 +168,8 @@ namespace App.Domain.CRUD
             return context.Orders.Where(o => o.EmployeeEmail == email 
                                         && o.DateTime.Year == DateTime.Now.Year
                                         && o.DateTime.Month == DateTime.Now.Month
-                                        && o.DateTime.Day >= DateTime.Now.Day);
+                                        && o.DateTime.Day >= DateTime.Now.Day
+                                        && o.IsFinished == false).OrderByDescending(o => o.DateTime);
         }
 
         public bool AddCompanyService(CompanyServiceOption companyServiceOption)

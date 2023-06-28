@@ -272,7 +272,7 @@ namespace App.Domain.CRUD
 
         public IList<OrderExtendedProperties> GetOrderTimeChangeRequests(string email)
         {
-            return context.OrderExtendedProperties.Where(o => o.Order.ClientEmail == email && o.Key == Resource.OrderDateKey).ToList();
+            return context.OrderExtendedProperties.Where(o => o.Order.ClientEmail == email && o.Key == Resource.OrderDateKey && !o.Value.Contains("2000")).ToList();
         }
 
         public DateTime GetDate(int orderID)
@@ -295,16 +295,16 @@ namespace App.Domain.CRUD
 
             if (orderExtendedProperty != null)
             {
-                context.OrderExtendedProperties.Remove(orderExtendedProperty);
+                orderExtendedProperty.Value = new DateTime(2000, 1, 1).ToString();
                 context.SaveChanges();
             }
             return true;
         }
 
-        public bool DeleteChange(int id)
+        public bool CancelOrder(int id)
         {
             var order = context.Orders.Where(o => o.ID == id).FirstOrDefault();
-            context.Orders.Remove(order);
+            order.IsFinished = true;
             context.SaveChanges();
             return true;
         }
@@ -366,6 +366,22 @@ namespace App.Domain.CRUD
                 }
             }
 
+            context.SaveChanges();
+        }
+
+        public void CancelOrderChangeRequest()
+        {
+            DateTime currentDateTime = DateTime.Now;
+            var octr = context.OrderExtendedProperties.Where(o => o.Key == Resource.OrderDateKey && !o.Value.Contains("2000"));
+
+            foreach(var req in octr)
+            {
+                var order = context.Orders.Where(o => o.ID == req.OrderID).FirstOrDefault();
+                if(order.DateTime.Date == currentDateTime.Date)
+                {
+                    req.Value = new DateTime(2000, 1, 1).ToString();
+                }
+            }
             context.SaveChanges();
         }
     }

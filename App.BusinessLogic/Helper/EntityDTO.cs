@@ -127,7 +127,8 @@ namespace App.BusinessLogic.Helper
                 PaymentAmount = order.PaymentAmount,
                 ServiceName = order.Service.Name,
                 IsFinished = order.IsFinished,
-                Comment = order.Comment
+                Comment = order.Comment,
+                IsConfirmed = order.IsConfirmed
             };
         }
 

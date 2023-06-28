@@ -166,9 +166,9 @@ namespace App.API.Controllers
 
         [Route("delete/{id}")]
         [HttpDelete]
-        public IHttpActionResult DeleteChange(int id)
+        public IHttpActionResult CancelOrder(int id)
         {
-            var status = ordersDisplay.DeleteChange(id);
+            var status = ordersDisplay.CancelOrder(id);
             if (status == true)
             {
                 return Ok();
