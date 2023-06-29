@@ -202,5 +202,12 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("earnings/{id}")]
+        [HttpGet]
+        public Dictionary<string, float> GetCompanyEarnigs(int id)
+        {
+            return companiesDisplay.GetCompanyEarnigs(id);
+        }
     }
 }

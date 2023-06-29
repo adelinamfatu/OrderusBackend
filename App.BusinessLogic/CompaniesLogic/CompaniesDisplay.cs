@@ -182,5 +182,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetCancelledOrders(email).Select(o => EntityDTO.EntityToDTO(o));
         }
+
+        public Dictionary<string, float> GetCompanyEarnigs(int id)
+        {
+            return companiesData.GetCompanyEarnigs(id);
+        }
     }
 }

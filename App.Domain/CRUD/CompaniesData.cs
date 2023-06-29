@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using App.Domain.Entities;
+using System.Globalization;
 
 namespace App.Domain.CRUD
 {
@@ -332,6 +333,32 @@ namespace App.Domain.CRUD
                                     extendedProperty => extendedProperty.OrderID,
                                     (order, extendedProperty) => order)
                                 .OrderByDescending(o => o.DateTime);
+        }
+
+        public Dictionary<string, float> GetCompanyEarnigs(int id)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddMonths(-12);
+            DateTime endDate = currentDate.AddMonths(-1);
+
+            return context.Orders.Where(o => o.Employee.CompanyID == id && o.DateTime >= startDate && o.DateTime <= endDate)
+                                .GroupBy(o => o.DateTime.Month)
+                                .ToDictionary(
+                                                group => GetLocalizedMonthName(group.Key),
+                                                group => group.Sum(o => o.PaymentAmount));
+        }
+
+        private string GetLocalizedMonthName(int month)
+        {
+            var romanianCulture = new CultureInfo("ro-RO");
+            var monthNames = romanianCulture.DateTimeFormat.MonthGenitiveNames;
+
+            if (month >= 1 && month <= 12)
+            {
+                return monthNames[month - 1];
+            }
+
+            return string.Empty;
         }
     }
 }
