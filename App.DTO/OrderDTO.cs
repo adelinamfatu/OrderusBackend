@@ -33,5 +33,7 @@ namespace App.DTO
         public string ClientNumber { get; set; }
 
         public bool IsConfirmed { get; set; }
+
+        public bool IsCancelled => IsFinished && !IsConfirmed;
     }
 }

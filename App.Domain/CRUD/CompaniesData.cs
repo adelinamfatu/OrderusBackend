@@ -312,7 +312,10 @@ namespace App.Domain.CRUD
 
         public IEnumerable<Order> GetEmployeeOrders(string email)
         {
-            return context.Orders.Where(o => o.EmployeeEmail == email);
+            var currentDate = DateTime.Now;
+            return context.Orders.Where(o => o.EmployeeEmail == email 
+                                            && o.DateTime.Year == currentDate.Year
+                                            && o.DateTime.Month == currentDate.Month);
         }
 
         public string GetClientPhoneNumber(int orderID)
