@@ -129,7 +129,8 @@ namespace App.BusinessLogic.Helper
                 ServiceName = order.Service.Name,
                 IsFinished = order.IsFinished,
                 Comment = order.Comment,
-                IsConfirmed = order.IsConfirmed
+                IsConfirmed = order.IsConfirmed,
+                CompanyID = order.Employee.CompanyID
             };
         }
 

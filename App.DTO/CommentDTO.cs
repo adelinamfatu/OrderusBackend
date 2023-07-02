@@ -15,5 +15,13 @@ namespace App.DTO
         public string ClientName { get; set; }
 
         public string ClientPhoto { get; set; }
+
+        public int OrderID { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public int CompanyID { get; set; }
+
+        public string ClientEmail { get; set; }
     }
 }

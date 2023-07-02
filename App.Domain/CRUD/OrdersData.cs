@@ -384,5 +384,12 @@ namespace App.Domain.CRUD
             }
             context.SaveChanges();
         }
+
+        public bool AddOrderComment(Comment comment)
+        {
+            context.Comments.Add(comment);
+            context.SaveChanges();
+            return true;
+        }
     }
 }

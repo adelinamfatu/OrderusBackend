@@ -178,5 +178,20 @@ namespace App.API.Controllers
                 return Conflict();
             }
         }
+
+        [Route("comments/add")]
+        [HttpPost]
+        public IHttpActionResult AddOrderComment(CommentDTO comment)
+        {
+            var status = ordersDisplay.AddOrderComment(comment);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

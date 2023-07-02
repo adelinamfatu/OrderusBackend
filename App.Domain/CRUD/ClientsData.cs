@@ -103,5 +103,10 @@ namespace App.Domain.CRUD
             return context.Offers
                 .Where(o => o.ClientEmail == email && o.ExpirationDate >= startOfMonth);
         }
+
+        public IEnumerable<Order> GetClientUncommentedOrders(string email)
+        {
+            return context.Orders.Where(o => o.ClientEmail == email && !context.Comments.Any(c => c.OrderID == o.ID));
+        }
     }
 }

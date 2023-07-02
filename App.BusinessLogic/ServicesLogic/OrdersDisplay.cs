@@ -311,5 +311,10 @@ namespace App.BusinessLogic.ServicesLogic
         {
             ordersData.CancelOrderChangeRequest();
         }
+
+        public bool AddOrderComment(CommentDTO comment)
+        {
+            return ordersData.AddOrderComment(DTOEntity.DTOtoEntity(comment));
+        }
     }
 }

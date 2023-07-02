@@ -136,5 +136,18 @@ namespace App.BusinessLogic.Helper
                 ExpirationDate = offer.ExpirationDate
             };
         }
+
+        public static Comment DTOtoEntity(CommentDTO comment)
+        {
+            return new Comment()
+            {
+                OrderID = comment.OrderID,
+                Content = comment.Content,
+                Score = comment.Score,
+                Date = comment.Date,
+                ClientEmail = comment.ClientEmail,
+                CompanyID = comment.CompanyID
+            };
+        }
     }
 }

@@ -192,5 +192,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetCompanyReport(id).Select(o => EntityDTO.EntityToDTO(o));
         }
+
+        public IEnumerable<OrderDTO> GetClientUncommentedOrders(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
