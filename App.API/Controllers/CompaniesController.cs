@@ -38,6 +38,14 @@ namespace App.API.Controllers
             return companiesDisplay.GetCompaniesByService(id);
         }
 
+        [Route("{id}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OrderDTO> GetCompanyReport(int id)
+        {
+            return companiesDisplay.GetCompanyReport(id);
+        }
+
         [Route("services/details/{id}")]
         [HttpGet]
         [BasicAuthentication]

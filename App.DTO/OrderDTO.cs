@@ -26,6 +26,8 @@ namespace App.DTO
 
         public string ClientEmail { get; set; }
 
+        public string EmployeeEmail { get; set; }
+
         public int CompanyID { get; set; }
 
         public bool IsFinished { get; set; }

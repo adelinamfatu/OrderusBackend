@@ -363,5 +363,10 @@ namespace App.Domain.CRUD
 
             return string.Empty;
         }
+
+        public IEnumerable<Order> GetCompanyReport(int id)
+        {
+            return context.Orders.Where(o => o.Employee.Company.ID == id && o.IsFinished == true);
+        }
     }
 }

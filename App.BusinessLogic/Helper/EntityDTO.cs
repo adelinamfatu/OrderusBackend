@@ -121,6 +121,7 @@ namespace App.BusinessLogic.Helper
             {
                 ID = order.ID,
                 ClientEmail = order.ClientEmail,
+                EmployeeEmail = order.EmployeeEmail,
                 StartTime = order.DateTime,
                 FinishTime = order.DateTime.AddMinutes(order.Duration),
                 Duration = order.Duration,

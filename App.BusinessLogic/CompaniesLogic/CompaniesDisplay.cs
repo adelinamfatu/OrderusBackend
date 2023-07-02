@@ -187,5 +187,10 @@ namespace App.BusinessLogic.CompaniesLogic
         {
             return companiesData.GetCompanyEarnigs(id);
         }
+
+        public IEnumerable<OrderDTO> GetCompanyReport(int id)
+        {
+            return companiesData.GetCompanyReport(id).Select(o => EntityDTO.EntityToDTO(o));
+        }
     }
 }
