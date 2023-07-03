@@ -25,7 +25,8 @@ namespace App.BusinessLogic.Helper
             return new ServiceDTO()
             {
                 ID = service.ID,
-                Name = service.Name
+                Name = service.Name,
+                UnitOfMeasurement = service.UnitOfMeasurement
             };
         }
 
