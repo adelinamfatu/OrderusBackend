@@ -158,5 +158,13 @@ namespace App.API.Controllers
         {
             return clientsDisplay.GetClientUncommentedOrders(email);
         }
+
+        [Route("discount/available/{email}")]
+        [HttpGet]
+        [BasicAuthentication]
+        public IEnumerable<OfferDTO> GetAvailableOffers(string email)
+        {
+            return clientsDisplay.GetAvailableOffers(email);
+        }
     }
 }

@@ -108,5 +108,14 @@ namespace App.Domain.CRUD
         {
             return context.Orders.Where(o => o.ClientEmail == email && !context.Comments.Any(c => c.OrderID == o.ID));
         }
+
+        public IEnumerable<Offer> GetAvailableOffers(string email)
+        {
+            DateTime currentDate = DateTime.Now;
+            return context.Offers.Where(o => o.ClientEmail == email && 
+                                                    ((o.ExpirationDate.Year < currentDate.Year) ||
+                                                    (o.ExpirationDate.Month <= currentDate.Month) ||
+                                                    (o.ExpirationDate.Month == currentDate.Month && o.ExpirationDate.Day <= currentDate.Day)));
+        }
     }
 }
