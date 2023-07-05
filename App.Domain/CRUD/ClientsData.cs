@@ -117,5 +117,13 @@ namespace App.Domain.CRUD
                                                     (o.ExpirationDate.Month <= currentDate.Month) ||
                                                     (o.ExpirationDate.Month == currentDate.Month && o.ExpirationDate.Day <= currentDate.Day)));
         }
+
+        public bool DeleteOffer(int id)
+        {
+            var offer = context.Offers.Where(o => o.ID == id).FirstOrDefault();
+            context.Offers.Remove(offer);
+            context.SaveChanges();
+            return true;
+        }
     }
 }

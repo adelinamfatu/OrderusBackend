@@ -12,6 +12,8 @@ namespace App.DTO
 
     public class OfferDTO
     {
+        public int ID { get; set; }
+
         public int Discount { get; set; }
 
         public DiscountType Type { get; set; }

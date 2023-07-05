@@ -67,5 +67,10 @@ namespace App.BusinessLogic.UsersLogic
         {
             return clientsData.GetAvailableOffers(email).Select(o => EntityDTO.EntityToDTO(o));
         }
+
+        public bool DeleteOffer(int id)
+        {
+            return clientsData.DeleteOffer(id);
+        }
     }
 }

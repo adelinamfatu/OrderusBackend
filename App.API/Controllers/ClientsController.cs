@@ -166,5 +166,20 @@ namespace App.API.Controllers
         {
             return clientsDisplay.GetAvailableOffers(email);
         }
+
+        [Route("discount/delete/{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteOffer(int id)
+        {
+            var status = clientsDisplay.DeleteOffer(id);
+            if (status == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return Conflict();
+            }
+        }
     }
 }

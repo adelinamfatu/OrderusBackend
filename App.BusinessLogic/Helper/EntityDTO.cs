@@ -160,6 +160,7 @@ namespace App.BusinessLogic.Helper
         {
             return new OfferDTO()
             {
+                ID = o.ID,
                 Discount = o.Discount,
                 Type = (DTO.DiscountType)o.Type,
                 ExpirationDate = o.ExpirationDate
