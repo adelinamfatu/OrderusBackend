@@ -327,7 +327,13 @@ namespace App.Domain.CRUD
 
         public double GetCompanyScore(int id)
         {
-            return context.Comments.Where(c => c.CompanyID == id).Average(c => c.Score);
+            var commentsForCompany = context.Comments.Where(c => c.CompanyID == id);
+
+            if (commentsForCompany.Any())
+            {
+                return commentsForCompany.Average(c => c.Score);
+            }
+            return 0;
         }
 
         public IEnumerable<Order> GetCancelledOrders(string email)

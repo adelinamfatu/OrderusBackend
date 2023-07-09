@@ -128,7 +128,12 @@ namespace App.BusinessLogic.ServicesLogic
             }
             var transformedOrder = DTOEntity.DTOtoEntity(order, employeeEmail);
             var orderID = ordersData.AddOrder(transformedOrder);
-            return ordersData.AddOrderDetails(order.Details, orderID);
+
+            if(order.Details != null)
+            {
+                return ordersData.AddOrderDetails(order.Details, orderID);
+            }
+            return true;
         }
 
         public bool UpdateEmployeeOrders(string email)
