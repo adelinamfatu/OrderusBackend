@@ -26,7 +26,8 @@ namespace App.BusinessLogic.Helper
             {
                 ID = service.ID,
                 Name = service.Name,
-                UnitOfMeasurement = service.UnitOfMeasurement
+                UnitOfMeasurement = service.UnitOfMeasurement,
+                Icon = service.Icon
             };
         }
 

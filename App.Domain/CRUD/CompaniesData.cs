@@ -116,6 +116,8 @@ namespace App.Domain.CRUD
 
         public void UpdateCompanyServices(IEnumerable<CompanyServiceOption> companyServiceOptions)
         {
+            var companyID = companyServiceOptions.FirstOrDefault().CompanyID;
+
             foreach (var service in companyServiceOptions)
             {
                 if (!context.CompaniesServiceOptions.Any(s => s.ServiceID == service.ServiceID && s.CompanyID == service.CompanyID))
@@ -123,7 +125,7 @@ namespace App.Domain.CRUD
                     AddCompanyService(service);
                 }
             }
-            var existingServices = context.CompaniesServiceOptions.ToList();
+            var existingServices = context.CompaniesServiceOptions.Where(cso => cso.CompanyID == companyID).ToList();
             foreach (var existingService in existingServices)
             {
                 if (companyServiceOptions.Any(s => s.ServiceID == existingService.ServiceID && s.CompanyID == existingService.CompanyID))

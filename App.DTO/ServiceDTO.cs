@@ -11,5 +11,7 @@ namespace App.DTO
         public string Name { get; set; }
 
         public string UnitOfMeasurement { get; set; }
+
+        public string Icon { get; set; }
     }
 }
