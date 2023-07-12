@@ -251,7 +251,9 @@ namespace App.Domain.CRUD
 
         public bool UpdateOrderFinished(int id)
         {
-            context.Orders.Where(o => o.ID == id).FirstOrDefault().IsFinished = true;
+            var order = context.Orders.Where(o => o.ID == id).FirstOrDefault();
+            order.IsFinished = true;
+            order.Duration = (int)(DateTime.Now - order.DateTime).TotalMinutes;
             context.SaveChanges();
             return true;
         }
@@ -390,6 +392,11 @@ namespace App.Domain.CRUD
             context.Comments.Add(comment);
             context.SaveChanges();
             return true;
+        }
+
+        public Dictionary<string, string> GetOrderDetails(int id)
+        {
+            return context.OrderExtendedProperties.Where(oep => oep.OrderID == id).ToDictionary(oep => oep.Key, oep => oep.Value);
         }
     }
 }

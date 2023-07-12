@@ -178,12 +178,41 @@ namespace App.BusinessLogic.ServicesLogic
             if (status)
             {
                 var order = EntityDTO.EntityToDTO(ordersData.GetOrderData(id));
+                if(order.ServiceName == ServiceType.Curatenie.ToString())
+                {
+                    var details = ordersData.GetOrderDetails(order.ID);
+                    WriteOrderToCSV(order, details);
+                }
                 var company = EntityDTO.EntityToDTO(ordersData.GetCompanyData(id));
                 var materials = ordersData.GetOrderMaterials(id).Select(o => EntityDTO.EntityToDTO(o)).ToList();
                 GenerateInvoice(order, company, materials);
                 SendInvoiceEmail(order.ClientEmail, order.ServiceName, order.StartTime);
             }
             return status;
+        }
+
+        private void WriteOrderToCSV(OrderDTO order, Dictionary<string, string> details)
+        {
+            StringBuilder contentBuilder = new StringBuilder();
+
+            contentBuilder.Append($"{order.CompanyID},{order.EmployeeID},{order.ClientID},{order.StartTime.ToString("yyyy.MM.dd")},{order.StartTime.Hour}");
+
+            foreach (var detail in details)
+            {
+                contentBuilder.Append($",{detail.Value}");
+            }
+
+            contentBuilder.Append($",{order.Duration}");
+
+            string content = contentBuilder.ToString();
+
+            string csvFilePath = FilePathResource.FileStorage;
+            if (order.ServiceName == ServiceType.Curatenie.ToString())
+            {
+                csvFilePath += FilePathResource.ClearningServicesCsv;
+            }
+            
+            File.AppendAllText(csvFilePath, content);
         }
 
         private void SendInvoiceEmail(string clientEmail, string serviceName, DateTime dateTime)

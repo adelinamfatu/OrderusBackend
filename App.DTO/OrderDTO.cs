@@ -37,5 +37,9 @@ namespace App.DTO
         public bool IsConfirmed { get; set; }
 
         public bool IsCancelled => IsFinished && !IsConfirmed;
+
+        public int EmployeeID { get; set; }
+
+        public int ClientID { get; set; }
     }
 }

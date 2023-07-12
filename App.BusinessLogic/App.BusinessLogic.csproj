@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="ServicesLogic\OrdersDisplay.cs" />
     <Compile Include="ServicesLogic\ServicesDisplay.cs" />
+    <Compile Include="ServiceType.cs" />
     <Compile Include="SMSLogic\SMSDisplay.cs" />
     <Compile Include="UsersLogic\ClientsDisplay.cs" />
   </ItemGroup>
