@@ -18,6 +18,10 @@ namespace App.DTO
 
         public int Surface { get; set; }
 
+        public int NbRepairs { get; set; }
+
+        public int Complexity { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public int Duration { get; set; }

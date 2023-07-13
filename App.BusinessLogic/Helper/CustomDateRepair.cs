@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace App.BusinessLogic.Helper
 {
     [CustomMappingFactoryAttribute("CustomDateMapping")]
-    public class CustomDate : CustomMappingFactory<CleaningServiceOrder, CustomMappingOutput>
+    public class CustomDateRepair : CustomMappingFactory<ReparationServiceOrder, CustomMappingOutputRepair>
     {
-        public static void CustomAction(CleaningServiceOrder input, CustomMappingOutput output)
+        public static void CustomAction(ReparationServiceOrder input, CustomMappingOutputRepair output)
         {
             var customDate = Convert.ToDateTime(input.DateTime);
             output.CustomDateHour = ((customDate.Year * 10 + customDate.Month) * 10 + customDate.Day) * 10;
         }
 
-        public override Action<CleaningServiceOrder, CustomMappingOutput> GetMapping() => CustomAction;
+        public override Action<ReparationServiceOrder, CustomMappingOutputRepair> GetMapping() => CustomAction;
     }
 }

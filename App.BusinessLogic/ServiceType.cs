@@ -9,5 +9,6 @@ namespace App.BusinessLogic
     public enum ServiceType
     {
         Curatenie,
+        Reparatii
     }
 }

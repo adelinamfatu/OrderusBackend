@@ -28,7 +28,7 @@ namespace App.BusinessLogic.ServicesLogic
             ordersData = new OrdersData();
         }
 
-        public int GetEstimtedTime(PossibleOrderDTO po)
+        public int GetCleaningEstimtedTime(PossibleOrderDTO po)
         {
             var id = ordersData.FindAvailableEmployee(po.DateTime, po.CompanyID, po.ServiceID);
             if (id == -1)
@@ -51,18 +51,58 @@ namespace App.BusinessLogic.ServicesLogic
             var trainData = trainTestSplit.TrainSet;
             var testData = trainTestSplit.TestSet;
 
-            var model = Train(mlContext, trainData);
+            var model = Train(mlContext, trainData, "NbRooms", "Surface");
             Evaluate(mlContext, model, testData);
-            var duration = TestSinglePrediction(mlContext, model, po);
+            var duration = TestSinglePredictionCleaning(mlContext, model, po);
+            return (int)Math.Ceiling(duration);
+        }
+
+        public int GetRepairingEstimatedTime(PossibleOrderDTO po)
+        {
+            var id = ordersData.FindAvailableEmployee(po.DateTime, po.CompanyID, po.ServiceID);
+            if (id == -1)
+            {
+                return -1;
+            }
+            po.EmployeeID = id;
+
+            IList<ReparationServiceOrder> repairingServiceOrders = new List<ReparationServiceOrder>();
+            using (var reader = new StreamReader(FilePathResource.FileStorage + FilePathResource.RepairingServicesCSV))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                repairingServiceOrders = csv.GetRecords<ReparationServiceOrder>().ToList();
+            }
+
+            MLContext mlContext = new MLContext(seed: 0);
+
+            var dataView = mlContext.Data.LoadFromEnumerable(repairingServiceOrders);
+            var trainTestSplit = mlContext.Data.TrainTestSplit(dataView, testFraction: 0.2);
+            var trainData = trainTestSplit.TrainSet;
+            var testData = trainTestSplit.TestSet;
+
+            var model = Train(mlContext, trainData, "NbRepairs", "Complexity");
+            Evaluate(mlContext, model, testData);
+            var duration = TestSinglePredictionRepairing(mlContext, model, po);
             return (int)Math.Ceiling(duration);
         }
 
         private ITransformer Train(MLContext mlContext, IDataView dataView)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
-                .Append(mlContext.Transforms.CustomMapping(new CustomDate().GetMapping(), "CustomDateMapping"))
-                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutput", 
+                .Append(mlContext.Transforms.CustomMapping(new CustomDateCleaning().GetMapping(), "CustomDateMapping"))
+                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutputCleaning",
                                                             "Hour", "NbRooms", "Surface", "Duration"))
+                .Append(mlContext.Regression.Trainers.FastTree());
+            var model = pipeline.Fit(dataView);
+            return model;
+        }
+
+        private ITransformer Train(MLContext mlContext, IDataView dataView, string column1, string column2)
+        {
+            var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
+                .Append(mlContext.Transforms.CustomMapping(new CustomDateRepair().GetMapping(), "CustomDateMapping"))
+                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutputRepair", 
+                                                            "Hour", column1, column2, "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
             return model;
@@ -74,7 +114,7 @@ namespace App.BusinessLogic.ServicesLogic
             var metrics = mlContext.Regression.Evaluate(predictions, "Label", "Score");
         }
 
-        private double TestSinglePrediction(MLContext mlContext, ITransformer model, PossibleOrderDTO po)
+        private double TestSinglePredictionCleaning(MLContext mlContext, ITransformer model, PossibleOrderDTO po)
         {
             var predictionFunction = mlContext.Model.CreatePredictionEngine<CleaningServiceOrder, CleaningDurationPrediction>(model);
             var cleaningOrderSample = new CleaningServiceOrder()
@@ -90,7 +130,24 @@ namespace App.BusinessLogic.ServicesLogic
             };
             return predictionFunction.Predict(cleaningOrderSample).Duration;
         }
-        
+
+        private double TestSinglePredictionRepairing(MLContext mlContext, ITransformer model, PossibleOrderDTO po)
+        {
+            var predictionFunction = mlContext.Model.CreatePredictionEngine<ReparationServiceOrder, ReparationDurationPrediction>(model);
+            var repairingOrderSample = new ReparationServiceOrder()
+            {
+                CompanyID = po.CompanyID,
+                EmployeeID = po.EmployeeID,
+                ClientID = ordersData.GetClientID(po.ClientEmail),
+                DateTime = po.DateTime,
+                Hour = po.DateTime.Hour,
+                NbRepairs = po.NbRepairs,
+                Complexity = po.Complexity,
+                Duration = 0
+            };
+            return predictionFunction.Predict(repairingOrderSample).Duration;
+        }
+
         public Dictionary<string, int> GetOrderServicesCount(int companyID)
         {
             return ordersData.GetOrderServicesCount(companyID);
@@ -178,7 +235,8 @@ namespace App.BusinessLogic.ServicesLogic
             if (status)
             {
                 var order = EntityDTO.EntityToDTO(ordersData.GetOrderData(id));
-                if(order.ServiceName == ServiceType.Curatenie.ToString())
+                if(order.ServiceName == ServiceType.Curatenie.ToString()
+                    || order.ServiceName == ServiceType.Reparatii.ToString())
                 {
                     var details = ordersData.GetOrderDetails(order.ID);
                     WriteOrderToCSV(order, details);
@@ -210,6 +268,10 @@ namespace App.BusinessLogic.ServicesLogic
             if (order.ServiceName == ServiceType.Curatenie.ToString())
             {
                 csvFilePath += FilePathResource.ClearningServicesCsv;
+            }
+            else if(order.ServiceName == ServiceType.Reparatii.ToString())
+            {
+                csvFilePath += FilePathResource.RepairingServicesCSV;
             }
             
             File.AppendAllText(csvFilePath, content);

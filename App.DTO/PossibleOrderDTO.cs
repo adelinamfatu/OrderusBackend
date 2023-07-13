@@ -21,5 +21,9 @@ namespace App.DTO
         public int Surface { get; set; }
 
         public int NbRooms { get; set; }
+
+        public int Complexity { get; set; }
+
+        public int NbRepairs { get; set; }
     }
 }

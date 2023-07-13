@@ -86,5 +86,14 @@ namespace App.BusinessLogic {
                 return ResourceManager.GetString("InvoicePath", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /RepairingServices.csv.
+        /// </summary>
+        internal static string RepairingServicesCSV {
+            get {
+                return ResourceManager.GetString("RepairingServicesCSV", resourceCulture);
+            }
+        }
     }
 }

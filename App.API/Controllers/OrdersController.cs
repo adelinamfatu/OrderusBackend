@@ -18,10 +18,25 @@ namespace App.API.Controllers
 
         [Route("cleaning")]
         [HttpPost]
-        public IHttpActionResult GetEstimtedTime(PossibleOrderDTO po)
+        public IHttpActionResult GetCleaningEstimtedTime(PossibleOrderDTO po)
         {
-            var duration = ordersDisplay.GetEstimtedTime(po);
+            var duration = ordersDisplay.GetCleaningEstimtedTime(po);
             if(duration == -1)
+            {
+                return Conflict();
+            }
+            else
+            {
+                return Ok(duration);
+            }
+        }
+
+        [Route("repairing")]
+        [HttpPost]
+        public IHttpActionResult GetRepairingEstimtedTime(PossibleOrderDTO po)
+        {
+            var duration = ordersDisplay.GetRepairingEstimatedTime(po);
+            if (duration == -1)
             {
                 return Conflict();
             }

@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.ML.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.ML.Data;
 
 namespace App.BusinessLogic.MLModels
 {
-    public class CleaningServiceOrder
+    public class ReparationServiceOrder
     {
         [ColumnName("CompanyID")]
-        public float CompanyID { get; set; } 
+        public float CompanyID { get; set; }
 
         [ColumnName("EmployeeID")]
         public float EmployeeID { get; set; }
@@ -24,25 +24,25 @@ namespace App.BusinessLogic.MLModels
         [ColumnName("Hour")]
         public float Hour { get; set; }
 
-        [ColumnName("NbRooms")]
-        public float NbRooms { get; set; }
+        [ColumnName("NbRepairs")]
+        public float NbRepairs { get; set; }
 
-        [ColumnName("Surface")]
-        public float Surface { get; set; }
+        [ColumnName("Complexity")]
+        public float Complexity { get; set; }
 
         [ColumnName("Duration")]
         public float Duration { get; set; }
     }
 
-    public class CleaningDurationPrediction
+    public class ReparationDurationPrediction
     {
         [ColumnName("Score")]
         public float Duration;
     }
 
-    public class CustomMappingOutputCleaning
+    public class CustomMappingOutputRepair
     {
-        [ColumnName("CustomMappingOutputCleaning")]
+        [ColumnName("CustomMappingOutputRepair")]
         public float CustomDateHour { get; set; }
     }
 }
