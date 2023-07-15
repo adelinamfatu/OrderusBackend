@@ -359,6 +359,19 @@ namespace App.Domain.CRUD
                                                 group => group.Sum(o => o.PaymentAmount));
         }
 
+        public Dictionary<string, double> GetCompanyReviews(int id)
+        {
+            DateTime currentDate = DateTime.Now;
+            DateTime startDate = currentDate.AddMonths(-12);
+            DateTime endDate = currentDate.AddMonths(-1);
+
+            return context.Comments.Where(o => o.CompanyID == id && o.Date >= startDate && o.Date <= endDate)
+                                .GroupBy(o => o.Date.Month)
+                                .ToDictionary(
+                                                group => GetLocalizedMonthName(group.Key),
+                                                group => group.Average(o => o.Score));
+        }
+
         private string GetLocalizedMonthName(int month)
         {
             var romanianCulture = new CultureInfo("ro-RO");

@@ -217,5 +217,12 @@ namespace App.API.Controllers
         {
             return companiesDisplay.GetCompanyEarnigs(id);
         }
+
+        [Route("reviews/{id}")]
+        [HttpGet]
+        public Dictionary<string, double> GetCompanyReviews(int id)
+        {
+            return companiesDisplay.GetCompanyReviews(id);
+        }
     }
 }

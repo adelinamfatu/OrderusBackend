@@ -41,5 +41,9 @@ namespace App.DTO
         public int EmployeeID { get; set; }
 
         public int ClientID { get; set; }
+
+        public string EmployeePhoneNumber { get; set; }
+
+        public string CompanyName { get; set; }
     }
 }

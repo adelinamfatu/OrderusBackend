@@ -51,7 +51,7 @@ namespace App.BusinessLogic.ServicesLogic
             var trainData = trainTestSplit.TrainSet;
             var testData = trainTestSplit.TestSet;
 
-            var model = Train(mlContext, trainData, "NbRooms", "Surface");
+            var model = TrainCleaning(mlContext, trainData);
             Evaluate(mlContext, model, testData);
             var duration = TestSinglePredictionCleaning(mlContext, model, po);
             return (int)Math.Ceiling(duration);
@@ -80,13 +80,13 @@ namespace App.BusinessLogic.ServicesLogic
             var trainData = trainTestSplit.TrainSet;
             var testData = trainTestSplit.TestSet;
 
-            var model = Train(mlContext, trainData, "NbRepairs", "Complexity");
+            var model = TrainRepairing(mlContext, trainData);
             Evaluate(mlContext, model, testData);
             var duration = TestSinglePredictionRepairing(mlContext, model, po);
             return (int)Math.Ceiling(duration);
         }
 
-        private ITransformer Train(MLContext mlContext, IDataView dataView)
+        private ITransformer TrainCleaning(MLContext mlContext, IDataView dataView)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
                 .Append(mlContext.Transforms.CustomMapping(new CustomDateCleaning().GetMapping(), "CustomDateMapping"))
@@ -97,12 +97,12 @@ namespace App.BusinessLogic.ServicesLogic
             return model;
         }
 
-        private ITransformer Train(MLContext mlContext, IDataView dataView, string column1, string column2)
+        private ITransformer TrainRepairing(MLContext mlContext, IDataView dataView)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
                 .Append(mlContext.Transforms.CustomMapping(new CustomDateRepair().GetMapping(), "CustomDateMapping"))
                 .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutputRepair", 
-                                                            "Hour", column1, column2, "Duration"))
+                                                            "Hour", "NbRepairs", "Complexity", "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
             return model;

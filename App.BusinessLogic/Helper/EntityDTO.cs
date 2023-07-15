@@ -134,7 +134,9 @@ namespace App.BusinessLogic.Helper
                 IsFinished = order.IsFinished,
                 Comment = order.Comment,
                 IsConfirmed = order.IsConfirmed,
-                CompanyID = order.Employee.CompanyID
+                CompanyID = order.Employee.CompanyID,
+                EmployeePhoneNumber = order.Employee.Phone,
+                CompanyName = order.Employee.Company.Name
             };
         }
 
