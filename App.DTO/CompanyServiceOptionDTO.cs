@@ -22,6 +22,10 @@ namespace App.DTO
 
         public int Complexity { get; set; }
 
+        public int NoObjects { get; set; }
+
+        public int Size { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public int Duration { get; set; }

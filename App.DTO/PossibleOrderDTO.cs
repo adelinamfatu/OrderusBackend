@@ -25,5 +25,9 @@ namespace App.DTO
         public int Complexity { get; set; }
 
         public int NbRepairs { get; set; }
+
+        public int NbObjects { get; set; }
+
+        public int Size { get; set; }
     }
 }

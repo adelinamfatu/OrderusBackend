@@ -88,6 +88,15 @@ namespace App.BusinessLogic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /MountingServices.csv.
+        /// </summary>
+        internal static string MountingServicesCSV {
+            get {
+                return ResourceManager.GetString("MountingServicesCSV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /RepairingServices.csv.
         /// </summary>
         internal static string RepairingServicesCSV {

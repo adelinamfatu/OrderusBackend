@@ -86,6 +86,35 @@ namespace App.BusinessLogic.ServicesLogic
             return (int)Math.Ceiling(duration);
         }
 
+        public int GetMountingEstimatedTime(PossibleOrderDTO po)
+        {
+            var id = ordersData.FindAvailableEmployee(po.DateTime, po.CompanyID, po.ServiceID);
+            if (id == -1)
+            {
+                return -1;
+            }
+            po.EmployeeID = id;
+
+            IList<MountingServiceOrder> mountingServiceOrders = new List<MountingServiceOrder>();
+            using (var reader = new StreamReader(FilePathResource.FileStorage + FilePathResource.MountingServicesCSV))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                mountingServiceOrders = csv.GetRecords<MountingServiceOrder>().ToList();
+            }
+
+            MLContext mlContext = new MLContext(seed: 0);
+
+            var dataView = mlContext.Data.LoadFromEnumerable(mountingServiceOrders);
+            var trainTestSplit = mlContext.Data.TrainTestSplit(dataView, testFraction: 0.2);
+            var trainData = trainTestSplit.TrainSet;
+            var testData = trainTestSplit.TestSet;
+
+            var model = TrainMounting(mlContext, trainData);
+            Evaluate(mlContext, model, testData);
+            var duration = TestSinglePredictionMounting(mlContext, model, po);
+            return (int)Math.Ceiling(duration);
+        }
+
         private ITransformer TrainCleaning(MLContext mlContext, IDataView dataView)
         {
             var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
@@ -103,6 +132,17 @@ namespace App.BusinessLogic.ServicesLogic
                 .Append(mlContext.Transforms.CustomMapping(new CustomDateRepair().GetMapping(), "CustomDateMapping"))
                 .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutputRepair", 
                                                             "Hour", "NbRepairs", "Complexity", "Duration"))
+                .Append(mlContext.Regression.Trainers.FastTree());
+            var model = pipeline.Fit(dataView);
+            return model;
+        }
+
+        private ITransformer TrainMounting(MLContext mlContext, IDataView dataView)
+        {
+            var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Duration")
+                .Append(mlContext.Transforms.CustomMapping(new CustomDateMounting().GetMapping(), "CustomDateMapping"))
+                .Append(mlContext.Transforms.Concatenate("Features", "CompanyID", "EmployeeID", "ClientID", "CustomMappingOutputMounting",
+                                                            "Hour", "NbObjects", "Size", "Duration"))
                 .Append(mlContext.Regression.Trainers.FastTree());
             var model = pipeline.Fit(dataView);
             return model;
@@ -146,6 +186,23 @@ namespace App.BusinessLogic.ServicesLogic
                 Duration = 0
             };
             return predictionFunction.Predict(repairingOrderSample).Duration;
+        }
+
+        private double TestSinglePredictionMounting(MLContext mlContext, ITransformer model, PossibleOrderDTO po)
+        {
+            var predictionFunction = mlContext.Model.CreatePredictionEngine<MountingServiceOrder, MountingDurationPrediction>(model);
+            var mountingOrderSample = new MountingServiceOrder()
+            {
+                CompanyID = po.CompanyID,
+                EmployeeID = po.EmployeeID,
+                ClientID = ordersData.GetClientID(po.ClientEmail),
+                DateTime = po.DateTime,
+                Hour = po.DateTime.Hour,
+                NbObjects = po.NbObjects,
+                Size = po.Size,
+                Duration = 0
+            };
+            return predictionFunction.Predict(mountingOrderSample).Duration;
         }
 
         public Dictionary<string, int> GetOrderServicesCount(int companyID)

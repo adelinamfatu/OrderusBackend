@@ -31,11 +31,11 @@ namespace App.API.Controllers
             }
         }
 
-        [Route("repairing")]
+        [Route("mounting")]
         [HttpPost]
         public IHttpActionResult GetRepairingEstimtedTime(PossibleOrderDTO po)
         {
-            var duration = ordersDisplay.GetRepairingEstimatedTime(po);
+            var duration = ordersDisplay.GetMountingEstimatedTime(po);
             if (duration == -1)
             {
                 return Conflict();

@@ -127,12 +127,14 @@
       <DependentUpon>FilePathResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Helper\CustomDateCleaning.cs" />
+    <Compile Include="Helper\CustomDateMounting.cs" />
     <Compile Include="Helper\CustomDateRepair.cs" />
     <Compile Include="Helper\DTOEntity.cs" />
     <Compile Include="Helper\EntityDTO.cs" />
     <Compile Include="Helper\ImageSaveService.cs" />
     <Compile Include="Helper\NextOrderType.cs" />
     <Compile Include="MLModels\CleaningServiceOrder.cs" />
+    <Compile Include="MLModels\MountingServiceOrder.cs" />
     <Compile Include="MLModels\ReparationServiceOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">

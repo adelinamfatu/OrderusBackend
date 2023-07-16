@@ -126,6 +126,9 @@
   <data name="InvoicePath" xml:space="preserve">
     <value>C:/OrderusFiles/invoice.pdf</value>
   </data>
+  <data name="MountingServicesCSV" xml:space="preserve">
+    <value>/MountingServices.csv</value>
+  </data>
   <data name="RepairingServicesCSV" xml:space="preserve">
     <value>/RepairingServices.csv</value>
   </data>
