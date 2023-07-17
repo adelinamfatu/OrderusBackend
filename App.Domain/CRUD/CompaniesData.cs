@@ -280,11 +280,19 @@ namespace App.Domain.CRUD
 
         public string Login(Representative representative)
         {
+            if(!context.Representatives.Any(r => r.Email == representative.Email))
+            {
+                return "";
+            }
             return context.Representatives.FirstOrDefault(r => r.Email == representative.Email).Password;
         }
 
         public string Login(Employee employee)
         {
+            if(!context.Employees.Any(e => e.Email == employee.Email))
+            {
+                return "";
+            }
             var data = context.Employees.FirstOrDefault(e => e.Email == employee.Email);
             if(data.IsConfirmed == false)
             {

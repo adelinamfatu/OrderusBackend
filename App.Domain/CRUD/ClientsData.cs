@@ -33,6 +33,10 @@ namespace App.Domain.CRUD
 
         public string Login(Client client)
         {
+            if(!context.Clients.Any(c => c.Email == client.Email))
+            {
+                return "";
+            }
             return context.Clients.FirstOrDefault(c => c.Email == client.Email).Password;
         }
 
@@ -106,7 +110,9 @@ namespace App.Domain.CRUD
 
         public IEnumerable<Order> GetClientUncommentedOrders(string email)
         {
-            return context.Orders.Where(o => o.ClientEmail == email && !context.Comments.Any(c => c.OrderID == o.ID));
+            return context.Orders.Where(o => o.ClientEmail == email && 
+                                        o.DateTime <= DateTime.Now &&
+                                        !context.Comments.Any(c => c.OrderID == o.ID));
         }
 
         public IEnumerable<Offer> GetAvailableOffers(string email)

@@ -31,9 +31,24 @@ namespace App.API.Controllers
             }
         }
 
-        [Route("mounting")]
+        [Route("repairing")]
         [HttpPost]
         public IHttpActionResult GetRepairingEstimtedTime(PossibleOrderDTO po)
+        {
+            var duration = ordersDisplay.GetRepairingEstimatedTime(po);
+            if (duration == -1)
+            {
+                return Conflict();
+            }
+            else
+            {
+                return Ok(duration);
+            }
+        }
+
+        [Route("mounting")]
+        [HttpPost]
+        public IHttpActionResult GetMountingEstimtedTime(PossibleOrderDTO po)
         {
             var duration = ordersDisplay.GetMountingEstimatedTime(po);
             if (duration == -1)
