@@ -293,7 +293,8 @@ namespace App.BusinessLogic.ServicesLogic
             {
                 var order = EntityDTO.EntityToDTO(ordersData.GetOrderData(id));
                 if(order.ServiceName == ServiceType.Curatenie.ToString()
-                    || order.ServiceName == ServiceType.Reparatii.ToString())
+                    || order.ServiceName == ServiceType.Reparatii.ToString()
+                    || order.ServiceName == ServiceType.Montare.ToString())
                 {
                     var details = ordersData.GetOrderDetails(order.ID);
                     WriteOrderToCSV(order, details);
@@ -330,7 +331,11 @@ namespace App.BusinessLogic.ServicesLogic
             {
                 csvFilePath += FilePathResource.RepairingServicesCSV;
             }
-            
+            else if (order.ServiceName == ServiceType.Montare.ToString())
+            {
+                csvFilePath += FilePathResource.MountingServicesCSV;
+            }
+
             File.AppendAllText(csvFilePath, content);
         }
 

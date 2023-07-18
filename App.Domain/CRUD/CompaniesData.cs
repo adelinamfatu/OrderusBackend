@@ -163,7 +163,9 @@ namespace App.Domain.CRUD
 
         public Dictionary<string, string> GetOrderDetails(int id)
         {
-            return context.OrderExtendedProperties.Where(oep => oep.OrderID == id).ToDictionary(oep => oep.Key, oep => oep.Value);
+            return context.OrderExtendedProperties.Where(oep => oep.OrderID == id &&
+                                                        oep.Key != Resource.OrderDateKey).
+                                                        ToDictionary(oep => oep.Key, oep => oep.Value);
         }
 
         public IEnumerable<Order> GetScheduledOrders(string email)
