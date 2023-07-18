@@ -136,7 +136,8 @@ namespace App.BusinessLogic.Helper
                 IsConfirmed = order.IsConfirmed,
                 CompanyID = order.Employee.CompanyID,
                 EmployeePhoneNumber = order.Employee.Phone,
-                CompanyName = order.Employee.Company.Name
+                CompanyName = order.Employee.Company.Name,
+                ClientLocation = order.Client.Street + " " + order.Client.StreetNumber
             };
         }
 
